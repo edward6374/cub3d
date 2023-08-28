@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
+#    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:13 by vduchi            #+#    #+#              #
-#    Updated: 2023/07/03 19:15:20 by vduchi           ###   ########.fr        #
+#    Updated: 2023/08/28 08:18:00 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
--include files_mk/sources.mk
--include files_mk/directories.mk
+-include mk_files/sources.mk
+-include mk_files/directories.mk
 
 #=-=-=-=-=-=-=- COLORS DEFINITION =-=-=-=-=-=-=-=-=-#
 
@@ -56,8 +56,10 @@ LIBFT_PATH		=	libft
 
 
 CFLAGS			+= 	-Wall -Werror -Wextra -g -O3 $(addprefix -I , $(INC_DIR)) #-fsanitize=address
-LDFLAGS			= 	-L $(MLX_PATH) -L $(LIBFT_PATH) -L $(PRINTF_PATH) -lft -lftprintf #-lmlx -framework OpenGL -framework AppKit
-DEPFLAGS		=	-MMD -MP -MF $(DEPS_DIR)/$*.d
+LDFLAGS			= 	-L $(MLX_PATH) -L $(LIBFT_PATH) -L $(PRINTF_PATH) 
+LDFLAGS			+= 	-lft -lftprintf -lmlx -framework OpenGL -framework AppKit
+DEPFLAGS_GEN	=	-MMD -MP -MF $(DEPS_DIR_GEN)/$*.d
+DEPFLAGS_WND	=	-MMD -MP -MF $(DEPS_DIR_WND)/$*.d
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
@@ -68,19 +70,26 @@ MAKE			=	make --no-print-directory
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#
 
-$(OBJS_DIR)/%.o :	$(SRCS_DIR)/%.c
-	@echo "$(YELLOW)$(patsubst $(SRCS_DIR)/%,%, $<) \tcompiled!$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+$(OBJS_DIR_GEN)/%.o :	$(SRCS_DIR_GEN)/%.c
+	@echo "$(YELLOW)$(patsubst $(SRCS_DIR_GEN)/%,%, $<) \tcompiled!$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(DEPFLAGS_GEN) -c $< -o $@
 
-all				:	directories $(LIBFT) $(PRINTF)
+$(OBJS_DIR_WND)/%.o :	$(SRCS_DIR_WND)/%.c
+	@echo "$(YELLOW)$(patsubst $(SRCS_DIR_WND)/%,%, $<) \tcompiled!$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(DEPFLAGS_WND) -c $< -o $@
+
+all				:	directories
+	@$(MAKE) -C $(LIBFT_PATH)
+	@$(MAKE) -C $(PRINTF_PATH)
+	@$(MAKE) -C $(MLX_PATH)
 	@$(MAKE) $(NAME)
 
 $(NAME)		::
 	@echo "$(MAGENTA)\nChecking cub3d...$(DEF_COLOR)"
 
-$(NAME)		::	$(OBJS_DIR) $(DEPS_DIR) $(OBJS)
+$(NAME)		::	$(LIBFT) $(PRINTF) $(OBJS_GEN) $(OBJS_WND)
 	@echo "$(ORANGE)Compiling cub3d exec...$(DEF_COLOR)"
-	@$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 $(NAME)		::
 	@echo "$(GREEN)Cub3d executable ready!$(DEF_COLOR)"
@@ -88,6 +97,10 @@ $(NAME)		::
 directories	:
 	@$(MKDIR) $(OBJS_DIR)
 	@$(MKDIR) $(DEPS_DIR)
+	@$(MKDIR) $(OBJS_DIR_GEN)
+	@$(MKDIR) $(DEPS_DIR_GEN)
+	@$(MKDIR) $(OBJS_DIR_WND)
+	@$(MKDIR) $(DEPS_DIR_WND)
 
 $(MLX):
 	@$(MAKE) -C $(MLX_PATH)
