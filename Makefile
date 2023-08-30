@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+         #
+#    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:13 by vduchi            #+#    #+#              #
-#    Updated: 2023/08/28 08:18:00 by vduchi           ###   ########.fr        #
+#    Updated: 2023/08/30 14:11:51 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,21 +43,14 @@ NAME			=	cub3d
 
 MLX				=	mlx/libmlx.a
 LIBFT			=	libft/libft.a
-PRINTF			=	ft_printf/libftprintf.a
-
 MLX_PATH		=	mlx
 LIBFT_PATH		=	libft
-PRINTF_PATH		=	ft_printf
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#a
 
-MLX_PATH		=	mlx
-LIBFT_PATH		=	libft
-
-
 CFLAGS			+= 	-Wall -Werror -Wextra -g -O3 $(addprefix -I , $(INC_DIR)) #-fsanitize=address
-LDFLAGS			= 	-L $(MLX_PATH) -L $(LIBFT_PATH) -L $(PRINTF_PATH) 
-LDFLAGS			+= 	-lft -lftprintf -lmlx -framework OpenGL -framework AppKit
+LDFLAGS			= 	-L $(MLX_PATH) -L $(LIBFT_PATH)
+LDFLAGS			+= 	-lft -lmlx -framework OpenGL -framework AppKit
 DEPFLAGS_GEN	=	-MMD -MP -MF $(DEPS_DIR_GEN)/$*.d
 DEPFLAGS_WND	=	-MMD -MP -MF $(DEPS_DIR_WND)/$*.d
 
@@ -80,14 +73,13 @@ $(OBJS_DIR_WND)/%.o :	$(SRCS_DIR_WND)/%.c
 
 all				:	directories
 	@$(MAKE) -C $(LIBFT_PATH)
-	@$(MAKE) -C $(PRINTF_PATH)
 	@$(MAKE) -C $(MLX_PATH)
 	@$(MAKE) $(NAME)
 
 $(NAME)		::
 	@echo "$(MAGENTA)\nChecking cub3d...$(DEF_COLOR)"
 
-$(NAME)		::	$(LIBFT) $(PRINTF) $(OBJS_GEN) $(OBJS_WND)
+$(NAME)		::	$(MLX) $(LIBFT) $(OBJS_GEN) $(OBJS_WND)
 	@echo "$(ORANGE)Compiling cub3d exec...$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
@@ -108,9 +100,6 @@ $(MLX):
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(PRINTF):
-	@$(MAKE) -C $(PRINTF_PATH)
-
 clean		:
 	@$(RM) $(OBJS_DIR)
 	@$(RM) $(DEPS_DIR)
@@ -119,12 +108,12 @@ fclean		:	clean
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(MLX_PATH) clean
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@$(MAKE) -C $(PRINTF_PATH) fclean
 	@echo "$(BLUE)\nCub3d cleaned!$(DEF_COLOR)"
 
 re			:	fclean all
 
--include $(DEPS)
+-include $(DEPS_GEN)
+-include $(DEPS_WND)
 
 .PHONY: all clean fclean re
 

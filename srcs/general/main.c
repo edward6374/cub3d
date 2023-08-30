@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/28 08:25:16 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:08:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "libft.h"
 #include "cub3d.h"
-#include "ft_printf.h"
+#include "libft.h"
+#include <fcntl.h>
 
 void	init_func(t_cube *cube)
 {
@@ -63,20 +62,20 @@ int	check_map(t_cube *cube, char *str)
 
 int	main(int argc, char *argv[])
 {
-	// int		err;
 	t_cube	cube;
 
+	// int		err;
 	(void)argv;
-	if (argc == 1)	
+	if (argc == 1)
 		return (ft_printf("Map file name required!\n"));
 	else if (argc > 3)
 		return (ft_printf("Too many arguments\n"));
 	init_func(&cube);
 	// err = check_map(&cube, argv[1]);
 	// if (err == 1)
-		// return (ft_printf("Map error\n"));
+	// return (ft_printf("Map error\n"));
 	// else if (err > 1)
-		// return (ft_printf("Malloc error\n"));
+	// return (ft_printf("Malloc error\n"));
 	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
