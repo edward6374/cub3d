@@ -6,11 +6,11 @@
 /*   By: vduchi <vduchi@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:32:16 by vduchi            #+#    #+#             */
-/*   Updated: 2023/07/03 17:55:58 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:41:58 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -59,8 +59,10 @@ void	ft_bzero(void *s, size_t n)
 
 void	*ft_calloc(size_t count, size_t size)
 {
+	int		i;
 	char	*ptr;
 
+	i = 0;
 	ptr = (char *)malloc(size * count);
 	if (!ptr)
 		return (NULL);

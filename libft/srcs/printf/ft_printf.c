@@ -6,12 +6,11 @@
 /*   By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:14:52 by vduchi            #+#    #+#             */
-/*   Updated: 2022/11/15 20:23:36 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:41:36 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../include/ft_printf.h"
+#include "libft.h"
 
 static int	ft_check(char c, va_list args, int *count)
 {

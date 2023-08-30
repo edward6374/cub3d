@@ -6,20 +6,20 @@
 /*   By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 02:35:50 by vduchi            #+#    #+#             */
-/*   Updated: 2022/11/16 15:45:10 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:42:28 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "libft.h"
 
 int	ft_print_num(unsigned int u, int i, int *count)
 {
 	char	*str;
 
 	if (!i)
-		str = ft_uint_to_asc(u);
+		str = ft_utoa(u);
 	else
-		str = ft_int_to_asc(i);
+		str = ft_itoa(i);
 	if (!str)
 		return (0);
 	if (write (1, str, ft_strlen(str)) != (ssize_t)ft_strlen(str))
