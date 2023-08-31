@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/30 14:08:46 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/30 15:01:13 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 
 void	hook_mlx(t_cube *cube)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 1920)
-	{
-		j = -1;
-		while (++j < 1020)
-		{
-			my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
-		}
-	}
+	// int	i;
+	// int	j;
+	// i = -1;
+	// while (++i < cube->width)
+	// {
+	// 	j = -1;
+	// 	while (++j < cube->height)
+	// 	{
+	// 		my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
+	// 	}
+	// }
+	// mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+	read_map(cube);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	cube->mlx.status = 0;
 	mlx_key_hook(cube->mlx.win, key_hook, cube);
@@ -45,15 +46,14 @@ void	hook_mlx(t_cube *cube)
 
 int	init_mlx(t_cube *cube)
 {
-	int width = 1920;
-	int height = 1020;
 	cube->mlx.mlx = mlx_init();
 	if (!cube->mlx.mlx)
 		return (1);
-	cube->mlx.win = mlx_new_window(cube->mlx.mlx, width, height, "cub3d");
+	cube->mlx.win = mlx_new_window(cube->mlx.mlx, cube->width, cube->height,
+		"cub3d");
 	if (!cube->mlx.win)
 		return (2);
-	cube->mlx.img = mlx_new_image(cube->mlx.mlx, width, height);
+	cube->mlx.img = mlx_new_image(cube->mlx.mlx, cube->width, cube->height);
 	if (!cube->mlx.img)
 		return (3);
 	cube->mlx.addr = mlx_get_data_addr(cube->mlx.img, &cube->mlx.bits_per_pixel,

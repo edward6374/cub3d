@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/27 19:58:28 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:40:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "mlx.h"
+#include "libft.h"
 
 typedef struct s_color
 {
@@ -46,6 +47,8 @@ typedef struct s_mlx
 
 typedef struct s_cube
 {
+	int				width;
+	int				height;
 	char			*east;
 	char			*west;
 	char			*north;
@@ -63,6 +66,13 @@ int					mouse_hook(int button, int x, int y, t_cube *cube);
 void				second_key_hook(int keycode, t_cube *cube);
 
 /* ---			Window.c			--- */
-int init_mlx(t_cube *cube);
+int					init_mlx(t_cube *cube);
+void my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+
+/* ---			Check_file.c			--- */
+int check_map(t_cube *cube, char *str);
+
+/* ---			Read_map.c			--- */
+void read_map(t_cube *cube);
 
 #endif

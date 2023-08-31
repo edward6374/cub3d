@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:29 by vduchi            #+#    #+#              #
-#    Updated: 2023/07/03 18:09:31 by vduchi           ###   ########.fr        #
+#    Updated: 2023/08/31 09:49:58 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,6 @@ $(NOM)	::
 clean	:
 	@rm -f $(NOM) $(OBJ) *~
 	@rm -f mlx_app
-	@echo "$(BLUE)\nMlx cleaned!$(DEF_COLOR)"
+	@echo "$(BLUE)\nMlx cleaned!\n$(DEF_COLOR)"
 
 re		:	clean all
