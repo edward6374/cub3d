@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:09 by vduchi            #+#    #+#              #
-#    Updated: 2023/08/30 14:24:51 by vduchi           ###   ########.fr        #
+#    Updated: 2023/10/09 10:46:07 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,3 +27,6 @@ DEPS_DIR_WND	=	$(DEPS_DIR)/window
 SRCS_DIR_GEN	=	$(SRCS_DIR)/general
 OBJS_DIR_GEN	=	$(OBJS_DIR)/general
 DEPS_DIR_GEN	=	$(DEPS_DIR)/general
+SRCS_DIR_CALCS	=	$(SRCS_DIR)/calcs
+OBJS_DIR_CALCS	=	$(OBJS_DIR)/calcs
+DEPS_DIR_CALCS	=	$(DEPS_DIR)/calcs

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/30 14:34:52 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/09 15:10:24 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,62 @@ int	mouse_hook(int button, int x, int y, t_cube *cube)
 void	second_key_hook(int keycode, t_cube *cube)
 {
 	(void)cube;
-	ft_printf("Second key hook: %d\n", keycode);
+	(void)keycode;
+}
+
+int	keep_pressed(int keycode, t_cube *cube)
+{
+	printf("Key pressed: %d\n", keycode);
+	if (keycode == 126) // Flecha arriba
+	{
+		cube->posY--;
+		map_person_point(cube, 0);
+	}
+	else if (keycode == 125) // Flecha abajo
+	{
+		cube->posY++;
+		map_person_point(cube, 1);
+	}
+	else if (keycode == 124) // Flecha derecha
+	{
+		cube->posX++;
+		map_person_point(cube, 2);
+	}
+	else if (keycode == 123) // Flecha izquierda
+	{
+		cube->posX--;
+		map_person_point(cube, 3);
+	}
+	return (0);
 }
 
 int	key_hook(int keycode, t_cube *cube)
 {
+	cube->mlx.status = 1;
+	printf("Keycode: %d\n", keycode);
 	if (keycode == 53)
 		exit_safe(cube, 0);
-	else
-		second_key_hook(keycode, cube);
+	// else if (keycode == 126) // Flecha arriba
+	// {
+	// 	cube->posY--;
+	// 	map_person_point(cube);
+	// }
+	// else if (keycode == 125) // Flecha abajo
+	// {
+	// 	cube->posY++;
+	// 	map_person_point(cube);
+	// }
+	// else if (keycode == 124) // Flecha derecha
+	// {
+	// 	cube->posX++;
+	// 	map_person_point(cube);
+	// }
+	// else if (keycode == 123) // Flecha izquierda
+	// {
+	// 	cube->posX--;
+	// 	map_person_point(cube);
+	// }
+	// second_key_hook(keycode, cube);
 	return (0);
 }
 
@@ -53,7 +100,8 @@ int	loop_hook(t_cube *cube)
 {
 	if (cube->mlx.status == 1)
 	{
-		ft_printf("Loop hook\n");
+//		ft_printf("Loop hook\n");
+		calculate_rays(cube);
 		cube->mlx.status = 0;
 	}
 	return (0);

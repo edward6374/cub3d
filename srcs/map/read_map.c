@@ -6,16 +6,16 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:18:35 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/31 09:35:51 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/10 16:59:57 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void fill_borders(t_cube *cube)
+void	fill_borders(t_cube *cube)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < cube->width)
@@ -29,19 +29,73 @@ void fill_borders(t_cube *cube)
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x99FFCC);
 		}
 	}
-	// mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
 
-void read_map(t_cube *cube)
+void	map_person_point(t_cube *cube, int dir)
 {
-	int i;
-	int j;
-	int l;
-	int str_l;
-	int str_c;
-	int last_i;
-	int last_j;
-	int max_length;
+	int	x;
+	int	y;
+
+	x = -3;
+	y = -3;
+	printf("Here: X: %d\tY: %d\n", cube->posX, cube->posY + y);
+	while (++x < 3)
+	{
+		y = -3;
+		while (++y < 3)
+			my_mlx_pixel_put(&cube->mlx, cube->posX + x, cube->posY + y,
+				0x000000);
+	}
+	// Limpiar mapa
+	if (!dir)
+	{
+		my_mlx_pixel_put(&cube->mlx, cube->posX, cube->posY + 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 1, cube->posY + 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 2, cube->posY + 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 1, cube->posY + 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 2, cube->posY + 3, 0xFFFFFF);
+	}
+	else if (dir == 1)
+	{
+		my_mlx_pixel_put(&cube->mlx, cube->posX, cube->posY - 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 1, cube->posY - 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 2, cube->posY - 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 1, cube->posY - 3, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 2, cube->posY - 3, 0xFFFFFF);
+	}
+	else if (dir == 2)
+	{
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY + 1, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY + 2, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY - 1, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY - 2, 0xFFFFFF);
+		// my_mlx_pixel_put(&cube->mlx, cube->posX - 3, cube->posY - 3,
+		// 0xFFFFFF);
+	}
+	else
+	{
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY + 1, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY + 2, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY - 1, 0xFFFFFF);
+		my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY - 2, 0xFFFFFF);
+		// my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY + 3,
+		// 0xFFFFFF);
+	}
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+}
+
+void	read_map(t_cube *cube)
+{
+	int	i;
+	int	j;
+	int	l;
+	int	str_l;
+	int	str_c;
+	int	last_i;
+	int	last_j;
+	int	max_length;
 
 	i = -1;
 	max_length = -1;
@@ -50,19 +104,18 @@ void read_map(t_cube *cube)
 			max_length = ft_strlen(cube->map[i]);
 	fill_borders(cube);
 	l = (cube->width - 240) / max_length;
-	i = 120;
-	j = 120;
-	last_i = i + l;
-	last_j = j + l;
+//	printf("l: %d\tMax: %d\tWidth: %d\n", l, max_length, cube->width);
+	i = 119;
+	j = 119;
+	last_i = i + l + 1;
+	last_j = j + l + 1;
 	str_l = 0;
 	str_c = 0;
-	// printf("Before loop\n");
-	while (42)
+	while (i < 1080 || j < 1080)
 	{
 		while (++i < last_i)
 		{
-			j = last_j - l;
-			// printf("Before while\tI: %d\tJ: %d\n", i, j);
+			j = last_j - l - 1;
 			while (++j < last_j)
 			{
 				if (cube->map[str_l][str_c] == '0')
@@ -70,30 +123,31 @@ void read_map(t_cube *cube)
 				else if (cube->map[str_l][str_c] == '1')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);
 				else if (cube->map[str_l][str_c] == 'N')
-					my_mlx_pixel_put(&cube->mlx, i, j, 0xFF0000);
+				{
+					cube->posX = last_i - (l / 2);
+					cube->posY = last_j - (l / 2);
+					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
+				}
 			}
+			printf("NOW: %d\t%d\n", i, j);
 		}
-		// printf("End\tI: %d\tJ: %d\tN: %d\tC: %d\n", i, j, str_l, str_c);
-		if (i < 1120)
+		printf("I: %d\tJ: %d\n", i, j);
+		if (i >= 1080)
 		{
+			i = 119;
+			str_c = 0;
+			str_l++;
+			last_j += l;
+			last_i = i + l + 1;
+		}
+		else
+		{
+			i--;
 			last_i += l;
 			str_c++;
 		}
-		else if (i == 1120 && j == 1120)
-			break;
-		else if (i == 1120)
-		{
-			i = 120;
-			j = last_j;
-			last_i = i + l;
-			last_j += l;
-			str_c = 0;
-			str_l++;
-			// printf("I: %d\tJ: %d\tLast i: %d\tLast j: %d\n", i, j, last_i, last_j);
-			// return;
-		}
-		// printf("Str n: %d\tStr c:%d\n", str_l, str_c);
 	}
-	// printf("I: %d\tJ: %d\n", i, j);
+	map_person_point(cube, -1);
+	printf("PosX: %d\tPosY: %d\n", cube->posX, cube->posY);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
