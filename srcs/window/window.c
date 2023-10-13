@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/10 15:29:27 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:41:27 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	map_max_len(t_cube *cube, int mode)
 	}
 }
 
-void	print_minimap(t_cube *cube, int max_x, int max_y, int offset)
+void	print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
 {
 	int	i;
 	int	j;
@@ -71,15 +71,14 @@ void	print_minimap(t_cube *cube, int max_x, int max_y, int offset)
 			j = last_j - l;
 			while (j < last_j)
 			{
-				if (cube->map[str_l][str_c] == '0')
+				if (cube->map[str_l][str_c] == '0' || cube->map[str_l][str_c] == 'N')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
 				else if (cube->map[str_l][str_c] == '1')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);
-				else if (cube->map[str_l][str_c] == 'N')
+				if (cube->map[str_l][str_c] == 'N' && cube->posX == 0)
 				{
 					cube->posX = last_i - (l / 2);
 					cube->posY = last_j - (l / 2);
-					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
 				}
 				j++;
 			}
@@ -103,10 +102,10 @@ void	print_minimap(t_cube *cube, int max_x, int max_y, int offset)
 			str_l++;
 		}
 	}
-	map_person_point(cube, -1);
+	map_person_point(cube, dir);
 }
 
-void	create_minimap(t_cube *cube)
+void	create_minimap(t_cube *cube, int dir)
 {
 	int	i;
 	int	j;
@@ -126,15 +125,16 @@ void	create_minimap(t_cube *cube)
 			my_mlx_pixel_put(&cube->mlx, i, j, 0x99FFCC);
 		}
 	}
-	print_minimap(cube, max_x, max_y, offset);
+	print_minimap(cube, max_x, max_y, offset, dir);
 }
 
 void	hook_mlx(t_cube *cube)
 {
-	read_map(cube);
-//	create_minimap(cube);
+//	read_map(cube);
+	calculate_rays(cube);
+	create_minimap(cube, -1);
 	cube->mlx.status = 0;
-//	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	mlx_key_hook(cube->mlx.win, key_hook, cube);
 	mlx_mouse_hook(cube->mlx.win, mouse_hook, cube);
 	mlx_hook(cube->mlx.win, 17, 0, exit_safe, cube);

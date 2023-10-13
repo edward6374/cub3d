@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/09 15:00:07 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:29:00 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ typedef struct s_mlx
 
 typedef struct s_cube
 {
-	int				posX;
+	int				posX; //posicion del jugador por el minimapa
 	int				posY;
-	int				nposX;
+	int				nposX; //posicion del jugador en pixel
 	int				nposY;
+	int				iX; //posicion del jugador en indice de array
+	int				iY;
 	int				width;
 	int				height;
+	int				length_ray;
 	char			*east;
 	char			*west;
 	char			*north;
@@ -79,6 +82,7 @@ void		second_key_hook(int keycode, t_cube *cube);
 
 /* ---			Window.c			--- */
 int			init_mlx(t_cube *cube);
+void		create_minimap(t_cube *cube, int dir);
 void		my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 /* ---			Check_file.c			--- */

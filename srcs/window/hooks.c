@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/09 15:10:24 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:21:45 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,30 @@ int	keep_pressed(int keycode, t_cube *cube)
 	if (keycode == 126) // Flecha arriba
 	{
 		cube->posY--;
-		map_person_point(cube, 0);
+		cube->nposY--;
+		calculate_rays(cube);
+		create_minimap(cube, 0);
 	}
 	else if (keycode == 125) // Flecha abajo
 	{
 		cube->posY++;
-		map_person_point(cube, 1);
+		cube->nposY++;
+		calculate_rays(cube);
+		create_minimap(cube, 1);
 	}
 	else if (keycode == 124) // Flecha derecha
 	{
 		cube->posX++;
-		map_person_point(cube, 2);
+		cube->nposX++;
+		calculate_rays(cube);
+		create_minimap(cube, 2);
 	}
 	else if (keycode == 123) // Flecha izquierda
 	{
 		cube->posX--;
-		map_person_point(cube, 3);
+		cube->nposX--;
+		calculate_rays(cube);
+		create_minimap(cube, 3);
 	}
 	return (0);
 }

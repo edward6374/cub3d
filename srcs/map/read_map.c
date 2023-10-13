@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:18:35 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/10 16:59:57 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:38:30 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	fill_borders(t_cube *cube)
 		j = -1;
 		while (++j < cube->height)
 		{
-			if ((i > 120 && i < 1120) && j == 121)
-				j = 1119;
+			if ((i > 120 && i < 1080) && j == 121)
+				j = 1079;
 			else
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x99FFCC);
 		}
@@ -38,7 +38,6 @@ void	map_person_point(t_cube *cube, int dir)
 
 	x = -3;
 	y = -3;
-	printf("Here: X: %d\tY: %d\n", cube->posX, cube->posY + y);
 	while (++x < 3)
 	{
 		y = -3;
@@ -47,7 +46,7 @@ void	map_person_point(t_cube *cube, int dir)
 				0x000000);
 	}
 	// Limpiar mapa
-	if (!dir)
+	if (dir == 0)
 	{
 		my_mlx_pixel_put(&cube->mlx, cube->posX, cube->posY + 3, 0xFFFFFF);
 		my_mlx_pixel_put(&cube->mlx, cube->posX + 1, cube->posY + 3, 0xFFFFFF);
@@ -109,36 +108,42 @@ void	read_map(t_cube *cube)
 	j = 119;
 	last_i = i + l + 1;
 	last_j = j + l + 1;
+//	printf("Last i:%d\tLast j:%d\n", last_i, last_j);
 	str_l = 0;
 	str_c = 0;
 	while (i < 1080 || j < 1080)
 	{
+//		printf("START: %d\t%d\n", i, j);
 		while (++i < last_i)
 		{
 			j = last_j - l - 1;
+//			printf("BEGIN: %d\t%d\n", i, j);
 			while (++j < last_j)
 			{
-				if (cube->map[str_l][str_c] == '0')
+//				printf("LOOP: %d\t%d\t%d\t%d\n", i, j, str_l, str_c);
+				if (cube->map[str_l][str_c] == '0' || cube->map[str_l][str_c] == 'N')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
 				else if (cube->map[str_l][str_c] == '1')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);
-				else if (cube->map[str_l][str_c] == 'N')
+				if (cube->map[str_l][str_c] == 'N')
 				{
 					cube->posX = last_i - (l / 2);
 					cube->posY = last_j - (l / 2);
-					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
 				}
 			}
-			printf("NOW: %d\t%d\n", i, j);
+//			printf("NOW: %d\t%d\n", i, j);
 		}
-		printf("I: %d\tJ: %d\n", i, j);
-		if (i >= 1080)
+//		printf("I: %d\tJ: %d\n", i, j);
+//		if (i >= 1080 && j > 500)
+//			break;
+		if (i >= 1080 && j < 1080)
 		{
 			i = 119;
 			str_c = 0;
 			str_l++;
 			last_j += l;
 			last_i = i + l + 1;
+			j = last_j - l - 1;
 		}
 		else
 		{
@@ -149,5 +154,5 @@ void	read_map(t_cube *cube)
 	}
 	map_person_point(cube, -1);
 	printf("PosX: %d\tPosY: %d\n", cube->posX, cube->posY);
-	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+//	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
