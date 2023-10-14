@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/13 19:39:58 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/14 18:19:38 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	init_func(t_cube *cube)
 	cube->params.textures[2] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/north");
 	cube->params.textures[3] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/south");
 	cube->params.textures[4] = NULL;
-	cube->params.colors[0].R = 124; // suelo
-	cube->params.colors[0].G = 124;
-	cube->params.colors[0].B = 124;
-	cube->params.colors[1].R = 196; // techo
-	cube->params.colors[1].G = 196;
-	cube->params.colors[1].B = 196;
+	cube->params.colors[0].r = 124; // suelo
+	cube->params.colors[0].g = 124;
+	cube->params.colors[0].b = 124;
+	cube->params.colors[1].r = 196; // techo
+	cube->params.colors[1].g = 196;
+	cube->params.colors[1].b = 196;
 	cube->map = ft_calloc(sizeof(char *), 16);
 	cube->map[0] = ft_strdup("111111111111111");
 	cube->map[1] = ft_strdup("100000000000001");
@@ -76,6 +76,7 @@ void	init_func(t_cube *cube)
 	cube->posY = 0;
 	cube->nposX = (j * 64) + 32;
 	cube->nposY = (i * 64) + 32;
+	printf("X: %d\tY: %d\tPos X: %d\tPosY: %d\n", j, i, cube->nposX, cube->nposY);
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
 

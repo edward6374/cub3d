@@ -56,6 +56,7 @@ sources/minishell
 *.swp
 
 cub3d
+session
 readline/library/
 readline/Makefile
 readline/config.h
