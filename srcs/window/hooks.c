@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/19 16:49:14 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/24 17:11:15 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int	keep_pressed(int keycode, t_cube *cube)
 	{
 //		cube->posX++;
 //		cube->nposX++;
-		cube->angle -= 2.0;
+		if (cube->angle - 2.00 < 0.00)
+			cube->angle = 360.00 - cube->angle;
+		else
+			cube->angle -= 2.00;
 		calculate_rays(cube);
 		create_minimap(cube, 2);
 	}
@@ -69,7 +72,10 @@ int	keep_pressed(int keycode, t_cube *cube)
 	{
 //		cube->posX--;
 //		cube->nposX--;
-		cube->angle += 2.0;
+		if (cube->angle + 2.00 > 360.00)
+			cube->angle = 360.00 - cube->angle;
+		else
+			cube->angle += 2.00;
 		calculate_rays(cube);
 		create_minimap(cube, 3);
 	}

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/14 19:15:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/24 17:49:42 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ enum
 
 typedef struct s_rays
 {
+	int		incr;
 	int		offset;
 	double	p_x;
 	double	p_y;
@@ -33,7 +34,7 @@ typedef struct s_rays
 	double	start_y;
 	double	long_seg;
 	double	small_seg;
-}					t_rays;
+}			t_rays;
 
 typedef struct s_color
 {
