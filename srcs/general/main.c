@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/24 16:45:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/29 20:11:19 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	init_func(t_cube *cube)
 	cube->iY = i;
 	cube->posX = 0;
 	cube->posY = 0;
-	cube->nposX = (j * 64) + 32;
-	cube->nposY = (i * 64) + 32;
-	cube->angle = 45.00;
-//	printf("X: %d\tY: %d\tPos X: %d\tPosY: %d\n", j, i, cube->nposX, cube->nposY);
+	cube->nposX = (double)((j * 64) + 32);
+	cube->nposY = (double)((i * 64) + 32);
+	cube->angle = 0.00;
+	printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", j, i, cube->nposX, cube->nposY);
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
 

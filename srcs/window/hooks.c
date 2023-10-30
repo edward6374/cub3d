@@ -6,11 +6,12 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/24 17:11:15 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/30 09:03:44 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 int	exit_safe(t_cube *cube, int index)
 {
@@ -45,15 +46,17 @@ int	keep_pressed(int keycode, t_cube *cube)
 	printf("Key pressed: %d\n", keycode);
 	if (keycode == 126) // Flecha arriba
 	{
-		cube->posY--;
-		cube->nposY--;
+//		cube->posY--; //TODO: ponerlo para el minimapa
+		cube->nposY -= 1.00 * sin(cube->angle * cube->rad_const);
+		cube->nposX -= 1.00 * cos(cube->angle * cube->rad_const);
 		calculate_rays(cube);
 		create_minimap(cube, 0);
 	}
 	else if (keycode == 125) // Flecha abajo
 	{
-		cube->posY++;
-		cube->nposY++;
+//		cube->posY++;
+		cube->nposY += 1.00 * sin(cube->angle * cube->rad_const);
+		cube->nposX += 1.00 * cos(cube->angle * cube->rad_const);
 		calculate_rays(cube);
 		create_minimap(cube, 1);
 	}
@@ -79,13 +82,13 @@ int	keep_pressed(int keycode, t_cube *cube)
 		calculate_rays(cube);
 		create_minimap(cube, 3);
 	}
-	printf("X: %d\tY: %d\n", cube->nposX, cube->nposY);
+	printf("X: %f\tY: %f\n", cube->nposX, cube->nposY);
 	return (0);
 }
 
 int	key_hook(int keycode, t_cube *cube)
 {
-	cube->mlx.status = 1;
+//	cube->mlx.status = 1;
 	printf("Keycode: %d\n", keycode);
 	if (keycode == 53)
 		exit_safe(cube, 0);

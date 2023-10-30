@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/24 17:49:42 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/29 19:57:32 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,30 @@ enum
 	true = 1,
 };
 
+typedef struct s_values
+{
+	double	p_x;
+	double	p_y;
+	double	dist;
+	double	long_seg;
+	double	small_seg;
+}			t_values;
+
 typedef struct s_rays
 {
-	int		incr;
-	int		offset;
+	int			incr;
+	int			offset;
+	double		start_x;
+	double		start_y;
 	double	p_x;
 	double	p_y;
 	double	dist_x;
 	double	dist_y;
-	double	start_x;
-	double	start_y;
 	double	long_seg;
 	double	small_seg;
-}			t_rays;
+//	t_values	x;
+//	t_values	y;
+}				t_rays;
 
 typedef struct s_color
 {
@@ -69,8 +80,6 @@ typedef struct s_cube
 {
 	int				posX; //posicion del jugador por el minimapa
 	int				posY;
-	int				nposX; //posicion del jugador en pixel
-	int				nposY;
 	int				iX; //posicion del jugador en indice de array
 	int				iY;
 	int				width;
@@ -81,6 +90,8 @@ typedef struct s_cube
 	char			*north;
 	char			*south;
 	char			**map;
+	double			nposX; //posicion del jugador en pixel
+	double			nposY;
 	double			angle;
 	double			rad_const;
 	t_mlx			mlx;

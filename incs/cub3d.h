@@ -6,14 +6,14 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/14 18:09:55 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/26 10:01:15 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "struct.h"
+# include "structs.h"
 
 /* ---			Hooks.c				--- */
 int			loop_hook(t_cube *cube);

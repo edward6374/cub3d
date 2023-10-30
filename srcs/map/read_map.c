@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:18:35 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/13 19:38:30 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/29 20:06:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	map_person_point(t_cube *cube, int dir)
 
 	x = -3;
 	y = -3;
+//	printf("Here\n");
 	while (++x < 3)
 	{
 		y = -3;
