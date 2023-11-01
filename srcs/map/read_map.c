@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:18:35 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/29 20:06:53 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/01 18:45:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	map_person_point(t_cube *cube, int dir)
 
 	x = -3;
 	y = -3;
-//	printf("Here\n");
 	while (++x < 3)
 	{
 		y = -3;
@@ -83,7 +82,7 @@ void	map_person_point(t_cube *cube, int dir)
 		// my_mlx_pixel_put(&cube->mlx, cube->posX + 3, cube->posY + 3,
 		// 0xFFFFFF);
 	}
-	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+//	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
 
 void	read_map(t_cube *cube)
@@ -117,7 +116,7 @@ void	read_map(t_cube *cube)
 //		printf("START: %d\t%d\n", i, j);
 		while (++i < last_i)
 		{
-			j = last_j - l - 1;
+			j = last_j - l;
 //			printf("BEGIN: %d\t%d\n", i, j);
 			while (++j < last_j)
 			{
@@ -126,7 +125,7 @@ void	read_map(t_cube *cube)
 					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
 				else if (cube->map[str_l][str_c] == '1')
 					my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);
-				if (cube->map[str_l][str_c] == 'N')
+				if (cube->map[str_l][str_c] == 'N' && cube->posX == 0)
 				{
 					cube->posX = last_i - (l / 2);
 					cube->posY = last_j - (l / 2);
@@ -144,11 +143,11 @@ void	read_map(t_cube *cube)
 			str_l++;
 			last_j += l;
 			last_i = i + l + 1;
-			j = last_j - l - 1;
+			j = last_j - l;
 		}
 		else
 		{
-			i--;
+//			i--;
 			last_i += l;
 			str_c++;
 		}

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/29 20:05:46 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/10/30 15:13:59 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,9 @@ void	create_minimap(t_cube *cube, int dir)
 
 void	hook_mlx(t_cube *cube)
 {
-//	read_map(cube);
+	read_map(cube);
 	calculate_rays(cube);
-	create_minimap(cube, -1);
+//	create_minimap(cube, -1);
 	cube->mlx.status = 0;
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	mlx_key_hook(cube->mlx.win, key_hook, cube);

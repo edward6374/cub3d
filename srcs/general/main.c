@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/29 20:11:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/01 18:45:06 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_func(t_cube *cube)
 		if (cube->map[i][j] == 'N')
 			break ;
 	}
-	cube->iX = j;
-	cube->iY = i;
+	cube->iX = i;
+	cube->iY = j;
 	cube->posX = 0;
 	cube->posY = 0;
 	cube->nposX = (double)((j * 64) + 32);

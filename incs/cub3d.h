@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/26 10:01:15 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:06:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		map_person_point(t_cube *cube, int dir);
 void		read_map(t_cube *cube);
 
 /* ---			Rays.c			--- */
+int			double_equals(double a, double b);
+int			set_segments(t_rays *r, double small_val, double long_val);
 void		calculate_rays(t_cube *cube);
 
 #endif

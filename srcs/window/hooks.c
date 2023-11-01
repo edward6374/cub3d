@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/30 09:03:44 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/01 17:14:44 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,44 @@ void	second_key_hook(int keycode, t_cube *cube)
 	(void)keycode;
 }
 
+void	check_pos(t_cube *cube)
+{
+//	printf("NposX: %d\tiX: %d\tNposY: %d\tiY: %d\n", (int)(cube->nposX / 64), cube->iX, (int)(cube->nposY / 64), cube->iY);
+	if ((int)(cube->nposX / 64) > cube->iX)
+		cube->iX++;
+	else if ((int)(cube->nposX / 64) < cube->iX)
+		cube->iX--;
+	if ((int)(cube->nposY / 64) > cube->iY)
+		cube->iY++;
+	else if ((int)(cube->nposY / 64) < cube->iY)
+		cube->iY--;
+	printf("iX: %d\tiY: %d\n", cube->iX, cube->iY);
+}
+
 int	keep_pressed(int keycode, t_cube *cube)
 {
 	printf("Key pressed: %d\n", keycode);
 	if (keycode == 126) // Flecha arriba
 	{
 //		cube->posY--; //TODO: ponerlo para el minimapa
-		cube->nposY -= 1.00 * sin(cube->angle * cube->rad_const);
-		cube->nposX -= 1.00 * cos(cube->angle * cube->rad_const);
+		cube->posY -= 2.00 * sin(cube->angle * cube->rad_const);
+		cube->posX += 2.00 * cos(cube->angle * cube->rad_const);
+		cube->nposY -= 2.00 * sin(cube->angle * cube->rad_const);
+		cube->nposX += 2.00 * cos(cube->angle * cube->rad_const);
+		check_pos(cube);
 		calculate_rays(cube);
-		create_minimap(cube, 0);
+//		create_minimap(cube, 0);
 	}
 	else if (keycode == 125) // Flecha abajo
 	{
 //		cube->posY++;
-		cube->nposY += 1.00 * sin(cube->angle * cube->rad_const);
-		cube->nposX += 1.00 * cos(cube->angle * cube->rad_const);
+		cube->posY += 2.00 * sin(cube->angle * cube->rad_const);
+		cube->posX -= 2.00 * cos(cube->angle * cube->rad_const);
+		cube->nposY += 2.00 * sin(cube->angle * cube->rad_const);
+		cube->nposX -= 2.00 * cos(cube->angle * cube->rad_const);
+		check_pos(cube);
 		calculate_rays(cube);
-		create_minimap(cube, 1);
+//		create_minimap(cube, 1);
 	}
 	else if (keycode == 124) // Flecha derecha
 	{
@@ -69,7 +89,7 @@ int	keep_pressed(int keycode, t_cube *cube)
 		else
 			cube->angle -= 2.00;
 		calculate_rays(cube);
-		create_minimap(cube, 2);
+//		create_minimap(cube, 2);
 	}
 	else if (keycode == 123) // Flecha izquierda
 	{
@@ -80,9 +100,11 @@ int	keep_pressed(int keycode, t_cube *cube)
 		else
 			cube->angle += 2.00;
 		calculate_rays(cube);
-		create_minimap(cube, 3);
+//		create_minimap(cube, 3);
 	}
-	printf("X: %f\tY: %f\n", cube->nposX, cube->nposY);
+//	read_map(cube);
+	printf("X: %f\tY: %f\tPos X: %d\tPos Y: %d\n", cube->nposX, cube->nposY, cube->posX, cube->posY);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	return (0);
 }
 
@@ -121,7 +143,7 @@ int	loop_hook(t_cube *cube)
 	if (cube->mlx.status == 1)
 	{
 //		ft_printf("Loop hook\n");
-		calculate_rays(cube);
+//		calculate_rays(cube);
 		cube->mlx.status = 0;
 	}
 	return (0);
