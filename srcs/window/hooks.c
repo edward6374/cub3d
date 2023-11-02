@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/01 17:14:44 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/02 17:20:11 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,22 @@ void	check_pos(t_cube *cube)
 
 int	keep_pressed(int keycode, t_cube *cube)
 {
+	double	cos_val;
+	double	sin_val;
+
+	cos_val = 2.00 * cos(cube->angle * cube->rad_const);
+	sin_val = 2.00 * sin(cube->angle * cube->rad_const);
 	printf("Key pressed: %d\n", keycode);
 	if (keycode == 126) // Flecha arriba
 	{
 //		cube->posY--; //TODO: ponerlo para el minimapa
-		cube->posY -= 2.00 * sin(cube->angle * cube->rad_const);
-		cube->posX += 2.00 * cos(cube->angle * cube->rad_const);
-		cube->nposY -= 2.00 * sin(cube->angle * cube->rad_const);
-		cube->nposX += 2.00 * cos(cube->angle * cube->rad_const);
+		if (cube->map[(int)fabs((cube->nposY - (10 * sin_val)) / 64.00)]\
+				[(int)fabs((cube->nposX + (10 * cos_val)) / 64.00)] == '1')
+			return (0);
+		cube->posY -= sin_val;
+		cube->posX += cos_val;
+		cube->nposY -= sin_val;
+		cube->nposX += cos_val;
 		check_pos(cube);
 		calculate_rays(cube);
 //		create_minimap(cube, 0);
@@ -72,10 +80,13 @@ int	keep_pressed(int keycode, t_cube *cube)
 	else if (keycode == 125) // Flecha abajo
 	{
 //		cube->posY++;
-		cube->posY += 2.00 * sin(cube->angle * cube->rad_const);
-		cube->posX -= 2.00 * cos(cube->angle * cube->rad_const);
-		cube->nposY += 2.00 * sin(cube->angle * cube->rad_const);
-		cube->nposX -= 2.00 * cos(cube->angle * cube->rad_const);
+		if (cube->map[(int)(fabs(cube->nposY + (10 * sin_val)) / 64.00)]\
+				[(int)fabs((cube->nposX - (10 * cos_val)) / 64.00)] == '1')
+			return (0);
+		cube->posY += sin_val;
+		cube->posX -= cos_val;
+		cube->nposY += sin_val;
+		cube->nposX -= cos_val;
 		check_pos(cube);
 		calculate_rays(cube);
 //		create_minimap(cube, 1);

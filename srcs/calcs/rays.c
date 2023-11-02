@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/01 19:22:54 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/02 17:02:29 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,25 @@ void	print_screen(t_cube *cube, double *arr)
 
 double	calc_small(t_cube *cube, double pos, double angle, int mode)
 {
-	int	just_angle = angle / cube->rad_const;
-//	printf("X: %d\tY: %d\tNposX: %f\tNposY: %f\n", cube->iX, cube->iY, cube->nposX, cube->nposY);
+	double	diff_x;
+	double	diff_y;
+	double	tan_value;
+	double	just_angle;
+
+	tan_value = tan(angle);
+	just_angle = angle / cube->rad_const;
+//	printf("X: %d\tY: %d\tNposX: %f\tNposY: %f\tAngle: %f\n", cube->iX, cube->iY, cube->nposX, cube->nposY, angle);
 	if (!mode)
 	{
 		if (double_equals(just_angle, 0.00) || double_equals(just_angle, 180.00)
-			|| (angle / cube->rad_const > 0.00 && angle / cube->rad_const < 180.00))
+			|| (just_angle > 0.00 && just_angle < 180.00))
 		{
 //			printf("Mode 0 yes if\n");
-			return ((double)(((int)cube->nposY % 64) / tan(angle)));
+			return (fmod(cube->nposY, 64.00) / tan_value);
 		}
-//		printf("Mode 0 no if\n");
-		return ((double)((((cube->iY + 1) * 64) - pos) / tan(angle)));
+//		printf("Mode 0 no if: %f\tTan: %f\n", (((((double)cube->iY + 1.00) * 64.00) - pos) / tan(angle)), tan(angle));
+		diff_x = ((cube->iY + 1) * 64.00) - pos;
+		return (diff_x / tan_value);
 	}
 	else
 	{
@@ -67,10 +74,11 @@ double	calc_small(t_cube *cube, double pos, double angle, int mode)
 			|| (angle / cube->rad_const > 90.00 && angle / cube->rad_const < 270.00))
 		{
 //			printf("Mode 1 yes if\n");
-			return ((double)(((int)cube->nposX % 64) * tan(angle)));
+			return (fmod(cube->nposX, 64.00) * tan_value);
 		}
 //		printf("Mode 1 no if\n");
-		return ((double)((((cube->iX + 1) * 64) - pos) * tan(angle)));
+		diff_y = ((cube->iX + 1) * 64.00) - pos;
+		return (diff_y  * tan_value);
 	}
 }
 
@@ -110,8 +118,7 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 			r->p_x = r->start_x + r->small_seg;
 		else
 			r->p_x = r->start_x - r->small_seg;
-//		if (angle > 0.00 && angle < 3.00)
-//			printf("Mode 0: %f\tSmall: %f\tLong %f\tR_X: %f\n", r->start_x, r->small_seg, r->long_seg, r->p_x);
+//		printf("Mode 0: %f\tSmall: %f\tLong %f\tR_X: %f\n", r->start_x, r->small_seg, r->long_seg, r->p_x);
 	}
 	else
 	{
@@ -119,8 +126,7 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 			r->p_y = r->start_y + r->small_seg;
 		else
 			r->p_y = r->start_y - r->small_seg;
-//		if (angle > 0.00 && angle < 3.00)
-//			printf("Mode 1: %f\tSmall: %f\tLong %f\tR_Y: %f\n", r->start_y, r->small_seg, r->long_seg, r->p_y);
+//		printf("Mode 1: %f\tSmall: %f\tLong %f\tR_Y: %f\n", r->start_y, r->small_seg, r->long_seg, r->p_y);
 	}
 }
 
@@ -156,9 +162,14 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 //		r.p_x += r.long_seg;
 //		r.offset += r->incr;
 //	}
-	if (double_equals(angle, 90.00) || double_equals(angle, 270.00))
+	if (double_equals(angle, 90.00))
 	{
 		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) - r.offset + 1) * 64.0; //No necesito la y cuando tengo la x y igual al revers
+		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
+	}
+	else if (double_equals(angle, 270.00))
+	{
+		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) + r.offset) * 64.0; //No necesito la y cuando tengo la x y igual al revers
 		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
 	}
 	else
@@ -186,17 +197,19 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 //			printf("Second Y\tX: %d\tY: %d\tR_Y: %f\n", (int)fabs(r.p_y / 64.0), (int)(cube->nposX / 64.0) + r.offset, r.p_y);
 		}
 	}
-	if (double_equals(angle, 0.00) || double_equals(angle, 180.00))
+	if (double_equals(angle, 0.00))
 	{
 		r.p_x = (double)((int)(fabs(cube->nposX / 64.00)) + r.offset) * 64.00;
 		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)); //* cos((-90.0 + angle) * cube->rad_const);
-//		if (angle > 0.00 && angle < 1.00)
-//			printf("R_X: %f\tDist Y: %f\n", r.p_x, r.dist_y);
+	}
+	else if (double_equals(angle, 180.00))
+	{
+		r.p_x = (double)((int)(fabs(cube->nposX / 64.00)) - r.offset + 1) * 64.00;
+		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)); //* cos((-90.0 + angle) * cube->rad_const);
 	}
 	else
 		r.dist_y = fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const)); // * cos((-90.0 + angle) * cube->rad_const);
-	if (double_equals(angle, 180.00))
-		printf("Angle: %f\tDist X: %f\tDist Y: %f\n", angle, r.dist_x, r.dist_y);
+//	printf("Angle: %f\tDist X: %f\tDist Y: %f\n\n", angle, r.dist_x, r.dist_y);
 	if (r.dist_x <= r.dist_y)
 		return (r.dist_x);
 	return (r.dist_y);
@@ -231,7 +244,7 @@ void	calculate_rays(t_cube *cube)
 		angle = cube->angle - 30.0;
 //	printf("First\tDistance: %f\tIdx: %d\tAngle: %f\n", distance[idx], idx, angle);
 //	printf("Second\tDistance: %f\tIdx: %d\tAngle: %f\tCos angle: %f\n", distance[idx], idx, angle, cos_angle);
-//	angle = 30.00;
+//	angle = 355.00;
 //	distance[idx] = bigger_distance(cube, r, angle);
 //	printf("Angle: %f\tDistance: %f\n", angle, distance[idx]);
 	printf("Angle value: %f\n", cube->angle);
@@ -258,10 +271,8 @@ void	calculate_rays(t_cube *cube)
 		cos_angle -= 60.00 / 1200.00;
 		if (angle > 359.9999)
 			angle = 0.0;
-		if (idx < -5)
-			break ;
 		idx--;
 	}
-	printf("Angle after: %f\n", angle);
+	printf("Angle after: %f\tIdx: %d\n", angle, idx);
 	print_screen(cube, distance);
 }

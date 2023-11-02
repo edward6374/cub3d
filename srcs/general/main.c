@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/01 18:45:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/02 13:39:31 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	init_func(t_cube *cube)
 	cube->map[2] = ft_strdup("100001111000001");
 	cube->map[3] = ft_strdup("100001111111001");
 	cube->map[4] = ft_strdup("100001111110001");
-	cube->map[5] = ft_strdup("100000000000001");
-	cube->map[6] = ft_strdup("100000N00111001");
+	cube->map[5] = ft_strdup("1000000N0000001");
+	cube->map[6] = ft_strdup("100000000111001");
 	cube->map[7] = ft_strdup("100000000000001");
 	cube->map[8] = ft_strdup("100000000000001");
 	cube->map[9] = ft_strdup("100000000000001");
@@ -70,13 +70,13 @@ void	init_func(t_cube *cube)
 		if (cube->map[i][j] == 'N')
 			break ;
 	}
-	cube->iX = i;
-	cube->iY = j;
+	cube->iX = j;
+	cube->iY = i;
 	cube->posX = 0;
 	cube->posY = 0;
 	cube->nposX = (double)((j * 64) + 32);
 	cube->nposY = (double)((i * 64) + 32);
-	cube->angle = 0.00;
+	cube->angle = 20.00;
 	printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", j, i, cube->nposX, cube->nposY);
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
