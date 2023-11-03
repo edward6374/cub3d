@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/02 17:02:29 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/03 13:06:54 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,11 @@ double	calc_small(t_cube *cube, double pos, double angle, int mode)
 
 	tan_value = tan(angle);
 	just_angle = angle / cube->rad_const;
-//	printf("X: %d\tY: %d\tNposX: %f\tNposY: %f\tAngle: %f\n", cube->iX, cube->iY, cube->nposX, cube->nposY, angle);
 	if (!mode)
 	{
 		if (double_equals(just_angle, 0.00) || double_equals(just_angle, 180.00)
 			|| (just_angle > 0.00 && just_angle < 180.00))
-		{
-//			printf("Mode 0 yes if\n");
 			return (fmod(cube->nposY, 64.00) / tan_value);
-		}
-//		printf("Mode 0 no if: %f\tTan: %f\n", (((((double)cube->iY + 1.00) * 64.00) - pos) / tan(angle)), tan(angle));
 		diff_x = ((cube->iY + 1) * 64.00) - pos;
 		return (diff_x / tan_value);
 	}
@@ -72,11 +67,7 @@ double	calc_small(t_cube *cube, double pos, double angle, int mode)
 	{
 		if (double_equals(just_angle, 90.00) || double_equals(just_angle, 270.00)
 			|| (angle / cube->rad_const > 90.00 && angle / cube->rad_const < 270.00))
-		{
-//			printf("Mode 1 yes if\n");
 			return (fmod(cube->nposX, 64.00) * tan_value);
-		}
-//		printf("Mode 1 no if\n");
 		diff_y = ((cube->iX + 1) * 64.00) - pos;
 		return (diff_y  * tan_value);
 	}
@@ -88,7 +79,7 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 		|| ((double_equals(angle, 90.00) || (angle > 90.00 && angle < 270.00)) && mode))
 	{
 		r->incr = -1;
-		r->offset = 1; //TODO: es -1
+		r->offset = -1;
 	}
 	else
 	{
@@ -107,8 +98,6 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 	}
 	else
 	{
-//		((!mode) && (set_segments(r, (double)((int)cube->nposY % 64) / tan(angle * cube->rad_const), 64.0 / tan(angle * cube->rad_const))));
-//		((mode) && (set_segments(r, (double)((int)cube->nposX % 64) * tan(angle * cube->rad_const), 64.0 * tan(angle * cube->rad_const))));
 		((!mode) && (set_segments(r, calc_small(cube, cube->nposY, angle * cube->rad_const, 0), 64.0 / tan(angle * cube->rad_const))));
 		((mode) && (set_segments(r, calc_small(cube, cube->nposX, angle * cube->rad_const, 1), 64.0 * tan(angle * cube->rad_const))));
 	}
@@ -118,7 +107,6 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 			r->p_x = r->start_x + r->small_seg;
 		else
 			r->p_x = r->start_x - r->small_seg;
-//		printf("Mode 0: %f\tSmall: %f\tLong %f\tR_X: %f\n", r->start_x, r->small_seg, r->long_seg, r->p_x);
 	}
 	else
 	{
@@ -126,90 +114,54 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 			r->p_y = r->start_y + r->small_seg;
 		else
 			r->p_y = r->start_y - r->small_seg;
-//		printf("Mode 1: %f\tSmall: %f\tLong %f\tR_Y: %f\n", r->start_y, r->small_seg, r->long_seg, r->p_y);
 	}
 }
 
+//TODO: poner no 15 ma el numero maximo de lineas del mapa
 double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen ma la longitud de cada linea del mapa
 {
 	check_segments(cube, &r, angle, 0);
-	if (double_equals(angle, 0.00) || (angle > 0.00 && angle < 180.00))
+	while ((int)(fabs(cube->nposY / 64.00)) + r.offset >= 0
+			&& (int)(fabs(cube->nposY / 64.00)) + r.offset < 15
+			&& (int)(fabs(r.p_x / 64.00)) < (int)ft_strlen(cube->map[(int)fabs(cube->nposY / 64.00)])
+			&& cube->map[(int)(fabs(cube->nposY / 64.00)) + r.offset][(int)fabs(r.p_x / 64.00)] != '1')
 	{
-//		printf("First\tX: %d\tY: %d\tR_X: %f\n", (int)(cube->nposY / 64.0) - r.offset, (int)fabs(r.p_x / 64.0), r.p_x);
-		while ((int)fabs(r.p_x / 64.00) < (int)ft_strlen(cube->map[0]) && (int)(fabs(cube->nposY / 64.00)) - r.offset >= 0
-				&& cube->map[(int)(fabs(cube->nposY / 64.00)) - r.offset][(int)fabs(r.p_x / 64.00)] != '1')
-		{
-			r.p_x += r.long_seg;
-			r.offset++;
-//			printf("First\tX: %d\tY: %d\tR_X: %f\n", (int)(cube->nposY / 64.0) - r.offset, (int)fabs(r.p_x / 64.0), r.p_x);
-		}
-	}
-	else
-	{
-//		printf("Second X\tX: %d\tY: %d\tR_X: %f\n", (int)(cube->nposY / 64.0) + r.offset, (int)fabs(r.p_x / 64.0), r.p_x);
-		while ((int)fabs(r.p_x / 64.00) < (int)ft_strlen(cube->map[0]) && (int)(fabs(cube->nposY / 64.00)) + r.offset < 15
-				&& cube->map[(int)(fabs(cube->nposY / 64.00)) + r.offset][(int)fabs(r.p_x / 64.00)] != '1')
-		{
+		if (r.incr > 0)
 			r.p_x -= r.long_seg;
-			r.offset++;
-//			printf("Second\tX: %d\tY: %d\tR_X: %f\n", (int)(cube->nposY / 64.0) + r.offset, (int)fabs(r.p_x / 64.0), r.p_x);
-		}
+		else
+			r.p_x += r.long_seg;
+		r.offset += r.incr;
 	}
-//	while ((int)(cube->nposY / 64.0) + r.offset >= 0 && (int)(cube->nposY / 64.0) + r.offset < 15
-//			&& cube->map[(int)(cube->nposY / 64.0) - r.offset][(int)fabs(r.p_x / 64.0)] != '1')
-//	{
-//		printf("First\tX: %d\tY: %d\n", (int)(cube->nposY / 64.0) - r.offset, (int)fabs(r.p_x / 64.0));
-//		r.p_x += r.long_seg;
-//		r.offset += r->incr;
-//	}
 	if (double_equals(angle, 90.00))
+		r.offset += 1;
+	if (double_equals(angle, 90.00) || double_equals(angle, 270.00))
 	{
-		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) - r.offset + 1) * 64.0; //No necesito la y cuando tengo la x y igual al revers
-		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
-	}
-	else if (double_equals(angle, 270.00))
-	{
-		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) + r.offset) * 64.0; //No necesito la y cuando tengo la x y igual al revers
+		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) + r.offset) * 64.00; //No necesito la y cuando tengo la x y igual al revers
 		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
 	}
 	else
 		r.dist_x = (fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
 	check_segments(cube, &r, angle, 1);
-	if (double_equals(angle, 90.00) || (angle > 90.0 && angle < 270.0))
+	while ((int)(fabs(cube->nposX / 64.00)) + r.offset >= 0
+			&& (int)(fabs(r.p_y / 64.00)) < 15
+			&& (int)(fabs(cube->nposX / 64.00)) + r.offset < (int)ft_strlen(cube->map[(int)fabs(r.p_y / 64.00)])
+			&& cube->map[(int)fabs(r.p_y / 64.00)][(int)(fabs(cube->nposX / 64.00)) + r.offset] != '1')
 	{
-//		printf("First Y\tX: %d\tY: %d\tR_Y: %f\n", (int)fabs(r.p_y / 64.0), (int)(cube->nposX / 64.0) - r.offset, r.p_y);
-		while ((int)fabs(r.p_y / 64.00) < 15 && (int)(fabs(cube->nposX / 64.00)) - r.offset > 0
-				&& cube->map[(int)fabs(r.p_y / 64.0)][(int)(fabs(cube->nposX / 64.00)) - r.offset] != '1')
-		{
-			r.p_y += r.long_seg;
-			r.offset++;
-//			printf("First Y\tX: %d\tY: %d\tR_Y: %f\n", (int)fabs(r.p_y / 64.0), (int)(cube->nposX / 64.0) - r.offset, r.p_y);
-		}
-	}
-	else
-	{
-//		printf("Second Y\tX: %d\tY: %d\tR_Y: %f\n", (int)fabs(r.p_y / 64.0), (int)(cube->nposX / 64.0) + r.offset, r.p_y);
-		while ((int)fabs(r.p_y / 64.00) < 15 && (int)(fabs(cube->nposX / 64.00)) + r.offset < (int)ft_strlen(cube->map[0])
-				&& cube->map[(int)fabs(r.p_y / 64.0)][(int)(fabs(cube->nposX / 64.00)) + r.offset] != '1')
-		{
+		if (r.incr > 0)
 			r.p_y -= r.long_seg;
-			r.offset++;
-//			printf("Second Y\tX: %d\tY: %d\tR_Y: %f\n", (int)fabs(r.p_y / 64.0), (int)(cube->nposX / 64.0) + r.offset, r.p_y);
-		}
+		else
+			r.p_y += r.long_seg;
+		r.offset += r.incr;
 	}
-	if (double_equals(angle, 0.00))
+	if (double_equals(angle, 180.00))
+		r.offset += 1;
+	if (double_equals(angle, 0.00) || double_equals(angle, 180.00))
 	{
 		r.p_x = (double)((int)(fabs(cube->nposX / 64.00)) + r.offset) * 64.00;
 		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)); //* cos((-90.0 + angle) * cube->rad_const);
 	}
-	else if (double_equals(angle, 180.00))
-	{
-		r.p_x = (double)((int)(fabs(cube->nposX / 64.00)) - r.offset + 1) * 64.00;
-		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)); //* cos((-90.0 + angle) * cube->rad_const);
-	}
 	else
 		r.dist_y = fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const)); // * cos((-90.0 + angle) * cube->rad_const);
-//	printf("Angle: %f\tDist X: %f\tDist Y: %f\n\n", angle, r.dist_x, r.dist_y);
 	if (r.dist_x <= r.dist_y)
 		return (r.dist_x);
 	return (r.dist_y);
@@ -242,13 +194,6 @@ void	calculate_rays(t_cube *cube)
 	}
 	else
 		angle = cube->angle - 30.0;
-//	printf("First\tDistance: %f\tIdx: %d\tAngle: %f\n", distance[idx], idx, angle);
-//	printf("Second\tDistance: %f\tIdx: %d\tAngle: %f\tCos angle: %f\n", distance[idx], idx, angle, cos_angle);
-//	angle = 355.00;
-//	distance[idx] = bigger_distance(cube, r, angle);
-//	printf("Angle: %f\tDistance: %f\n", angle, distance[idx]);
-	printf("Angle value: %f\n", cube->angle);
-	printf("Angle before: %f\tDiff: %f\n", angle, diff);
 	while (!double_equals(diff, 0.00) && angle < 359.9999)
 	{
 		distance[idx] = bigger_distance(cube, r, angle);
@@ -259,7 +204,6 @@ void	calculate_rays(t_cube *cube)
 	}
 	if (!double_equals(diff, 0.00))
 		angle = 0.00;
-	printf("Angle now: %f\n", angle);
 	while ((double_equals(diff, 0.00) && !double_equals(cube->angle, 330.00) && angle < cube->angle + 30.00)
 			|| (double_equals(diff, 0.00) && double_equals(cube->angle, 330.00) && !double_equals(angle, 0.00))
 			|| (!double_equals(diff, 0.00) && cube->angle < 30.00 && angle < 60.00 - diff)
@@ -273,6 +217,5 @@ void	calculate_rays(t_cube *cube)
 			angle = 0.0;
 		idx--;
 	}
-	printf("Angle after: %f\tIdx: %d\n", angle, idx);
 	print_screen(cube, distance);
 }
