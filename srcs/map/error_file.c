@@ -6,11 +6,12 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/06 20:52:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:09:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "error.h"
 #include "libft.h"
 
 int check_file(int argc, char *argv[])
@@ -18,7 +19,8 @@ int check_file(int argc, char *argv[])
 	(void)argv;
 
 	if (argc == 1)
-		return (ft_printf("Map file name required!\n"), 1);
+		// return (ft_printf("Map file name required!\n"), 1);
+		return (ft_message(DANGER, "Map file name required!\n"), 1);
 	else if (argc > 3)
 		return (ft_printf("Too many arguments\n"), 1);
 	return (0);
