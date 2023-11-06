@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/01 17:06:03 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/06 20:48:35 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ void		read_map(t_cube *cube);
 int			double_equals(double a, double b);
 int			set_segments(t_rays *r, double small_val, double long_val);
 void		calculate_rays(t_cube *cube);
+
+/* ---			error_file.c			--- */
+int check_file(int argc, char *argv[]);
 
 #endif

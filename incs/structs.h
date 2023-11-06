@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/10/29 19:57:32 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/06 21:00:42 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ enum
 {
 	false = 0,
 	true = 1,
+};
+
+enum
+{
+	F, // FLOOR,
+	C, // CEILING,
+};
+
+enum
+{
+	NO,
+	SO,
+	WE,
+	EA,
 };
 
 typedef struct s_values

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 19:32:02 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:18:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //	TODO
 //	Da implementar esta funcion
+// map tiene que tener la extension cub
 
 // Comprobar NO,SO,WE,EA,F,C este
 // Comprobar que la ruta sea correcta y este la textura
