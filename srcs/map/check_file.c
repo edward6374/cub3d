@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 20:18:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:31:42 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
 
 int	check_map(t_cube *cube, char *str)
 {
-	// int	map;
+	// char **file;
+	// file = ft_file_to_dptr(argv[1],0); // free(file)
+
 	(void)str;
 	(void)cube;
 	// map = open(str, O_RDONLY);
 	// if (map == -1)
-	// 	return (1);
+	// return (1);
 	return (0);
 }
+

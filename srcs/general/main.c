@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 22:08:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:31:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,30 +83,14 @@ void	init_func(t_cube *cube)
 
 int	main(int argc, char *argv[])
 {
-	int		err;
-	t_cube	cube;
-	// char **file;
+	t_cube cube;
 
 	ft_bzero(&cube, sizeof(t_cube));
-	if (check_file(argc, argv))
+	if (check_file(argc) || check_map(&cube, argv[1]))
 		return (1);
-
-	// if (argc == 1)
-	// 	return (ft_printf("Map file name required!\n"));
-	// else if (argc > 3)
-	// 	return (ft_printf("Too many arguments\n"));
-
-	// file = ft_file_to_dptr(argv[1],0);
-	// err = check_map(&cube, file); // despues liberar file y poner NULL
-
-	err = check_map(&cube, argv[1]);
 
 	init_func(&cube);
 
-	if (err == 1)
-		return (ft_printf("Map error\n"));
-	else if (err > 1)
-		return (ft_printf("Malloc error\n"));
 	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
