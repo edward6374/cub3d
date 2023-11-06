@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/30 14:27:00 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/06 19:32:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 //	TODO
 //	Da implementar esta funcion
+
+// Comprobar NO,SO,WE,EA,F,C este
+// Comprobar que la ruta sea correcta y este la textura
+// comprobar que sea un valor valido para RGB entre 0 y 255
+// Leer el mapa y todal de filas sera el Primer Puntero
+// Leer el mapa, la fila mas larga sera el total del Doble puntero
+
 int	check_map(t_cube *cube, char *str)
 {
 	// int	map;
