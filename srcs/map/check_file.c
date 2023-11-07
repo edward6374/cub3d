@@ -5,34 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 22:31:42 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/11/06 22:38:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <fcntl.h>
+#include "error.h"
+#include "libft.h"
 
-//	TODO
-//	Da implementar esta funcion
-// map tiene que tener la extension cub
-
-// Comprobar NO,SO,WE,EA,F,C este
-// Comprobar que la ruta sea correcta y este la textura
-// comprobar que sea un valor valido para RGB entre 0 y 255
-// Leer el mapa y todal de filas sera el Primer Puntero
-// Leer el mapa, la fila mas larga sera el total del Doble puntero
-
-int	check_map(t_cube *cube, char *str)
+int check_file(int argc)
 {
-	// char **file;
-	// file = ft_file_to_dptr(argv[1],0); // free(file)
-
-	(void)str;
-	(void)cube;
-	// map = open(str, O_RDONLY);
-	// if (map == -1)
-	// return (1);
+	if (argc == 1)
+		return (ft_message(DANGER, "Map file name required!"), 1);
+	else if (argc > 2)
+		return (ft_message(DANGER, "Too many arguments"), 1);
 	return (0);
 }
 
+// TODO
+// falta comprobar la extension del fichero .cub

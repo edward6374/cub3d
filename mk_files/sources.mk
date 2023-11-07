@@ -6,7 +6,7 @@
 #    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:18 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/06 20:43:01 by nmota-bu         ###   ########.fr        #
+#    Updated: 2023/11/06 22:36:57 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ SRCS_WND		=	srcs/window/hooks.c
 SRCS_WND		+=	srcs/window/window.c
 
 SRCS_MAP		=	srcs/map/check_file.c
+SRCS_MAP		+=	srcs/map/check_map.c
 SRCS_MAP		+=	srcs/map/read_map.c
-SRCS_MAP		+=	srcs/map/error_file.c
 
 SRCS_CALCS		=	srcs/calcs/rays.c
 SRCS_CALCS		+=	srcs/calcs/utils.c
