@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/07 14:56:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:16:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	check_file(int argc, char *file)
 		return (ft_message(DANGER, "Error\nToo many arguments."), EXIT_FAILURE);
 	else
 	{
-		if (!ft_strnstr(&file[ft_strlen(file) - 4], ".map", 4))
+		if (!ft_strnstr(&file[ft_strlen(file) - 4], ".cub", 4))
 			return (ft_message(DANGER,
-					"Error\nFile map does not have the extension .map"),
-				EXIT_FAILURE);
+							   "Error\nFile map does not have the extension .cub"),
+					EXIT_FAILURE);
 	}
 	return (0);
 }

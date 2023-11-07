@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/07 14:56:09 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:59:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,21 @@ void	init_func(t_cube *cube)
 	cube->params.west = 4;
 	cube->params.north = 5;
 	cube->params.south = 6;
-	cube->params.textures = ft_calloc(sizeof(char *), 5);
-	cube->params.textures[NO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/east");
-	cube->params.textures[SO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/west");
-	cube->params.textures[WE] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/north");
-	cube->params.textures[EA] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/south");
-	cube->params.textures[4] = NULL;
-	cube->params.colors[F].r = 124; // suelo
-	cube->params.colors[F].g = 124;
-	cube->params.colors[F].b = 124;
-	cube->params.colors[C].r = 196; // techo
-	cube->params.colors[C].g = 196;
-	cube->params.colors[C].b = 196;
+
+	// cube->params.textures = ft_calloc(sizeof(char *), 5);
+	// cube->params.textures[NO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/east");
+	// cube->params.textures[SO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/west");
+	// cube->params.textures[WE] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/north");
+	// cube->params.textures[EA] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/south");
+	// cube->params.textures[4] = NULL;
+
+	// cube->params.colors[F].r = 124; // suelo
+	// cube->params.colors[F].g = 124;
+	// cube->params.colors[F].b = 124;
+	// cube->params.colors[C].r = 196; // techo
+	// cube->params.colors[C].g = 196;
+	// cube->params.colors[C].b = 196;
+
 	cube->map = ft_calloc(sizeof(char *), 16);
 	cube->map[0] = ft_strdup("111111111111111");
 	cube->map[1] = ft_strdup("100000000000001");
