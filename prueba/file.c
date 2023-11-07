@@ -7,7 +7,7 @@ int main(int n, char *str[])
 	char **cur;
 	char *file = str[1];
 
-	cur = ft_file_to_dptr(file, 1);
+	cur = ft_file_to_dptr(file, 0);
 	int i = 0;
 	if (cur)
 	{
@@ -18,3 +18,4 @@ int main(int n, char *str[])
 		}
 	}
 }
+

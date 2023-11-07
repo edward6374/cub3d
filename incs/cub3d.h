@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 22:27:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:54:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int			set_segments(t_rays *r, double small_val, double long_val);
 void		calculate_rays(t_cube *cube);
 
 /* ---			error_file.c			--- */
-int check_file(int argc);
+int check_file(int argc, char *file);
 
 #endif

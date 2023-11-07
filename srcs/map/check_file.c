@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/06 22:38:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:56:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 #include "error.h"
 #include "libft.h"
 
-int check_file(int argc)
+int	check_file(int argc, char *file)
 {
 	if (argc == 1)
-		return (ft_message(DANGER, "Map file name required!"), 1);
+		return (ft_message(DANGER, "Error\nMap file name required."),
+			EXIT_FAILURE);
 	else if (argc > 2)
-		return (ft_message(DANGER, "Too many arguments"), 1);
+		return (ft_message(DANGER, "Error\nToo many arguments."), EXIT_FAILURE);
+	else
+	{
+		if (!ft_strnstr(&file[ft_strlen(file) - 4], ".map", 4))
+			return (ft_message(DANGER,
+					"Error\nFile map does not have the extension .map"),
+				EXIT_FAILURE);
+	}
 	return (0);
 }
-
-// TODO
-// falta comprobar la extension del fichero .cub

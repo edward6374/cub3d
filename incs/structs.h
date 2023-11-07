@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/06 21:00:42 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:52:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "../libft/incs/libft.h"
 # include "../mlx/mlx.h"
+
+// const static char *g_file[] = {
+// 	"Error\nMap file name required.",
+// 	"Error\nToo many arguments.",
+// 	"Error\nFile map does not have the extension .map."};
 
 enum
 {
