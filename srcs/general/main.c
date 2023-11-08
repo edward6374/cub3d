@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/08 16:26:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:53:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]))
 		return (EXIT_FAILURE);
-
+	//=========================================================================
 	int i = 0;
 	while (cube.params.textures[i])
 	{
@@ -100,6 +100,15 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 
+	i = 0;
+	while (i < 2)
+	{
+		ft_printf("r: %d\n", cube.params.colors[i].r);
+		ft_printf("g: %d\n", cube.params.colors[i].g);
+		ft_printf("b: %d\n", cube.params.colors[i].b);
+		i++;
+	}
+	//=========================================================================
 	init_func(&cube);
 
 	ft_printf("Value: %d\n", init_mlx(&cube));
