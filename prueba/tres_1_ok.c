@@ -1,5 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <string.h>
+
+// si empieza cn '1' o ' ' hasta '\n'
+// if 0 == ' ' || 0 == '1'
+// sumas 1 a row para saber las lineas a copiar
 
 int main()
 {
@@ -27,56 +33,54 @@ int main()
 		"10000000000000000000000000000000000000000000000011\n",
 		"11111111111111111111111111111111111111111111111111\n"};
 
+	int total_lines = sizeof(datos) / sizeof(datos[0]);
+
 	int i = 0;
-	int num_lines = sizeof(datos) / sizeof(datos[0]);
+	int row = 0;
 
-	printf("Líneas con solo 1 o 0:\n");
-	while (i < num_lines)
+	while (i < total_lines)
 	{
-		int j = 0;
-		int contiene_1_o_0 = 1; // Suponemos que la línea contiene solo 1 o 0 hasta que se demuestre lo contrario
-		while (datos[i][j] != '\0')
-		{
-			if (datos[i][j] != '1' && datos[i][j] != '0')
-			{
-				contiene_1_o_0 = 0; // La línea no contiene solo 1 o 0
-				break;
-			}
-			j++;
-		}
-
-		if (contiene_1_o_0)
-		{
-			printf("%s", datos[i]);
-		}
-
+		if (datos[i][0] == ' ' || datos[i][0] == '1')
+			row++;
 		i++;
 	}
-	//=========================================================================
-	// int total_lines = sizeof(datos) / sizeof(datos[0]);
+	char **map = malloc(row * sizeof(char *));
 
-	// printf("Líneas con solo '1' y '0':\n");
-	// int i = 0;
-	// while (i < total_lines)
-	// {
-	// 	int has_only_01 = 1;
-	// 	int j = 0;
-	// 	while (datos[i][j] != '\0')
-	// 	{
-	// 		if (datos[i][j] != '1' && datos[i][j] != '0' && datos[i][j] != '\n' &&
-	// 			datos[i][j] != ' ' && datos[i][j] != 'E')
-	// 		{
-	// 			has_only_01 = 0;
-	// 			break;
-	// 		}
-	// 		j++;
-	// 	}
-	// 	if (has_only_01)
-	// 	{
-	// 		printf("%s", datos[i]);
-	// 	}
-	// 	i++;
-	// }
+	i = 0;
+	int map_index = 0;
+	while (i < total_lines)
+	{
+		if (datos[i][0] == ' ' || datos[i][0] == '1')
+		{
+			map[map_index] = malloc(strlen(datos[i]) + 1);
+			if (map[map_index] == NULL)
+			{
+				fprintf(stderr, "Error al asignar memoria\n");
+				return 1;
+			}
+
+			int j = 0;
+			while (datos[i][j] != '\n')
+			{
+				map[map_index][j] = datos[i][j];
+				j++;
+			}
+			map[map_index][j] = '\0';
+			map_index++;
+		}
+		i++;
+	}
+
+	map[map_index] = NULL;
+
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+
+	// otra vez lo mismo pero ahora recorriendo j para copiar los datos hasta '\n'
 }
 
 // int i = 0;

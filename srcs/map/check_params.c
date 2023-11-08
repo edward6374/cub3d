@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/08 16:53:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:03:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int check_params(t_cube *cube, char *file)
 	int i;
 
 	data = ft_file_to_dptr(file, 1);
-	if (!(cube->params.textures = malloc(sizeof(char *) * 5)) || !data)
+	if (!(cube->params.textures = malloc(sizeof(char *) * 5)) || !data || init_map(cube, data))
 		return (EXIT_FAILURE);
 	i = 0;
 	if (data)
