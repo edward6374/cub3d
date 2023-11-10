@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/08 22:09:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:13:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,23 @@ void	init_func(t_cube *cube)
 	// cube->params.colors[C].g = 196;
 	// cube->params.colors[C].b = 196;
 
-	// cube->map = ft_calloc(sizeof(char *), 16);
-	// cube->map[0] = ft_strdup("111111111111111");
-	// cube->map[1] = ft_strdup("100000000000001");
-	// cube->map[2] = ft_strdup("100001111000001");
-	// cube->map[3] = ft_strdup("100001111111001");
-	// cube->map[4] = ft_strdup("100001111110001");
-	// cube->map[5] = ft_strdup("1000000N0000001");
-	// cube->map[6] = ft_strdup("100000000111001");
-	// cube->map[7] = ft_strdup("100000000000001");
-	// cube->map[8] = ft_strdup("100000000000001");
-	// cube->map[9] = ft_strdup("100000000000001");
-	// cube->map[10] = ft_strdup("100000000000001");
-	// cube->map[11] = ft_strdup("100000000000001");
-	// cube->map[12] = ft_strdup("100000000000001");
-	// cube->map[13] = ft_strdup("100000000000001");
-	// cube->map[14] = ft_strdup("111111111111111");
-	// cube->map[15] = NULL;
+	cube->map = ft_calloc(sizeof(char *), 16);
+	cube->map[0] = ft_strdup("111111111111111");
+	cube->map[1] = ft_strdup("100000000000001");
+	cube->map[2] = ft_strdup("100001111000001");
+	cube->map[3] = ft_strdup("100001111111001");
+	cube->map[4] = ft_strdup("100001111110001");
+	cube->map[5] = ft_strdup("1000000N0000001");
+	cube->map[6] = ft_strdup("100000000111001");
+	cube->map[7] = ft_strdup("100000000000001");
+	cube->map[8] = ft_strdup("100000000000001");
+	cube->map[9] = ft_strdup("100000000000001");
+	cube->map[10] = ft_strdup("100000000000001");
+	cube->map[11] = ft_strdup("100000000000001");
+	cube->map[12] = ft_strdup("100000000000001");
+	cube->map[13] = ft_strdup("100000000000001");
+	cube->map[14] = ft_strdup("111111111111111");
+	cube->map[15] = NULL;
 
 	int	i = -1;
 	int	j = -1;
@@ -90,25 +90,30 @@ int	main(int argc, char *argv[])
 	t_cube cube;
 
 	ft_bzero(&cube, sizeof(t_cube));
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]))
-		return (EXIT_FAILURE);
+
+	check_file(argc, argv[1]);
+	check_params(&cube, argv[1]);
+	// ctrl_path(cube.params.textures);
+	// if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures))
+	// 	exit(EXIT_FAILURE);
+
 	//=========================================================================
 	int i = 0;
-	while (cube.params.textures[i])
-	{
+	// while (cube.params.textures[i])
+	// {
 
-		ft_printf("%s\n", cube.params.textures[i]);
-		i++;
-	}
+	// 	ft_printf("%s\n", cube.params.textures[i]);
+	// 	i++;
+	// }
 
-	i = 0;
-	while (i < 2)
-	{
-		ft_printf("r: %d\n", cube.params.colors[i].r);
-		ft_printf("g: %d\n", cube.params.colors[i].g);
-		ft_printf("b: %d\n", cube.params.colors[i].b);
-		i++;
-	}
+	// i = 0;
+	// while (i < 2)
+	// {
+	// 	ft_printf("r: %d\n", cube.params.colors[i].r);
+	// 	ft_printf("g: %d\n", cube.params.colors[i].g);
+	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
+	// 	i++;
+	// }
 	i = 0;
 	while (cube.map[i])
 	{
@@ -116,9 +121,10 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 
+	// ctrl_path(cube.params.textures);
 	//=========================================================================
-	init_func(&cube);
+	// init_func(&cube);
 
-	ft_printf("Value: %d\n", init_mlx(&cube));
+	// ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }

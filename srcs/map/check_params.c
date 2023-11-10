@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/08 21:03:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:12:37 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,32 @@ int check_params(t_cube *cube, char *file)
 	char **split;
 	int i;
 
+	(void)cube;
+	(void)split;
+	(void)i;
 	data = ft_file_to_dptr(file, 1);
-	if (!(cube->params.textures = malloc(sizeof(char *) * 5)) || !data || init_map(cube, data))
+	// if (!(cube->params.textures = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
+	if (!(cube->params.textures = ft_calloc(sizeof(char *), 5)) || !data)
 		return (EXIT_FAILURE);
-	i = 0;
-	if (data)
-	{
-		while (data[i])
-		{
-			split = ft_split(data[i], ' ');
-			init_texture(split, cube->params.textures);
-			if (!ft_strncmp(split[0], "C", 1))
-				init_color(&cube->params.colors[C], split[1]);
-			else if (!ft_strncmp(split[0], "F", 1))
-				init_color(&cube->params.colors[F], split[1]);
-			free(split);
-			i++;
-		}
-	}
-	cube->params.textures[4] = NULL;
-	free(data);
+	init_map(cube, data);
+	// i = 0;
+	// if (data)
+	// {
+	// 	while (data[i])
+	// 	{
+	// 		split = ft_split(data[i], ' ');
+	// 		init_texture(split, cube->params.textures);
+	// 		if (!ft_strncmp(split[0], "C", 1))
+	// 			init_color(&cube->params.colors[C], split[1]);
+	// 		else if (!ft_strncmp(split[0], "F", 1))
+	// 			init_color(&cube->params.colors[F], split[1]);
+	// 		free(split);
+	// 		i++;
+	// 	}
+	// }
+	// cube->params.textures[4] = NULL;
+	ft_printf("\tAKI\n");
+	// free(data);
+	ft_free_dptr(data);
 	return (0);
 }

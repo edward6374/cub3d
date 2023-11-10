@@ -1,7 +1,7 @@
-NO ./tools/assets/Wall-000.xpm
-WE ./tools/assets/Wall-001.xpm
-SO ./tools/assets/Wall-004.xpm
-EA ./tools/assets/Wall-012.xpm
+NO ./assets/textures//Wall-000.xpm
+WE ../assets/textures//Wall-000.xpm
+SO assets/textures/Wall-000.xpm
+EA ./Wall-000.xpm
 
 F 214,245,17
 C 13,56,171
