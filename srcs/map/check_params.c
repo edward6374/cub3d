@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/11 01:08:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/11 01:17:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 #include "error.h"
 #include "libft.h"
 #include <fcntl.h>
-
-//	TODO
-
-// Comprobar NO,SO,WE,EA,F,C este
-// Comprobar que la ruta sea correcta y este la textura
-// Leer el mapa y todal de filas sera el Primer Puntero
-// Leer el mapa, la fila mas larga sera el total del Doble puntero
 
 void check_rgb(int r, int g, int b)
 {

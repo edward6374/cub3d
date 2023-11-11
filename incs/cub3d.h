@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/09 09:13:25 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:00:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void		create_minimap(t_cube *cube, int dir);
 void		my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 /* ---			Check_file.c			--- */
-// int			check_map(t_cube *cube, char *str);
 int check_params(t_cube *cube, char *str);
 // int check_map(char *argv[]);
 void		map_person_point(t_cube *cube, int dir);
 int check_file(int argc, char *file);
 int init_map(t_cube *cube, char **data);
+
+/* ---			ctrl			--- */
 int ctrl_path(char **params);
+int ctrl_player(t_cube *cube, char **map);
 
 /* ---			Read_map.c			--- */
 void		read_map(t_cube *cube);

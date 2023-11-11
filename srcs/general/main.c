@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/11 01:06:39 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:43:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,34 @@ void	init_func(t_cube *cube)
 	// cube->map[14] = ft_strdup("111111111111111");
 	// cube->map[15] = NULL;
 
-	int	i = -1;
-	int	j = -1;
-	while (cube->map[++i])
-	{
-		j = -1;
-		while (cube->map[i][++j])
-			if (cube->map[i][j] == 'N')
-				break ;
-		if (cube->map[i][j] == 'N')
-			break ;
-	}
-	cube->iX = j;
-	cube->iY = i;
-	cube->posX = 0;
-	cube->posY = 0;
-	cube->nposX = (double)((j * 64) + 32);
-	cube->nposY = (double)((i * 64) + 32);
-	cube->angle = 20.00;
-	printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", j, i, cube->nposX, cube->nposY);
+	//==============ctrl_player=================================================
+	// int	i = -1;
+	// int	j = -1;
+	// while (cube->map[++i])
+	// {
+	// 	j = -1;
+	// 	while (cube->map[i][++j])
+	// 		if (cube->map[i][j] == 'N')
+	// 			break ;
+	// 	if (cube->map[i][j] == 'N')
+	// 		break ;
+	// }
+	// cube->iX = j;
+	// cube->iY = i;
+
+	// cube->posX = 0;
+	// cube->posY = 0;
+	// cube->nposX = (double)((j * 64) + 32);
+	// cube->nposY = (double)((i * 64) + 32);
+
+	// printf("X: %d\tY: %d\tPos X: %f\tPos Y: %f\n", j, i, cube->nposX, cube->nposY);
+	//=========================================================================
+	cube->angle = 180.00;
+
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	t_cube cube;
 
@@ -95,34 +100,40 @@ int	main(int argc, char *argv[])
 	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures))
 		exit(EXIT_FAILURE);
 
+	ctrl_player(&cube, cube.map);
+
 	//=========================================================================
 	int i = 0;
 	// PATH TEXTURES
-	while (cube.params.textures[i])
-	{
-		ft_printf("%s\n", cube.params.textures[i]);
-		i++;
-	}
-	i = 0;
-	// MAP
+	// while (cube.params.textures[i])
+	// {
+	// 	ft_printf("%s\n", cube.params.textures[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// // MAP
 	while (cube.map[i])
 	{
 		printf("%s\n", cube.map[i]);
 		i++;
 	}
-	i = 0;
+	// i = 0;
 	// RGB
-	while (i < 2)
-	{
-		ft_printf("r: %d\n", cube.params.colors[i].r);
-		ft_printf("g: %d\n", cube.params.colors[i].g);
-		ft_printf("b: %d\n", cube.params.colors[i].b);
-		i++;
-	}
+	// while (i < 2)
+	// {
+	// 	ft_printf("r: %d\n", cube.params.colors[i].r);
+	// 	ft_printf("g: %d\n", cube.params.colors[i].g);
+	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
+	// 	i++;
+	// }
 
 	//=========================================================================
+	// printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", cube.iX, cube.iY, cube.nposX, cube.nposY);
 	init_func(&cube);
 
 	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
+
+// TODO
+// map falta controlar que el mapa este rodeado de 1 interior 0
