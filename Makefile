@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
+#    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:13 by vduchi            #+#    #+#              #
-#    Updated: 2023/10/09 11:10:49 by vduchi           ###   ########.fr        #
+#    Updated: 2023/11/10 23:11:24 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LIBFT_PATH		=	libft
 
 #=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-#a
 
-CFLAGS			+= 	-Wall -Werror -Wextra -g -O3 $(addprefix -I , $(INC_DIR)) #-fsanitize=address
+CFLAGS			+= 	-Wall -Werror -Wextra -g3 -O3 $(addprefix -I , $(INC_DIR)) #-fsanitize=address
 LDFLAGS			= 	-L $(MLX_PATH) -L $(LIBFT_PATH)
 LDFLAGS			+= 	-lft -lmlx -framework OpenGL -framework AppKit
 DEPFLAGS_GEN	=	-MMD -MP -MF $(DEPS_DIR_GEN)/$*.d
