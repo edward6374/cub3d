@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/11 13:43:06 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:06:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 //	TODO
 //	Nacho, tienes que hacer el init_func bien, con un archivo da leer
 
-void	init_func(t_cube *cube)
+void init_func(t_cube *cube)
 {
 	cube->rad_const = M_PI / 180.0;
 	cube->width = 1200;
-//	cube->height = 800;
+	//	cube->height = 800;
 	cube->height = 1200;
 	// cube->east = NULL;
 	// cube->west = NULL;
@@ -86,7 +86,7 @@ void	init_func(t_cube *cube)
 
 	// printf("X: %d\tY: %d\tPos X: %f\tPos Y: %f\n", j, i, cube->nposX, cube->nposY);
 	//=========================================================================
-	cube->angle = 180.00;
+	// cube->angle = 180.00;
 
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
@@ -97,10 +97,11 @@ int main(int argc, char *argv[])
 
 	ft_bzero(&cube, sizeof(t_cube));
 
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures))
+	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures) || ctrl_player(&cube, cube.map))
 		exit(EXIT_FAILURE);
 
-	ctrl_player(&cube, cube.map);
+	// int player = ctrl_player(&cube, cube.map);
+	// ft_printf(YELLOW "ctr_player %d\n", player);
 
 	//=========================================================================
 	int i = 0;
@@ -126,6 +127,7 @@ int main(int argc, char *argv[])
 	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
 	// 	i++;
 	// }
+	printf(GREEN "Angle: %f\n", cube.angle);
 
 	//=========================================================================
 	// printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", cube.iX, cube.iY, cube.nposX, cube.nposY);
