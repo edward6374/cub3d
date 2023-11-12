@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/11 15:06:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:36:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,18 @@ int main(int argc, char *argv[])
 
 	ft_bzero(&cube, sizeof(t_cube));
 
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures) || ctrl_player(&cube, cube.map))
+	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
 
-	// int player = ctrl_player(&cube, cube.map);
+	// printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
+
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 
 	//=========================================================================
 	int i = 0;
 	// PATH TEXTURES
 	// while (cube.params.textures[i])
-	// {
+	// { 
 	// 	ft_printf("%s\n", cube.params.textures[i]);
 	// 	i++;
 	// }
@@ -115,7 +116,7 @@ int main(int argc, char *argv[])
 	// // MAP
 	while (cube.map[i])
 	{
-		printf("%s\n", cube.map[i]);
+		printf(CYAN "%s\n" RESET, cube.map[i]);
 		i++;
 	}
 	// i = 0;
@@ -127,10 +128,11 @@ int main(int argc, char *argv[])
 	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
 	// 	i++;
 	// }
+	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX,
+		   cube.iY, cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n", cube.angle);
 
 	//=========================================================================
-	// printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", cube.iX, cube.iY, cube.nposX, cube.nposY);
 	init_func(&cube);
 
 	ft_printf("Value: %d\n", init_mlx(&cube));

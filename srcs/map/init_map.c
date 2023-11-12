@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 20:55:52 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/10 22:49:30 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/12 19:04:08 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,6 @@ int init_map(t_cube *cube, char **data)
 	cube->map[map_index] = NULL;
 	return (0);
 }
+
+// TODO
+// quizas poner aqui el tamaño del mapa ahora esta en ctrl_map
