@@ -5,7 +5,7 @@
 #include "../libft/incs/libft.h"
 #include "../libft/incs/colorsft.h"
 
-void print_map(char **map);
+// cheaquea si esta abierto
 
 void print_map(char **map)
 {
@@ -13,7 +13,6 @@ void print_map(char **map)
 
 	i = 0;
 
-	system("clear");
 	while (map[i])
 	{
 		int j = 0;

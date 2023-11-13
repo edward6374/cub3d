@@ -19,28 +19,43 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "../libft/incs/libft.h"
+#include "../libft/incs/colorsft.h"
 #include <stdio.h>
 
-// #define ROWS 15
-// #define COLS 15
-
-void findA(char **arr, int row, int col, int ROWS)
+void findA(char **arr, int row, int col, int ROWS, int COLS)
 {
-	int COLS = ft_strlen(arr[row]);
-
-	if (row < 0 || row >= ROWS || col < 0 || col >= COLS || arr[row][col] == '1' || arr[row][col] == '@')
-	{
+	if (row < 0 || row >= ROWS || col < 0 || col >= COLS || arr[row][col] == ' ' || arr[row][col] == '1' || arr[row][col] == '@')
 		return;
-	}
 
 	arr[row][col] = '@';
 
-	// Buscamos A en las celdas adyacentes
-	findA(arr, row - 1, ft_strlen(arr[row - 1]), ROWS); // arriba
-	findA(arr, row, col + 1, ROWS);						// derecha
-	findA(arr, row + 1, ft_strlen(arr[row + 1]), ROWS); // abajo
-	findA(arr, row, col - 1, ROWS);						// izquierda
+	// Buscamos 0 en las celdas adyacentes
+	findA(arr, row - 1, col, ROWS, COLS); // arriba
+	findA(arr, row, col + 1, ROWS, COLS); // derecha
+	findA(arr, row + 1, col, ROWS, COLS); // abajo
+	findA(arr, row, col - 1, ROWS, COLS); // izquierda
 }
+
+void print_map(char **map)
+{
+	int i = 0;
+
+	while (map[i])
+	{
+		int j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '@')
+				printf(MAGENTA "%c" RESET, map[i][j]);
+			else
+				printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 int main()
 {
 	char **arr = ft_file_to_dptr("map1.cub", 0);
@@ -49,36 +64,22 @@ int main()
 
 	// // Calculamos row
 	while (arr[i])
-	{
-		// printf("%d\n", i);
-		// printf("%s\n", arr[i]);
 		i++;
-	}
-
 	int ROWS = i + 1;
 
 	i = 0;
-
 	while (arr[i])
 	{
 		int j = 0;
 		while (arr[i][j])
 		{
-			// printf("%c", arr[i][j]);
-			findA(arr, i, j, ROWS);
+			// if (arr[i][j] == 'E')
+			findA(arr, i, j, ROWS, ft_strlen(arr[i]));
 			j++;
 		}
-		// printf("\n");
 		i++;
 	}
-
-	// // Imprimimos el resultado
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
-
+	print_map(arr);
 	return 0;
 }
 
