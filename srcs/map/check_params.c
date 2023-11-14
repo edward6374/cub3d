@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/11 01:17:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:23:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int check_params(t_cube *cube, char *file)
 				init_color(&cube->params.colors[C], split[1]);
 			else if (!ft_strncmp(split[0], "F", 1))
 				init_color(&cube->params.colors[F], split[1]);
-			free(split);
+			ft_free_dptr(split);
 			i++;
 		}
 	}

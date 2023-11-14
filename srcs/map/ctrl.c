@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/13 10:51:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:18:34 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void ctrl_char(char ch, double *angle)
 		exit(EXIT_FAILURE);
 	}
 	if (ch == 'N')
-		*angle = 90;
+		*angle = 90.00;
 	else if (ch == 'S')
-		*angle = 200;
+		*angle = 270.00;
 	else if (ch == 'E')
-		*angle = 0;
+		*angle = 0.00;
 	else if (ch == 'W')
-		*angle = 180;
+		*angle = 180.00;
 }
 
 int ctrl_player(t_cube *cube, char **map)

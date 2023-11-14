@@ -6,13 +6,13 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/13 10:51:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:10:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "colorsft.h"
 #include "cub3d.h"
 #include <math.h>
-#include "colorsft.h"
 
 //	TODO
 //	Nacho, tienes que hacer el init_func bien, con un archivo da leer
@@ -31,21 +31,18 @@ void init_func(t_cube *cube)
 	cube->params.west = 4;
 	cube->params.north = 5;
 	cube->params.south = 6;
-
 	// cube->params.textures = ft_calloc(sizeof(char *), 5);
 	// cube->params.textures[NO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/east");
 	// cube->params.textures[SO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/west");
 	// cube->params.textures[WE] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/north");
 	// cube->params.textures[EA] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/south");
 	// cube->params.textures[4] = NULL;
-
 	// cube->params.colors[F].r = 124; // suelo
 	// cube->params.colors[F].g = 124;
 	// cube->params.colors[F].b = 124;
 	// cube->params.colors[C].r = 196; // techo
 	// cube->params.colors[C].g = 196;
 	// cube->params.colors[C].b = 196;
-
 	// cube->map = ft_calloc(sizeof(char *), 16);
 	// cube->map[0] = ft_strdup("111111111111111");
 	// cube->map[1] = ft_strdup("100000000000001");
@@ -63,7 +60,6 @@ void init_func(t_cube *cube)
 	// cube->map[13] = ft_strdup("100000000000001");
 	// cube->map[14] = ft_strdup("111111111111111");
 	// cube->map[15] = NULL;
-
 	//==============ctrl_player=================================================
 	// int	i = -1;
 	// int	j = -1;
@@ -78,34 +74,28 @@ void init_func(t_cube *cube)
 	// }
 	// cube->iX = j;
 	// cube->iY = i;
-
 	// cube->posX = 0;
 	// cube->posY = 0;
 	// cube->nposX = (double)((j * 64) + 32);
 	// cube->nposY = (double)((i * 64) + 32);
-
-	// printf("X: %d\tY: %d\tPos X: %f\tPos Y: %f\n", j, i, cube->nposX, cube->nposY);
+	// printf("X: %d\tY: %d\tPos X: %f\tPos Y: %f\n", j, i, cube->nposX,cube->nposY);
 	//=========================================================================
 	// cube->angle = 180.00;
-
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 }
 
 int main(int argc, char *argv[])
 {
 	t_cube cube;
+	int i;
 
 	ft_bzero(&cube, sizeof(t_cube));
-
 	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
-
 	// printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
-
 	// ft_printf(YELLOW "ctr_player %d\n", player);
-
 	//=========================================================================
-	int i = 0;
+	i = 0;
 	// PATH TEXTURES
 	// while (cube.params.textures[i])
 	// { 
@@ -128,14 +118,12 @@ int main(int argc, char *argv[])
 	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
 	// 	i++;
 	// }
-	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX,
-		   cube.iY, cube.nposX, cube.nposY);
+	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
+		   cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n", cube.angle);
-
 	//=========================================================================
-	// init_func(&cube);
-
-	// ft_printf("Value: %d\n", init_mlx(&cube));
+	init_func(&cube);
+	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
 

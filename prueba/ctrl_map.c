@@ -73,8 +73,8 @@ int main()
 		int j = 0;
 		while (arr[i][j])
 		{
-			// if (arr[i][j] == 'E')
-			findA(arr, i, j, ROWS, ft_strlen(arr[i]));
+			if (arr[i][j] == 'E')
+				findA(arr, i, j, ROWS, ft_strlen(arr[i]));
 			j++;
 		}
 		i++;
