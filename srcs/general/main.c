@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/02 13:39:31 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/20 19:28:09 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,26 @@ void	init_func(t_cube *cube)
 	cube->params.colors[1].r = 196; // techo
 	cube->params.colors[1].g = 196;
 	cube->params.colors[1].b = 196;
-	cube->map = ft_calloc(sizeof(char *), 16);
+//	cube->map = ft_calloc(sizeof(char *), 16);
+	cube->map = ft_calloc(sizeof(char *), 11);
 	cube->map[0] = ft_strdup("111111111111111");
 	cube->map[1] = ft_strdup("100000000000001");
 	cube->map[2] = ft_strdup("100001111000001");
 	cube->map[3] = ft_strdup("100001111111001");
 	cube->map[4] = ft_strdup("100001111110001");
-	cube->map[5] = ft_strdup("1000000N0000001");
+	cube->map[5] = ft_strdup("100000000000001");
 	cube->map[6] = ft_strdup("100000000111001");
 	cube->map[7] = ft_strdup("100000000000001");
-	cube->map[8] = ft_strdup("100000000000001");
-	cube->map[9] = ft_strdup("100000000000001");
-	cube->map[10] = ft_strdup("100000000000001");
-	cube->map[11] = ft_strdup("100000000000001");
-	cube->map[12] = ft_strdup("100000000000001");
-	cube->map[13] = ft_strdup("100000000000001");
-	cube->map[14] = ft_strdup("111111111111111");
-	cube->map[15] = NULL;
+	cube->map[8] = ft_strdup("1000000N0000001");
+//	cube->map[9] = ft_strdup("100000000000001");
+	cube->map[9] = ft_strdup("111111111111111");
+	cube->map[10] = NULL;
+//	cube->map[10] = ft_strdup("100000000000001");
+//	cube->map[11] = ft_strdup("100000000000001");
+//	cube->map[12] = ft_strdup("100000000000001");
+//	cube->map[13] = ft_strdup("100000000000001");
+//	cube->map[14] = ft_strdup("111111111111111");
+//	cube->map[15] = NULL;
 	int	i = -1;
 	int	j = -1;
 	while (cube->map[++i])
@@ -72,13 +75,18 @@ void	init_func(t_cube *cube)
 	}
 	cube->iX = j;
 	cube->iY = i;
-	cube->posX = 0;
-	cube->posY = 0;
+	cube->posX = (double)((j * 64) + 32);
+	cube->posY = (double)((i * 64) + 32);
 	cube->nposX = (double)((j * 64) + 32);
 	cube->nposY = (double)((i * 64) + 32);
-	cube->angle = 20.00;
+	cube->angle = 90.00;
 	printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", j, i, cube->nposX, cube->nposY);
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
+	i = 0;
+	while (cube->map[i])
+		i++;
+	cube->rows = i;
+	printf("Rows: %d\n", cube->rows);
 }
 
 int	main(int argc, char *argv[])

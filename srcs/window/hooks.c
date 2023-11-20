@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/02 17:20:11 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:30:40 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposX += cos_val;
 		check_pos(cube);
 		calculate_rays(cube);
-//		create_minimap(cube, 0);
+		create_minimap(cube, -1);
 	}
 	else if (keycode == 125) // Flecha abajo
 	{
@@ -89,6 +89,7 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposX -= cos_val;
 		check_pos(cube);
 		calculate_rays(cube);
+		create_minimap(cube, -1);
 //		create_minimap(cube, 1);
 	}
 	else if (keycode == 124) // Flecha derecha
@@ -100,6 +101,7 @@ int	keep_pressed(int keycode, t_cube *cube)
 		else
 			cube->angle -= 2.00;
 		calculate_rays(cube);
+		create_minimap(cube, -1);
 //		create_minimap(cube, 2);
 	}
 	else if (keycode == 123) // Flecha izquierda
@@ -111,10 +113,11 @@ int	keep_pressed(int keycode, t_cube *cube)
 		else
 			cube->angle += 2.00;
 		calculate_rays(cube);
+		create_minimap(cube, -1);
 //		create_minimap(cube, 3);
 	}
 //	read_map(cube);
-	printf("X: %f\tY: %f\tPos X: %d\tPos Y: %d\n", cube->nposX, cube->nposY, cube->posX, cube->posY);
+	printf("X: %f\tY: %f\tPos X: %f\tPos Y: %f\n", cube->nposX, cube->nposY, cube->posX, cube->posY);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	return (0);
 }

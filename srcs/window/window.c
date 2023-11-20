@@ -6,11 +6,12 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/02 11:33:37 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/20 19:27:15 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
@@ -45,64 +46,11 @@ int	map_max_len(t_cube *cube, int mode)
 
 void	print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
 {
-	int	i;
-	int	j;
-	int	l;
-	int	str_l;
-	int	str_c;
-	int	last_i;
-	int	last_j;
-	int	max_length;
-	int	max_width;
-
-	max_length = map_max_len(cube, 0);
-	max_width = map_max_len(cube, 1);
-	l = 6;
-	i = (max_x / 2) - ((max_length * l) / 2) + offset;
-	j = (max_y / 2) - ((max_width * l) / 2) + offset;
-	last_i = i + l;
-	last_j = j + l;
-	str_l = 0;
-	str_c = 0;
-	while (42)
-	{
-		while (i < last_i)
-		{
-			j = last_j - l;
-			while (j < last_j)
-			{
-				if (cube->map[str_l][str_c] == '0' || cube->map[str_l][str_c] == 'N')
-					my_mlx_pixel_put(&cube->mlx, i, j, 0xFFFFFF);
-				else if (cube->map[str_l][str_c] == '1')
-					my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);
-				if (cube->map[str_l][str_c] == 'N' && cube->posX == 0)
-				{
-					cube->posX = last_i - (l / 2);
-					cube->posY = last_j - (l / 2);
-				}
-				j++;
-			}
-			i++;
-		}
-		if (i < ((max_x / 2) + ((max_length * l) / 2) + offset))
-		{
-			last_i += l;
-			str_c++;
-		}
-		else if (i == ((max_x / 2) + ((max_length * l) / 2) + offset)
-			&& j == ((max_y / 2) + ((max_width * l) / 2) + offset))
-			break ;
-		else if (i == ((max_x / 2) + ((max_length * l) / 2) + offset))
-		{
-			i = (max_x / 2) - ((max_length * l) / 2) + offset;
-			// j = last_j;
-			last_i = i + l;
-			last_j += l;
-			str_c = 0;
-			str_l++;
-		}
-	}
-	map_person_point(cube, dir);
+	(void)cube;
+	(void)max_x;
+	(void)max_y;
+	(void)dir;
+	(void)offset;
 }
 
 void	create_minimap(t_cube *cube, int dir)
@@ -112,27 +60,63 @@ void	create_minimap(t_cube *cube, int dir)
 	int	max_x;
 	int	max_y;
 	int	offset;
+	int	x;
+	int	y;
+	int	idx_x;
+	int	idx_y;
 
+	dir = 0; //TODO comentar
+	x = cube->posX - 320.00;
+	y = cube->posY - 192.00;
 	offset = 20;
-	i = offset - 1;
-	max_x = 240;
-	max_y = 120;
-	while (++i < max_x + offset)
+	i = offset;
+	max_x = 320; //multiplos de 32
+	max_y = 192;
+//	while (++i < max_x + offset)
+//	{
+//		j = offset - 1;
+//		while (++j < max_y + offset)
+//		{
+//			if (i >= 166 && i <= 174 && j >= 116 && j <= 124)
+//				my_mlx_pixel_put(&cube->mlx, i, j, 0x000000);
+//			else if (j >= 90 && j <= 106 && i >= 145 && i <= 161)
+//				my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
+//			else
+//				my_mlx_pixel_put(&cube->mlx, i, j, 0x99FFCC);
+//		}
+//	}
+	while (x <= cube->posX + 320.00)
 	{
-		j = offset - 1;
-		while (++j < max_y + offset)
+		j = offset;
+		y = cube->posY - 192;
+		while (y <= cube->posY + 192.00)
 		{
-			my_mlx_pixel_put(&cube->mlx, i, j, 0x99FFCC);
+			idx_x = (int)fabs(y / 64.00);
+			idx_y = (int)fabs(x / 64.00);
+//			printf("Idx x: %d\tIdx Y: %d\n", idx_x, idx_y);
+			if (x < 0 || y < 0 || idx_x >= cube->rows
+				|| idx_y >= (int)ft_strlen(cube->map[idx_x])
+				|| cube->map[idx_x][idx_y] == '1')
+				my_mlx_pixel_put(&cube->mlx, i, j, 0x000000);
+			else if (cube->map[idx_x][idx_y] == '0' || cube->map[idx_x][idx_y] == ' ')
+				my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
+			else
+				my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);	
+			y = y + 2.00;
+			j++;
 		}
+		i++;
+		x = x + 2.00;
 	}
-	print_minimap(cube, max_x, max_y, offset, dir);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
+//	print_minimap(cube, max_x, max_y, offset, dir);
 }
 
 void	hook_mlx(t_cube *cube)
 {
-	read_map(cube);
+//	read_map(cube);
 	calculate_rays(cube);
-//	create_minimap(cube, -1);
+	create_minimap(cube, -1);
 	cube->mlx.status = 0;
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	mlx_key_hook(cube->mlx.win, key_hook, cube);

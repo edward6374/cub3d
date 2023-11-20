@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/03 13:06:54 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/20 19:28:37 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,21 @@ void	print_screen(t_cube *cube, double *arr)
 {
 	int	x;
 	int	y;
-	int	height;
+	double	height;
 	double	angle = 60.0;
 
 	x = -1;
+	printf("Printing..\n");
 	while (++x < 1200)
 	{
 		y = -1;
 //		arr[x] *= cos((-90.0 + angle) * cube->rad_const); //lo hago antes de esta funcion
-		height = (64.0 / arr[x]) * cube->length_ray;
+		height = ((64.0 / arr[x]) * cube->length_ray) / 2.00; //dividido por 2 porque necesito la mitad de la altura
 		while (++y < 1200)
 		{
-			if (y > 600 - (height / 2) && y < 600 + (height / 2))
+			if ((double)y > 600.00 - height && (double)y < 600.00 + height)
 				my_mlx_pixel_put(&cube->mlx, x, y, 0xFF0000);
-			else if (y < 600 - (height / 2))
+			else if ((double)y < 600.00 - height)
 				my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + \
 					((cube->params.colors[1].r & 0xff) << 16) + \
 					((cube->params.colors[1].g & 0xff) << 8) + \
@@ -121,11 +122,13 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen ma la longitud de cada linea del mapa
 {
 	check_segments(cube, &r, angle, 0);
+//	printf("Start distance\n");
 	while ((int)(fabs(cube->nposY / 64.00)) + r.offset >= 0
-			&& (int)(fabs(cube->nposY / 64.00)) + r.offset < 15
-			&& (int)(fabs(r.p_x / 64.00)) < (int)ft_strlen(cube->map[(int)fabs(cube->nposY / 64.00)])
+			&& (int)(fabs(cube->nposY / 64.00)) + r.offset < cube->rows
+			&& (int)(fabs(r.p_x / 64.00)) < (int)ft_strlen(cube->map[(int)fabs(cube->nposY / 64.00) + r.offset])
 			&& cube->map[(int)(fabs(cube->nposY / 64.00)) + r.offset][(int)fabs(r.p_x / 64.00)] != '1')
 	{
+//		printf("X: %d\tY: %d\n", (int)(fabs(cube->nposY / 64.00)) + r.offset, (int)fabs(r.p_x / 64.00));
 		if (r.incr > 0)
 			r.p_x -= r.long_seg;
 		else
@@ -143,10 +146,11 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 		r.dist_x = (fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
 	check_segments(cube, &r, angle, 1);
 	while ((int)(fabs(cube->nposX / 64.00)) + r.offset >= 0
-			&& (int)(fabs(r.p_y / 64.00)) < 15
+			&& (int)(fabs(r.p_y / 64.00)) < cube->rows
 			&& (int)(fabs(cube->nposX / 64.00)) + r.offset < (int)ft_strlen(cube->map[(int)fabs(r.p_y / 64.00)])
 			&& cube->map[(int)fabs(r.p_y / 64.00)][(int)(fabs(cube->nposX / 64.00)) + r.offset] != '1')
 	{
+//		printf("X: %d\tY: %d\n", (int)fabs(r.p_y / 64.00),(int)(fabs(cube->nposX / 64.00)) + r.offset);
 		if (r.incr > 0)
 			r.p_y -= r.long_seg;
 		else

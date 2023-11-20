@@ -6,12 +6,13 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:18:35 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/01 18:45:02 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/20 18:32:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
 void	fill_borders(t_cube *cube)
 {
 	int	i;
@@ -156,3 +157,4 @@ void	read_map(t_cube *cube)
 	printf("PosX: %d\tPosY: %d\n", cube->posX, cube->posY);
 //	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
+*/
