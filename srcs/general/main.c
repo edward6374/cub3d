@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/14 16:10:06 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:57:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void init_func(t_cube *cube)
 	// cube->west = NULL;
 	// cube->north = NULL;
 	// cube->south = NULL;
-	cube->params.east = 3;
-	cube->params.west = 4;
-	cube->params.north = 5;
-	cube->params.south = 6;
+	// cube->params.east = 3;
+	// cube->params.west = 4;
+	// cube->params.north = 5;
+	// cube->params.south = 6;
 	// cube->params.textures = ft_calloc(sizeof(char *), 5);
 	// cube->params.textures[NO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/east");
 	// cube->params.textures[SO] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/west");
@@ -90,34 +90,35 @@ int main(int argc, char *argv[])
 	int i;
 
 	ft_bzero(&cube, sizeof(t_cube));
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.textures) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
+	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.path) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
 	// printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
 	i = 0;
 	// PATH TEXTURES
-	// while (cube.params.textures[i])
-	// { 
-	// 	ft_printf("%s\n", cube.params.textures[i]);
-	// 	i++;
-	// }
-	// i = 0;
-	// // MAP
+
+	while (cube.params.path[i])
+	{
+		printf("%s\n", cube.params.path[i]);
+		i++;
+	}
+	i = 0;
+	// MAP
 	while (cube.map[i])
 	{
 		printf(CYAN "%s\n" RESET, cube.map[i]);
 		i++;
 	}
-	// i = 0;
+	i = 0;
 	// RGB
-	// while (i < 2)
-	// {
-	// 	ft_printf("r: %d\n", cube.params.colors[i].r);
-	// 	ft_printf("g: %d\n", cube.params.colors[i].g);
-	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
-	// 	i++;
-	// }
+	while (i < 2)
+	{
+		ft_printf("r: %d\n", cube.params.colors[i].r);
+		ft_printf("g: %d\n", cube.params.colors[i].g);
+		ft_printf("b: %d\n", cube.params.colors[i].b);
+		i++;
+	}
 	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
 		   cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n", cube.angle);

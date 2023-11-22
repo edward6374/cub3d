@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/08 16:37:05 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:59:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ typedef struct s_color
 
 typedef struct s_param
 {
-	int				east;
-	int				west;
-	int				north;
-	int				south;
-	char			**textures;
+	// int				east;
+	// int				west;
+	// int				north;
+	// int				south;
+	char **img; // TODO poner array de 4 para las 4 imagenes
+	char **path;
 	t_color			colors[2];
 }					t_param;
 

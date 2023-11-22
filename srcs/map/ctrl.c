@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/14 15:18:34 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:50:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int ctrl_path(char **textures)
+int ctrl_path(char **path)
 {
 	int i;
 	int fd;
@@ -25,18 +25,18 @@ int ctrl_path(char **textures)
 
 	i = 0;
 	err = 0;
-	if (textures)
+	if (path)
 	{
-		while (textures[i])
+		while (path[i])
 		{
-			fd = open(textures[i], O_RDONLY);
+			fd = open(path[i], O_RDONLY);
 			if (fd >= 0)
 				close(fd);
 			else if (fd <= 0)
 			{
 				err = 1;
 				ft_message(DANGER, "Eror\nWrong path: ");
-				ft_message(INFO, textures[i]);
+				ft_message(INFO, path[i]);
 			}
 			i++;
 		}
