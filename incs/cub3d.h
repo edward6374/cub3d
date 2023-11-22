@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/12 19:05:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:35:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void		map_person_point(t_cube *cube, int dir);
 int check_file(int argc, char *file);
 int init_map(t_cube *cube, char **data);
 int ctrl_map(t_cube *cube);
+int check_path_img();
 
 /* ---			ctrl			--- */
 int ctrl_path(char **params);

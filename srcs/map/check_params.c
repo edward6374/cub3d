@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/22 14:52:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:04:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "error.h"
 #include "libft.h"
 #include <fcntl.h>
+
+#include "colorsft.h"
 
 void check_rgb(int r, int g, int b)
 {
@@ -83,12 +85,24 @@ int check_params(t_cube *cube, char *file)
 	data = ft_file_to_dptr(file, 1);
 	if (!(cube->params.path = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
 		exit(EXIT_FAILURE);
+	// check_path_img();
+
+	// TODO
+	// hacer strjoin con C F
+
 	i = 0;
 	if (data)
 	{
 		while (data[i])
 		{
 			split = ft_split(data[i], ' ');
+			// int j = 0;
+			// while (split[j])
+			// {
+
+			// 	printf(CYAN "%d:%s\n" RESET, j, split[j]);
+			// 	j++;
+			// }
 			init_texture(split, cube->params.path);
 			if (!ft_strncmp(split[0], "C", 1))
 				init_color(&cube->params.colors[C], split[1]);

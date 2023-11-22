@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/07 15:16:25 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:35:34 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,11 @@ int	check_file(int argc, char *file)
 							   "Error\nFile map does not have the extension .cub"),
 					EXIT_FAILURE);
 	}
+	return (0);
+}
+
+int check_path_img()
+{
+	printf("TOMATE\n");
 	return (0);
 }
