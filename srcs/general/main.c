@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/23 11:49:25 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:23:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ int main(int argc, char *argv[])
 		   cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n", cube.angle);
 	//=========================================================================
-	// init_func(&cube);
-	// ft_printf("Value: %d\n", init_mlx(&cube));
+	init_func(&cube);
+	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
 

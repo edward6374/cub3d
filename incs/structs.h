@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/22 14:59:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:15:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,28 @@ enum
 
 typedef struct s_values
 {
-	double	p_x;
-	double	p_y;
-	double	dist;
-	double	long_seg;
-	double	small_seg;
-}			t_values;
+	double			p_x;
+	double			p_y;
+	double			dist;
+	double			long_seg;
+	double			small_seg;
+}					t_values;
 
 typedef struct s_rays
 {
-	int			incr;
-	int			offset;
-	double		start_x;
-	double		start_y;
-	double	p_x;
-	double	p_y;
-	double	dist_x;
-	double	dist_y;
-	double	long_seg;
-	double	small_seg;
-//	t_values	x;
-//	t_values	y;
-}				t_rays;
+	int				incr;
+	int				offset;
+	double			start_x;
+	double			start_y;
+	double			p_x;
+	double			p_y;
+	double			dist_x;
+	double			dist_y;
+	double			long_seg;
+	double			small_seg;
+	//	t_values	x;
+	//	t_values	y;
+}					t_rays;
 
 typedef struct s_color
 {
@@ -79,8 +79,8 @@ typedef struct s_param
 	// int				west;
 	// int				north;
 	// int				south;
-	char **img; // TODO poner array de 4 para las 4 imagenes
-	char **path;
+	char *img[4]; // TODO poner array de 4 para las 4 imagenes
+	char			**path;
 	t_color			colors[2];
 }					t_param;
 
@@ -98,9 +98,9 @@ typedef struct s_mlx
 
 typedef struct s_cube
 {
-	int				posX; //posicion del jugador por el minimapa
+	int posX; //posicion del jugador por el minimapa
 	int				posY;
-	int				iX; //posicion del jugador en indice de array
+	int iX; //posicion del jugador en indice de array
 	int				iY;
 	int				width;
 	int				height;
@@ -110,7 +110,7 @@ typedef struct s_cube
 	char			*north;
 	char			*south;
 	char			**map;
-	double			nposX; //posicion del jugador en pixel
+	double nposX; //posicion del jugador en pixel
 	double			nposY;
 	double			angle;
 	double			rad_const;
