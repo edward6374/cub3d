@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/22 16:04:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:55:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,6 @@
 #include <fcntl.h>
 
 #include "colorsft.h"
-
-void check_rgb(int r, int g, int b)
-{
-	if ((r > 255 || r < 0) || (g > 255 || g < 0) || (b > 255 || b < 0))
-	{
-		ft_message(DANGER, "Error\nThe color is not within RBG.");
-		exit(EXIT_FAILURE);
-	}
-}
-
-void init_color(t_color *color, char *split)
-{
-	char **rgb;
-	int r;
-	int g;
-	int b;
-
-	rgb = ft_split(split, ',');
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	check_rgb(r, g, b);
-	color->r = r;
-	color->g = g;
-	color->b = b;
-	free(rgb);
-}
 
 char *ft_strdup_plus(char *s1)
 {
@@ -87,27 +60,17 @@ int check_params(t_cube *cube, char *file)
 		exit(EXIT_FAILURE);
 	// check_path_img();
 
-	// TODO
-	// hacer strjoin con C F
-
 	i = 0;
 	if (data)
 	{
 		while (data[i])
 		{
 			split = ft_split(data[i], ' ');
-			// int j = 0;
-			// while (split[j])
-			// {
-
-			// 	printf(CYAN "%d:%s\n" RESET, j, split[j]);
-			// 	j++;
-			// }
 			init_texture(split, cube->params.path);
 			if (!ft_strncmp(split[0], "C", 1))
-				init_color(&cube->params.colors[C], split[1]);
+				check_rgb(&cube->params.colors[C], split);
 			else if (!ft_strncmp(split[0], "F", 1))
-				init_color(&cube->params.colors[F], split[1]);
+				check_rgb(&cube->params.colors[F], split);
 			ft_free_dptr(split);
 			i++;
 		}

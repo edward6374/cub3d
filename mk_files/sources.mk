@@ -6,7 +6,7 @@
 #    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:18 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/09 09:08:25 by nmota-bu         ###   ########.fr        #
+#    Updated: 2023/11/23 11:42:01 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_MAP		+=	srcs/map/check_params.c
 SRCS_MAP		+=	srcs/map/read_map.c
 SRCS_MAP		+=	srcs/map/init_map.c
 SRCS_MAP		+=	srcs/map/ctrl.c
+SRCS_MAP		+=	srcs/map/check_rgb.c
 
 SRCS_CALCS		=	srcs/calcs/rays.c
 SRCS_CALCS		+=	srcs/calcs/utils.c
