@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/22 14:50:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:36:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,39 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+int check_img(char *file)
+{
+	if (!ft_strnstr(&file[ft_strlen(file) - 4], ".xpm", 4))
+		return (
+			ft_message(DANGER, "Eror\nWrong path or file: "), ft_message(INFO, file),
+			EXIT_FAILURE);
+	return (0);
+}
+
 int ctrl_path(char **path)
 {
 	int i;
 	int fd;
 	int err;
 
-	i = 0;
+	i = -1;
 	err = 0;
 	if (path)
 	{
-		while (path[i])
+		while (path[++i])
 		{
 			fd = open(path[i], O_RDONLY);
 			if (fd >= 0)
+			{
+				err = check_img(path[i]);
 				close(fd);
+			}
 			else if (fd <= 0)
 			{
 				err = 1;
 				ft_message(DANGER, "Eror\nWrong path: ");
 				ft_message(INFO, path[i]);
 			}
-			i++;
 		}
 	}
 	return (err);
