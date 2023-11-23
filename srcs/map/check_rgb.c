@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:39:37 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/23 12:13:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:19:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void is_num(char *str)
 	{
 		if (str[i] != ',' && !ft_isdigit(str[i]))
 		{
-			// printf(YELLOW "%c: %d\n" RESET, str[i], ft_isdigit(str[i]));
-			ft_message(DANGER, "Error\nThe color is not within RBG.");
+			ft_message(DANGER, "Error");
+			ft_printf(CYAN "The character: '%c' cannot be on RGB.\n" RESET, str[i]);
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -80,20 +80,14 @@ void check_rgb(t_color *color, char **split)
 
 	i = 0;
 	char *res;
-
-	// while (split[i])
-	// {
-	// 	printf("i:%d %s\n", i, split[i]);
-	// 	i++;
-	// }
-	// i = 0;
+	res = NULL;
 
 	if (ft_len_dptr(split) > 2)
 	{
 		res = ft_split_join_plus(split);
-		// printf(MAGENTA "%s\n" RESET, res);
 		init_color(color, res);
 	}
 	else
 		init_color(color, split[1]);
+	free(res);
 }
