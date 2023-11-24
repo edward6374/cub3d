@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/20 19:28:09 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 12:24:37 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 void	init_func(t_cube *cube)
 {
 	cube->rad_const = M_PI / 180.0;
-	cube->width = 1200;
+	cube->width = 1280;
 //	cube->height = 800;
-	cube->height = 1200;
+	cube->height = 720;
 	cube->east = NULL;
 	cube->west = NULL;
 	cube->north = NULL;
@@ -36,12 +36,12 @@ void	init_func(t_cube *cube)
 	cube->params.textures[2] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/north");
 	cube->params.textures[3] = ft_strdup("/Users/vduchi/Desktop/cub3d/textures/south");
 	cube->params.textures[4] = NULL;
-	cube->params.colors[0].r = 124; // suelo
-	cube->params.colors[0].g = 124;
-	cube->params.colors[0].b = 124;
-	cube->params.colors[1].r = 196; // techo
-	cube->params.colors[1].g = 196;
-	cube->params.colors[1].b = 196;
+	cube->params.colors[1].r = 0; // suelo
+	cube->params.colors[1].g = 0;
+	cube->params.colors[1].b = 255;
+	cube->params.colors[0].r = 255; // techo
+	cube->params.colors[0].g = 255;
+	cube->params.colors[0].b = 0;
 //	cube->map = ft_calloc(sizeof(char *), 16);
 	cube->map = ft_calloc(sizeof(char *), 11);
 	cube->map[0] = ft_strdup("111111111111111");
@@ -79,9 +79,9 @@ void	init_func(t_cube *cube)
 	cube->posY = (double)((i * 64) + 32);
 	cube->nposX = (double)((j * 64) + 32);
 	cube->nposY = (double)((i * 64) + 32);
-	cube->angle = 90.00;
+	cube->angle = 20.00;
 	printf("X: %d\tY: %d\tPos X: %f\tPosY: %f\n", j, i, cube->nposX, cube->nposY);
-	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
+	cube->length_ray = ((double)cube->width / 2.00) / tan(30.00 * cube->rad_const);
 	i = 0;
 	while (cube->map[i])
 		i++;

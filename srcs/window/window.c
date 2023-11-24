@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/20 19:27:15 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/22 14:59:59 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,14 @@ void	create_minimap(t_cube *cube, int dir)
 //			printf("Idx x: %d\tIdx Y: %d\n", idx_x, idx_y);
 			if (x < 0 || y < 0 || idx_x >= cube->rows
 				|| idx_y >= (int)ft_strlen(cube->map[idx_x])
-				|| cube->map[idx_x][idx_y] == '1')
-				my_mlx_pixel_put(&cube->mlx, i, j, 0x000000);
-			else if (cube->map[idx_x][idx_y] == '0' || cube->map[idx_x][idx_y] == ' ')
+				|| cube->map[idx_x][idx_y] == '1'
+				|| cube->map[idx_x][idx_y] == ' ')
+				my_mlx_pixel_put(&cube->mlx, i, j, 0x242C5F);
+			else if (x >= cube->posX - 10.00 && x <= cube->posX + 10.00
+				&& y >= cube->posY - 10.00 && y <= cube->posY + 10.00)
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
 			else
-				my_mlx_pixel_put(&cube->mlx, i, j, 0x0000FF);	
+				my_mlx_pixel_put(&cube->mlx, i, j, 0x97A3F0);	
 			y = y + 2.00;
 			j++;
 		}
