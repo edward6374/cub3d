@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/23 15:17:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:55:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int check_params(t_cube *cube, char *file)
 	data = ft_file_to_dptr(file, 1);
 	if (!(cube->params.path = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
 		exit(EXIT_FAILURE);
-	// check_path_img();
 
 	i = 0;
 	if (data)

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/23 21:28:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:08:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int check_map_format(char **map, int rows)
 					return (1);
 				}
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' ||
-					map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+					map[i][j - 1] == ' ' || map[i][j + 1] == ' ' || (map[i][j] == '0' && map[i - 1][j] == '\0'))
 				{
 					{
 						ft_message(DANGER, "Error\nThe map is not closed.");
