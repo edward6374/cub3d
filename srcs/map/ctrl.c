@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/23 21:28:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:28:55 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void check_img(char *file)
 {
 	if (!ft_strnstr(&file[ft_strlen(file) - 4], ".xpm", 4))
 	{
-		ft_message(DANGER, "Eror\nWrong path or file: "), ft_message(INFO, file);
+		ft_message(DANGER, "Eror\nWrong path or file: "), ft_message(INFO,
+																	 file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -47,7 +48,7 @@ int ctrl_path(char **path)
 			else if (fd <= 0)
 			{
 				err = 1;
-				ft_message(DANGER, "Eror\nWrong path: ");
+				ft_message(DANGER, "Error\nWrong path: ");
 				ft_message(INFO, path[i]);
 			}
 		}
@@ -87,13 +88,13 @@ int ctrl_player(t_cube *cube, char **map)
 		while (map[i][j] != '\0')
 		{
 			ctrl_char(map[i][j], &cube->angle);
-			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'S' ||
-				map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'W')
 			{
 				if (err == 1)
 				{
-					ft_message(DANGER, "Error\n"
-									   "There can only be one N, S, E,W");
+					ft_message(DANGER,
+							   "Error\n"
+							   "There can only be one N, S, E,W");
 					return (EXIT_FAILURE);
 				}
 				err = 1;
@@ -116,21 +117,24 @@ int ctrl_player(t_cube *cube, char **map)
 
 int check_map_format(char **map, int rows)
 {
-	int i = -1;
+	int i;
+	int j;
+
+	i = -1;
 	while (map[++i])
 	{
-		int j = -1;
+		j = -1;
 		while (map[i][++j])
 		{
 			if (ft_strchr("0NSWE", map[i][j]))
 			{
 				if (i == 0 || i == rows - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
 				{
-					ft_message(DANGER, "Error\n'0' cannot be in the perimeter.");
+					ft_message(DANGER,
+							   "Error\n'0' cannot be in the perimeter.");
 					return (1);
 				}
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' ||
-					map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 				{
 					{
 						ft_message(DANGER, "Error\nThe map is not closed.");
@@ -145,8 +149,9 @@ int check_map_format(char **map, int rows)
 
 int ctrl_map(t_cube *cube)
 {
-	int rows = 0;
+	int rows;
 
+	rows = 0;
 	while (cube->map[rows])
 		rows++;
 	return (check_map_format(cube->map, rows));

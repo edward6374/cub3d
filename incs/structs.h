@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 12:36:57 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:31:24 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ enum
 
 enum
 {
-	C, // CEILING,
 	F, // FLOOR,
+	C, // CEILING,
+};
+
+enum
+{
+	COS,
+	SIN,
 };
 
 enum
@@ -61,9 +67,7 @@ typedef struct s_rays
 	double			dist_x;
 	double			dist_y;
 	double			long_seg;
-	double			small_seg;
-	//	t_values	x;
-	//	t_values	y;
+	double small_seg;
 }					t_rays;
 
 typedef struct s_color
@@ -75,14 +79,10 @@ typedef struct s_color
 
 typedef struct s_param
 {
-	// int				east;
-	// int				west;
-	// int				north;
-	// int				south;
 	char *img[4]; // TODO poner array de 4 para las 4 imagenes
 	char			**path;
 	t_color			colors[2];
-}					t_param;
+} t_param;
 
 typedef struct s_mlx
 {
@@ -100,14 +100,9 @@ typedef struct s_cube
 {
 	int iX; // posicion del jugador en indice de array
 	int				iY;
+	int rows;
 	int				width;
-	int				height;
-	int				length_ray;
-	int				rows;
-	char			*east;
-	char			*west;
-	char			*north;
-	char			*south;
+	int height;
 	char			**map;
 	double posX; // posicion del jugador por el minimapa
 	double			posY;
@@ -115,6 +110,7 @@ typedef struct s_cube
 	double			nposY;
 	double			angle;
 	double			rad_const;
+	double length_ray;
 	t_mlx			mlx;
 	t_param			params;
 }					t_cube;

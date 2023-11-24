@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/22 16:23:56 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:33:05 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,29 @@
 
 void	print_screen(t_cube *cube, double *arr)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 	double	height;
-	double	angle = 60.0;
+	double angle;
 
+	angle = 60.0;
 	x = -1;
 	printf("Printing..\n");
 	while (++x < cube->width)
 	{
 		y = -1;
-//		arr[x] *= cos((-90.0 + angle) * cube->rad_const); //lo hago antes de esta funcion
-		height = ((64.0 / arr[x]) * cube->length_ray) / 2.00; //dividido por 2 porque necesito la mitad de la altura
+		//		arr[x] *= cos((-90.0 + angle) * cube->rad_const);
+		// lo hago antes de esta funcion
+		height = ((64.0 / arr[x]) * cube->length_ray) / 2.00;
+		// dividido por 2 porque necesito la mitad de la altura
 		while (++y < cube->height)
 		{
 			if ((double)y > (double)(cube->height / 2.00) - height && (double)y < (double)(cube->height / 2.00) + height)
 				my_mlx_pixel_put(&cube->mlx, x, y, 0xFF0000);
 			else if ((double)y < (double)(cube->height / 2.00) - height)
-				my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + \
-					((cube->params.colors[1].r & 0xff) << 16) + \
-					((cube->params.colors[1].g & 0xff) << 8) + \
-					((cube->params.colors[1].b & 0xff)));
+				my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + ((cube->params.colors[C].r & 0xff) << 16) + ((cube->params.colors[C].g & 0xff) << 8) + ((cube->params.colors[C].b & 0xff)));
 			else
-				my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + \
-					((cube->params.colors[0].r & 0xff) << 16) + \
-					((cube->params.colors[0].g & 0xff) << 8) + \
-					((cube->params.colors[0].b & 0xff)));
+				my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + ((cube->params.colors[F].r & 0xff) << 16) + ((cube->params.colors[F].g & 0xff) << 8) + ((cube->params.colors[F].b & 0xff)));
 		}
 		angle += 60.0 / cube->width;
 	}
@@ -60,23 +57,20 @@ double	calc_small(t_cube *cube, double pos, double angle, int mode)
 	diff_y = ((cube->iX + 1) * 64.00) - pos;
 	if (!mode)
 	{
-		if (dbl_eq(just_angle, 0.00)
-			|| dbl_eq(just_angle, 180.00)
-			|| dbl_btw(just_angle, 0.00, 180.00))
+		if (dbl_eq(just_angle, 0.00) || dbl_eq(just_angle, 180.00) || dbl_btw(just_angle, 0.00, 180.00))
 			return (fmod(cube->nposY, 64.00) / tan_value);
 		return (diff_x / tan_value);
 	}
 	else
 	{
-		if (dbl_eq(just_angle, 90.00)
-			|| dbl_eq(just_angle, 270.00)
-			|| dbl_btw(just_angle, 90.00, 270.00))
+		if (dbl_eq(just_angle, 90.00) || dbl_eq(just_angle, 270.00) || dbl_btw(just_angle, 90.00, 270.00))
 			return (fmod(cube->nposX, 64.00) * tan_value);
-		return (diff_y  * tan_value);
+		return (diff_y * tan_value);
 	}
 }
 
-void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es el calculo de la X, 1 de la Y
+void check_segments(t_cube *cube, t_rays *r, double angle, int mode)
+// mode 0 es el calculo de la X, 1 de la Y
 {
 	if (((dbl_eq(angle, 0.00) || dbl_btw(angle, 0.00, 180.00)) && !mode)
 		|| ((dbl_eq(angle, 90.00) || dbl_btw(angle, 90.00, 270.00)) && mode))
@@ -120,17 +114,16 @@ void	check_segments(t_cube *cube, t_rays *r, double angle, int mode) //mode 0 es
 	}
 }
 
-//TODO: poner no 15 ma el numero maximo de lineas del mapa
-double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen ma la longitud de cada linea del mapa
+// TODO: poner no 15 ma el numero maximo de lineas del mapa
+double bigger_distance(t_cube *cube, t_rays r, double angle)
+// TODO: no strlen ma la longitud de cada linea del mapa
 {
 	check_segments(cube, &r, angle, 0);
-//	printf("Start distance\n");
-	while ((int)(fabs(cube->nposY / 64.00)) + r.offset >= 0
-			&& (int)(fabs(cube->nposY / 64.00)) + r.offset < cube->rows
-			&& (int)(fabs(r.p_x / 64.00)) < (int)ft_strlen(cube->map[(int)fabs(cube->nposY / 64.00) + r.offset])
-			&& cube->map[(int)(fabs(cube->nposY / 64.00)) + r.offset][(int)fabs(r.p_x / 64.00)] != '1')
+	//	printf("Start distance\n");
+	while ((int)(fabs(cube->nposY / 64.00)) + r.offset >= 0 && (int)(fabs(cube->nposY / 64.00)) + r.offset < cube->rows && (int)(fabs(r.p_x / 64.00)) < (int)ft_strlen(cube->map[(int)fabs(cube->nposY / 64.00) + r.offset]) && cube->map[(int)(fabs(cube->nposY / 64.00)) + r.offset][(int)fabs(r.p_x / 64.00)] != '1')
 	{
-//		printf("X: %d\tY: %d\n", (int)(fabs(cube->nposY / 64.00)) + r.offset, (int)fabs(r.p_x / 64.00));
+		//		printf("X: %d\tY: %d\n", (int)(fabs(cube->nposY / 64.00))
+		//			+ r.offset, (int)fabs(r.p_x / 64.00));
 		if (r.incr > 0)
 			r.p_x -= r.long_seg;
 		else
@@ -141,18 +134,19 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 		r.offset += 1;
 	if (dbl_eq(angle, 90.00) || dbl_eq(angle, 270.00))
 	{
-		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) + r.offset) * 64.00; //No necesito la y cuando tengo la x y igual al revers
-		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
+		r.p_y = (double)((int)(fabs(cube->nposY / 64.00)) + r.offset) * 64.00;
+		// No necesito la y cuando tengo la x y igual al revers
+		r.dist_x = (fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const)));
+		//* cos((-90.0 + angle) * cube->rad_const);
 	}
 	else
-		r.dist_x = (fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const))); //* cos((-90.0 + angle) * cube->rad_const);
+		r.dist_x = (fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)));
+	//* cos((-90.0 + angle) * cube->rad_const);
 	check_segments(cube, &r, angle, 1);
-	while ((int)(fabs(cube->nposX / 64.00)) + r.offset >= 0
-			&& (int)(fabs(r.p_y / 64.00)) < cube->rows
-			&& (int)(fabs(cube->nposX / 64.00)) + r.offset < (int)ft_strlen(cube->map[(int)fabs(r.p_y / 64.00)])
-			&& cube->map[(int)fabs(r.p_y / 64.00)][(int)(fabs(cube->nposX / 64.00)) + r.offset] != '1')
+	while ((int)(fabs(cube->nposX / 64.00)) + r.offset >= 0 && (int)(fabs(r.p_y / 64.00)) < cube->rows && (int)(fabs(cube->nposX / 64.00)) + r.offset < (int)ft_strlen(cube->map[(int)fabs(r.p_y / 64.00)]) && cube->map[(int)fabs(r.p_y / 64.00)][(int)(fabs(cube->nposX / 64.00)) + r.offset] != '1')
 	{
-//		printf("X: %d\tY: %d\n", (int)fabs(r.p_y / 64.00),(int)(fabs(cube->nposX / 64.00)) + r.offset);
+		//		printf("X: %d\tY: %d\n", (int)fabs(r.p_y
+		//				/ 64.00),(int)(fabs(cube->nposX / 64.00)) + r.offset);
 		if (r.incr > 0)
 			r.p_y -= r.long_seg;
 		else
@@ -164,10 +158,11 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 	if (dbl_eq(angle, 0.00) || dbl_eq(angle, 180.00))
 	{
 		r.p_x = (double)((int)(fabs(cube->nposX / 64.00)) + r.offset) * 64.00;
-		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const)); //* cos((-90.0 + angle) * cube->rad_const);
+		r.dist_y = fabs((r.start_x - r.p_x) / cos(angle * cube->rad_const));
+		//* cos((-90.0 + angle) * cube->rad_const);
 	}
 	else
-		r.dist_y = fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const)); // * cos((-90.0 + angle) * cube->rad_const);
+		r.dist_y = fabs((r.start_y - r.p_y) / sin(angle * cube->rad_const)); // *cos((-90.0 + angle) * cube->rad_const);
 	if (r.dist_x <= r.dist_y)
 		return (r.dist_x);
 	return (r.dist_y);
@@ -175,7 +170,7 @@ double	bigger_distance(t_cube *cube, t_rays r, double angle) //TODO: no strlen m
 
 void	calculate_rays(t_cube *cube)
 {
-	int	idx;
+	int idx;
 	double	diff;
 	double	angle;
 	double	cos_angle;
@@ -204,20 +199,19 @@ void	calculate_rays(t_cube *cube)
 	while (!dbl_eq(diff, 0.00) && angle < 359.9999)
 	{
 		distance[idx] = bigger_distance(cube, r, angle);
-		distance[idx] *= cos(cos_angle * cube->rad_const); //TODO: Cuidado cuando el angulo es negativo
+		distance[idx] *= cos(cos_angle * cube->rad_const);
+		// TODO: Cuidado cuando el angulo es negativo
 		angle += 60.00 / cube->width;
 		cos_angle -= 60.00 / cube->width;
 		idx--;
 	}
 	if (!dbl_eq(diff, 0.00))
 		angle = 0.00;
-	while ((dbl_eq(diff, 0.00) && !dbl_eq(cube->angle, 330.00) && angle < cube->angle + 30.00)
-			|| (dbl_eq(diff, 0.00) && dbl_eq(cube->angle, 330.00) && !dbl_eq(angle, 0.00))
-			|| (!dbl_eq(diff, 0.00) && cube->angle < 30.00 && angle < 60.00 - diff)
-			|| (!dbl_eq(diff, 0.00) && cube->angle > 30.00 && angle < diff))
+	while ((dbl_eq(diff, 0.00) && !dbl_eq(cube->angle, 330.00) && angle < cube->angle + 30.00) || (dbl_eq(diff, 0.00) && dbl_eq(cube->angle, 330.00) && !dbl_eq(angle, 0.00)) || (!dbl_eq(diff, 0.00) && cube->angle < 30.00 && angle < 60.00 - diff) || (!dbl_eq(diff, 0.00) && cube->angle > 30.00 && angle < diff))
 	{
 		distance[idx] = bigger_distance(cube, r, angle);
-		distance[idx] *= cos(cos_angle * cube->rad_const); //TODO: Cuidado cuando el angulo es negativo
+		distance[idx] *= cos(cos_angle * cube->rad_const);
+		// TODO: Cuidado cuando el angulo es negativo
 		angle += 60.00 / cube->width;
 		cos_angle -= 60.00 / cube->width;
 		if (angle > 359.9999)

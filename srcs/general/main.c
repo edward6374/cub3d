@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 12:38:13 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:29:04 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@
 
 void	init_func(t_cube *cube)
 {
+	int i;
+
+	i = 0;
 	cube->rad_const = M_PI / 180.0;
-	cube->width = 1200;
+	cube->width = 1280;
 	//	cube->height = 800;
-	cube->height = 1200;
+	cube->height = 720;
 	// cube->east = NULL;
 	// cube->west = NULL;
 	// cube->north = NULL;
@@ -82,8 +85,13 @@ void	init_func(t_cube *cube)
 	//	cube->nposX,cube->nposY);
 	//=========================================================================
 	// cube->angle = 180.00;
+	cube->posX = cube->nposX;
+	cube->posY = cube->nposY;
 	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0)
 		* cube->rad_const);
+	while (cube->map[i])
+		i++;
+	cube->rows = i;
 }
 
 int	main(int argc, char *argv[])
@@ -124,7 +132,7 @@ int	main(int argc, char *argv[])
 	}
 	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
 		cube.nposX, cube.nposY);
-	printf(GREEN "Angle: %f\n", cube.angle);
+	printf(GREEN "Angle: %f\n" RESET, cube.angle);
 	//=========================================================================
 	init_func(&cube);
 	ft_printf("Value: %d\n", init_mlx(&cube));
