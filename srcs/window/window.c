@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:21:36 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 15:39:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,18 @@ void	hook_mlx(t_cube *cube)
 	mlx_loop(cube->mlx.mlx);
 }
 
+void init_img(void *mlx, char **path, char *img[])
+{
+	int i = 0;
+	int len;
+
+	while (path[i])
+	{
+		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
+		i++;
+	}
+}
+
 int	init_mlx(t_cube *cube)
 {
 	cube->mlx.mlx = mlx_init();
@@ -133,6 +145,8 @@ int	init_mlx(t_cube *cube)
 		&cube->mlx.line_length, &cube->mlx.endian);
 	if (!cube->mlx.addr)
 		return (4);
+
+	init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
 	hook_mlx(cube);
 	return (0);
 }

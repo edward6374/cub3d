@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:37:26 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 14:32:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
+
+// TODO quitar de aqui ya hay enums
 
 #ifndef NO
 # define NO 0

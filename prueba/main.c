@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 15:39:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:38:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,58 @@ void	init_func(t_cube *cube)
 		i++;
 	cube->rows = i;
 }
+//=========================================================================
+#define SQUARE 64
+#define LEN_X 10
+#define LEN_Y 5
 
+enum
+{
+	ON_KEYPRESS = 2,
+	ON_DESTROY = 17,
+	KEY_1 = 18, // new img & put img to windows
+	KEY_2 = 19,
+	KEY_3 = 20,
+	KEY_ESC = 53,
+};
+void key_push(int key)
+{
+	printf("%d\n", key);
+	if (key == KEY_ESC)
+		exit(0);
+}
+
+void init_img_dos(void *mlx, char **path, char *img[])
+{
+	int i = 0;
+	int len;
+
+	while (path[i])
+	{
+		// printf("\t%s\n", path[i]);
+		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
+		// printf("%s\n", img[i]);
+		i++;
+	}
+}
+
+void tokemo(t_cube *cube)
+{
+	cube->mlx.mlx = mlx_init();
+	cube->mlx.win = mlx_new_window(cube->mlx.mlx, LEN_X * SQUARE, LEN_Y * SQUARE, "nach131");
+	init_img_dos(cube->mlx.mlx, cube->params.path, cube->params.img);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
+							cube->params.img[0], 1 * SQUARE, 1 * SQUARE);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
+							cube->params.img[1], 2 * SQUARE, 1 * SQUARE);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
+							cube->params.img[2], 3 * SQUARE, 1 * SQUARE);
+	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
+							cube->params.img[3], 4 * SQUARE, 1 * SQUARE);
+	mlx_key_hook(cube->mlx.win, (void *)key_push, NULL);
+	mlx_loop(cube->mlx.mlx);
+}
+//=========================================================================
 int	main(int argc, char *argv[])
 {
 	t_cube	cube;
@@ -133,8 +184,10 @@ int	main(int argc, char *argv[])
 		cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n" RESET, cube.angle);
 	//=========================================================================
-	init_func(&cube);
-	ft_printf("Value: %d\n", init_mlx(&cube));
+	tokemo(&cube);
+	//=========================================================================
+	// init_func(&cube);
+	// ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
 
