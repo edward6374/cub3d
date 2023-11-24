@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:29:04 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:44:14 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_func(t_cube *cube)
 	i = 0;
 	cube->rad_const = M_PI / 180.0;
 	cube->width = 1280;
-	//	cube->height = 800;
 	cube->height = 720;
 	// cube->east = NULL;
 	// cube->west = NULL;

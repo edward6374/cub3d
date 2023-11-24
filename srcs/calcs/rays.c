@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:33:05 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:45:32 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_screen(t_cube *cube, double *arr)
 
 	angle = 60.0;
 	x = -1;
-	printf("Printing..\n");
+//	printf("Printing..\n");
 	while (++x < cube->width)
 	{
 		y = -1;
@@ -41,7 +41,7 @@ void	print_screen(t_cube *cube, double *arr)
 		}
 		angle += 60.0 / cube->width;
 	}
-	printf("Screen printed\n");
+//	printf("Screen printed\n");
 }
 
 double	calc_small(t_cube *cube, double pos, double angle, int mode)
