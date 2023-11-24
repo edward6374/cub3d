@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:31:26 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:37:26 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	check_pos(t_cube *cube)
 		cube->iY++;
 	else if ((int)(cube->nposY / 64) < cube->iY)
 		cube->iY--;
-	printf("iX: %d\tiY: %d\n", cube->iX, cube->iY);
+	// printf("iX: %d\tiY: %d\n", cube->iX, cube->iY);
 }
 
 int	check_movement(t_cube *cube, int *idx_diff, int *idx_xy)
