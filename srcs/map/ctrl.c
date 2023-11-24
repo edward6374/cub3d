@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/24 13:28:55 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 14:10:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,24 +117,21 @@ int ctrl_player(t_cube *cube, char **map)
 
 int check_map_format(char **map, int rows)
 {
-	int i;
-	int j;
-
-	i = -1;
+	int i = -1;
 	while (map[++i])
 	{
-		j = -1;
+		int j = -1;
 		while (map[i][++j])
 		{
 			if (ft_strchr("0NSWE", map[i][j]))
 			{
 				if (i == 0 || i == rows - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
 				{
-					ft_message(DANGER,
-							   "Error\n'0' cannot be in the perimeter.");
+					ft_message(DANGER, "Error\n'0' cannot be in the perimeter.");
 					return (1);
 				}
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' ||
+					map[i][j - 1] == ' ' || map[i][j + 1] == ' ' || (map[i][j] == '0' && map[i - 1][j] == '\0'))
 				{
 					{
 						ft_message(DANGER, "Error\nThe map is not closed.");
