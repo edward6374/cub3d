@@ -70,3 +70,5 @@ readline/shlib/Makefile
 readline/stamp-h
 *.DS_Store
 tags
+
+assets/psd/

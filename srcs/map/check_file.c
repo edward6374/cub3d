@@ -3,25 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/30 14:27:00 by vduchi           ###   ########.fr       */
+/*   Created: 2023/11/06 20:08:21 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/11/23 21:19:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <fcntl.h>
+#include "error.h"
+#include "libft.h"
 
-//	TODO
-//	Da implementar esta funcion
-int	check_map(t_cube *cube, char *str)
+int	check_file(int argc, char *file)
 {
-	// int	map;
-	(void)str;
-	(void)cube;
-	// map = open(str, O_RDONLY);
-	// if (map == -1)
-	// 	return (1);
+	if (argc == 1)
+		return (ft_message(DANGER, "Error\nMap file name required."),
+				EXIT_FAILURE);
+	else if (argc > 2)
+		return (ft_message(DANGER, "Error\nToo many arguments."), EXIT_FAILURE);
+	else
+	{
+		if (!ft_strnstr(&file[ft_strlen(file) - 4], ".cub", 4))
+			return (ft_message(DANGER,
+								"Error\nFile map does not have the extension .cub"),
+					EXIT_FAILURE);
+	}
 	return (0);
 }
