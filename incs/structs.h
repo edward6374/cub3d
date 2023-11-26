@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:46:28 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/24 13:55:21 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,22 @@ typedef struct s_mlx
 
 typedef struct s_cube
 {
-	int iX; // posicion del jugador en indice de array
-	int				iY;
-	int rows;
-	int				width;
-	int height;
-	char			**map;
-	double posX; // posicion del jugador por el minimapa
-	double			posY;
-	double nposX; // posicion del jugador en pixel
-	double			nposY;
-	double			angle;
-	double			rad_const;
-	double length_ray;
-	t_mlx			mlx;
-	t_param			params;
-}					t_cube;
+	int		iX; // posicion del jugador en indice de array
+	int		iY;
+	int		dir;
+	int		rows;
+	int		width;
+	int		height;
+	char	**map;
+	double	posX; // posicion del jugador por el minimapa
+	double	posY;
+	double	nposX; // posicion del jugador en pixel
+	double	nposY;
+	double	angle;
+	double	rad_const;
+	double	length_ray;
+	t_mlx	mlx;
+	t_param	params;
+}			t_cube;
 
 #endif
