@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 15:39:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:55:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,6 @@ int	main(int argc, char *argv[])
 }
 
 // TODO
-// map falta controlar que el mapa este rodeado de 1 interior 0
+// pasar el xmp a una estructura,
+// pasasr color hexa a RGB
+// hace funcion que recorra la img y devuelva el rgb segun la estructura rgb
