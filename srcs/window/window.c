@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 15:39:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/27 09:12:41 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	create_minimap(t_cube *cube, int dir)
 				|| cube->map[idx_x][idx_y] == '1'
 				|| cube->map[idx_x][idx_y] == ' ')
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x242C5F);
-			else if (x >= cube->posX - 10.00 && x <= cube->posX + 10.00
-				&& y >= cube->posY - 10.00 && y <= cube->posY + 10.00)
+			else if (x >= cube->posX - 8.00 && x <= cube->posX + 8.00
+				&& y >= cube->posY - 8.00 && y <= cube->posY + 8.00)
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x00FF00);
 			else
 				my_mlx_pixel_put(&cube->mlx, i, j, 0x97A3F0);

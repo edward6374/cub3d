@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:45:32 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:05:35 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	print_screen(t_cube *cube, double *arr)
 
 	angle = 60.0;
 	x = -1;
-//	printf("Printing..\n");
 	while (++x < cube->width)
 	{
 		y = -1;

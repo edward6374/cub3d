@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 14:32:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:54:31 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-
-// TODO quitar de aqui ya hay enums
 
 #ifndef NO
 # define NO 0
@@ -77,25 +75,31 @@ int	check_movement(t_cube *cube, int *idx_diff, int *idx_xy)
 		return (1);
 	else if ((dbl_eq(cube->angle, 90.00) || dbl_btw(cube->angle, 90.00, 180.00)) && (cube->map[idx_diff[NO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[WE]] == '1'))
 		return (1);
-	else if ((dbl_eq(cube->angle, 180.00) || dbl_btw(cube->angle, 180.00,
-													 270.00)) &&
-			 (cube->map[idx_diff[SO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[WE]] == '1'))
+	else if ((dbl_eq(cube->angle, 180.00) || dbl_btw(cube->angle, 180.00, 270.00)) && (cube->map[idx_diff[SO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[WE]] == '1'))
 		return (1);
-	else if ((dbl_eq(cube->angle, 270.00) || dbl_btw(cube->angle, 270.00,
-													 360.00)) &&
-			 (cube->map[idx_diff[SO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[EA]] == '1'))
+	else if ((dbl_eq(cube->angle, 270.00) || dbl_btw(cube->angle, 270.00, 360.00)) && (cube->map[idx_diff[SO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[EA]] == '1'))
 		return (1);
 	return (0);
 }
 
 void set_idx(t_cube *cube, int *idx_diff, int *idx_xy, double *angle_vals)
 {
+	double	incr;
+
+	incr = 10.00;
+	if (cube->dir == 2)
+		incr *= -1.00;
+	printf("Incr: %f\n", incr);
 	idx_xy[0] = (int)fabs(cube->nposX / 64.00);
 	idx_xy[1] = (int)fabs(cube->nposY / 64.00);
-	idx_diff[NO] = (int)fabs((cube->nposY - 10.00) / 64.00);
-	idx_diff[SO] = (int)fabs((cube->nposY + 10.00) / 64.00);
-	idx_diff[WE] = (int)fabs((cube->nposX + 10.00) / 64.00);
-	idx_diff[EA] = (int)fabs((cube->nposX - 10.00) / 64.00);
+//	idx_diff[NO] = (int)fabs((cube->nposY - 10.00) / 64.00);
+//	idx_diff[SO] = (int)fabs((cube->nposY + 10.00) / 64.00);
+//	idx_diff[WE] = (int)fabs((cube->nposX - 10.00) / 64.00);
+//	idx_diff[EA] = (int)fabs((cube->nposX + 10.00) / 64.00);
+	idx_diff[NO] = (int)fabs((cube->nposY - incr) / 64.00);
+	idx_diff[SO] = (int)fabs((cube->nposY + incr) / 64.00);
+	idx_diff[WE] = (int)fabs((cube->nposX - incr) / 64.00);
+	idx_diff[EA] = (int)fabs((cube->nposX + incr) / 64.00);
 	angle_vals[COS] = 2.00 * cos(cube->angle * cube->rad_const);
 	angle_vals[SIN] = 2.00 * sin(cube->angle * cube->rad_const);
 }
@@ -104,13 +108,15 @@ int	keep_pressed(int keycode, t_cube *cube)
 {
 	int		idx_xy[2];
 	int		idx_diff[4];
-	double angle_vals[2];
+	double	angle_vals[2];
 
 	set_idx(cube, idx_diff, idx_xy, angle_vals);
 	printf("Key: %d\tCos: %f\tSin: %f\n", keycode, angle_vals[COS],
 		   angle_vals[SIN]);
-	if (keycode == 126) // Flecha arriba
+	if (keycode == 13) // W
 	{
+		cube->dir = 1;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		//		cube->posY--; //TODO: ponerlo para el minimapa
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
@@ -122,8 +128,26 @@ int	keep_pressed(int keycode, t_cube *cube)
 		calculate_rays(cube);
 		create_minimap(cube, -1);
 	}
-	else if (keycode == 125) // Flecha abajo
+	else if (keycode == 1) // S
 	{
+		cube->dir = 2;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
+		//		cube->posY++;
+		if (check_movement(cube, idx_diff, idx_xy))
+			return (0);
+		cube->posY += angle_vals[SIN];
+		cube->posX -= angle_vals[COS];
+		cube->nposY += angle_vals[SIN];
+		cube->nposX -= angle_vals[COS];
+		check_pos(cube);
+		calculate_rays(cube);
+		create_minimap(cube, -1);
+		//		create_minimap(cube, 1);
+	}
+	else if (keycode == 1) // S
+	{
+		cube->dir = 2;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		//		cube->posY++;
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
