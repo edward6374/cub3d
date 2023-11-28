@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    sources.mk                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
+#    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:18 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/24 12:51:56 by vduchi           ###   ########.fr        #
+#    Updated: 2023/11/28 12:36:41 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS_MAP		+=	srcs/map/check_rgb.c
 SRCS_CALCS		=	srcs/calcs/rays.c
 SRCS_CALCS		+=	srcs/calcs/utils.c
 
+SRCS_TEXTURES = srcs/textures/init_text.c
+
 OBJS_GEN		=	$(patsubst $(SRCS_DIR_GEN)/%, $(OBJS_DIR_GEN)/%, $(SRCS_GEN:.c=.o))
 DEPS_GEN		=	$(patsubst $(SRCS_DIR_GEN)/%, $(DEPS_DIR_GEN)/%, $(SRCS_GEN:.c=.d))
 OBJS_WND		=	$(patsubst $(SRCS_DIR_WND)/%, $(OBJS_DIR_WND)/%, $(SRCS_WND:.c=.o))
@@ -32,3 +34,5 @@ OBJS_MAP		=	$(patsubst $(SRCS_DIR_MAP)/%, $(OBJS_DIR_MAP)/%, $(SRCS_MAP:.c=.o))
 DEPS_MAP		=	$(patsubst $(SRCS_DIR_MAP)/%, $(DEPS_DIR_MAP)/%, $(SRCS_MAP:.c=.d))
 OBJS_CALCS		=	$(patsubst $(SRCS_DIR_CALCS)/%, $(OBJS_DIR_CALCS)/%, $(SRCS_CALCS:.c=.o))
 DEPS_CALCS		=	$(patsubst $(SRCS_DIR_CALCS)/%, $(DEPS_DIR_CALCS)/%, $(SRCS_CALCS:.c=.d))
+OBJS_TEXTURES		=	$(patsubst $(SRCS_DIR_TEXTURES)/%, $(OBJS_DIR_TEXTURES)/%, $(SRCS_TEXTURES:.c=.o))
+DEPS_TEXTURES		=	$(patsubst $(SRCS_DIR_TEXTURES)/%, $(DEPS_DIR_TEXTURES)/%, $(SRCS_TEXTURES:.c=.d))

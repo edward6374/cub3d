@@ -6,7 +6,7 @@
 #    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:13 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/10 23:11:24 by nmota-bu         ###   ########.fr        #
+#    Updated: 2023/11/28 12:35:06 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,10 @@ $(OBJS_DIR_CALCS)/%.o :	$(SRCS_DIR_CALCS)/%.c
 	@echo "$(YELLOW)$(patsubst $(SRCS_DIR_CALCS)/%,%, $<) \tcompiled!$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(DEPFLAGS_CALCS) -c $< -o $@
 
+$(OBJS_DIR_TEXTURES)/%.o :	$(SRCS_DIR_TEXTURES)/%.c
+	@echo "$(YELLOW)$(patsubst $(SRCS_DIR_TEXTURES)/%,%, $<) \tcompiled!$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(DEPFLAGS_CALCS) -c $< -o $@
+
 all				:	directories
 	@$(MAKE) -C $(LIBFT_PATH)
 	@$(MAKE) -C $(MLX_PATH)
@@ -89,7 +93,7 @@ all				:	directories
 $(NAME)		::
 	@echo "$(MAGENTA)\nChecking cub3d...$(DEF_COLOR)"
 
-$(NAME)		::	$(MLX) $(LIBFT) $(OBJS_GEN) $(OBJS_WND) $(OBJS_MAP) $(OBJS_CALCS)
+$(NAME)		::	$(MLX) $(LIBFT) $(OBJS_GEN) $(OBJS_WND) $(OBJS_MAP) $(OBJS_CALCS) $(OBJS_TEXTURES)
 	@echo "$(ORANGE)Compiling cub3d exec...$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
@@ -107,6 +111,8 @@ directories	:
 	@$(MKDIR) $(DEPS_DIR_MAP)
 	@$(MKDIR) $(OBJS_DIR_CALCS)
 	@$(MKDIR) $(DEPS_DIR_CALCS)
+	@$(MKDIR) $(OBJS_DIR_TEXTURES)
+	@$(MKDIR) $(DEPS_DIR_TEXTURES)
 
 $(MLX):
 	@$(MAKE) -C $(MLX_PATH)

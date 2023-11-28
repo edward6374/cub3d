@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 12:37:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:30:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int		dbl_eq(double a, double b);
 int		dbl_btw(double angle, double min, double max);
 int		set_segments(t_rays *r, double small_val, double long_val);
 void	calculate_rays(t_cube *cube);
+
+void init_text();
 
 #endif

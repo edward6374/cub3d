@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/27 16:55:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:18:35 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,9 @@ int	main(int argc, char *argv[])
 	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
 		cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n" RESET, cube.angle);
+
+	init_text();
+
 	//=========================================================================
 	init_func(&cube);
 	ft_printf("Value: %d\n", init_mlx(&cube));
