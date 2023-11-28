@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 12:37:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 19:16:19 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ void	second_key_hook(int keycode, t_cube *cube);
 
 /* ---			Window.c			--- */
 int		init_mlx(t_cube *cube);
-void	create_minimap(t_cube *cube, int dir);
+void	create_minimap(t_cube *cube);
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 /* ---			Check_file.c			--- */
 int		check_params(t_cube *cube, char *str);
-// int check_map(char *argv[]);
 void	map_person_point(t_cube *cube, int dir);
 int		check_file(int argc, char *file);
 int		init_map(t_cube *cube, char **data);
@@ -50,5 +49,8 @@ int		dbl_eq(double a, double b);
 int		dbl_btw(double angle, double min, double max);
 int		set_segments(t_rays *r, double small_val, double long_val);
 void	calculate_rays(t_cube *cube);
+
+/* ---			Utils.c			--- */
+void	print_pixel(t_cube *cube, int x, int y, t_color colors);
 
 #endif

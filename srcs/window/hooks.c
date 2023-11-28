@@ -6,25 +6,13 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/27 15:54:31 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:56:34 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "structs.h"
 #include <math.h>
-
-#ifndef NO
-# define NO 0
-#endif
-#ifndef SO
-# define SO 1
-#endif
-#ifndef WE
-# define WE 2
-#endif
-#ifndef EA
-# define EA 3
-#endif
 
 int	exit_safe(t_cube *cube, int index)
 {
@@ -56,8 +44,6 @@ void	second_key_hook(int keycode, t_cube *cube)
 
 void	check_pos(t_cube *cube)
 {
-	//	printf("NposX: %d\tiX: %d\tNposY: %d\tiY: %d\n", (int)(cube->nposX
-	//			/ 64), cube->iX, (int)(cube->nposY / 64), cube->iY);
 	if ((int)(cube->nposX / 64) > cube->iX)
 		cube->iX++;
 	else if ((int)(cube->nposX / 64) < cube->iX)
@@ -66,7 +52,6 @@ void	check_pos(t_cube *cube)
 		cube->iY++;
 	else if ((int)(cube->nposY / 64) < cube->iY)
 		cube->iY--;
-	// printf("iX: %d\tiY: %d\n", cube->iX, cube->iY);
 }
 
 int	check_movement(t_cube *cube, int *idx_diff, int *idx_xy)
@@ -89,104 +74,94 @@ void set_idx(t_cube *cube, int *idx_diff, int *idx_xy, double *angle_vals)
 	incr = 10.00;
 	if (cube->dir == 2)
 		incr *= -1.00;
-	printf("Incr: %f\n", incr);
 	idx_xy[0] = (int)fabs(cube->nposX / 64.00);
 	idx_xy[1] = (int)fabs(cube->nposY / 64.00);
-//	idx_diff[NO] = (int)fabs((cube->nposY - 10.00) / 64.00);
-//	idx_diff[SO] = (int)fabs((cube->nposY + 10.00) / 64.00);
-//	idx_diff[WE] = (int)fabs((cube->nposX - 10.00) / 64.00);
-//	idx_diff[EA] = (int)fabs((cube->nposX + 10.00) / 64.00);
 	idx_diff[NO] = (int)fabs((cube->nposY - incr) / 64.00);
 	idx_diff[SO] = (int)fabs((cube->nposY + incr) / 64.00);
 	idx_diff[WE] = (int)fabs((cube->nposX - incr) / 64.00);
 	idx_diff[EA] = (int)fabs((cube->nposX + incr) / 64.00);
 	angle_vals[COS] = 2.00 * cos(cube->angle * cube->rad_const);
 	angle_vals[SIN] = 2.00 * sin(cube->angle * cube->rad_const);
+	angle_vals[COS_90] = 2.00 * cos((cube->angle + 90.00) * cube->rad_const);
+	angle_vals[SIN_90] = 2.00 * sin((cube->angle + 90.00) * cube->rad_const);
 }
 
 int	keep_pressed(int keycode, t_cube *cube)
 {
 	int		idx_xy[2];
 	int		idx_diff[4];
-	double	angle_vals[2];
+	double	angle_vals[4];
 
-	set_idx(cube, idx_diff, idx_xy, angle_vals);
-	printf("Key: %d\tCos: %f\tSin: %f\n", keycode, angle_vals[COS],
-		   angle_vals[SIN]);
-	if (keycode == 13) // W
+	if (keycode == 0) // A
 	{
 		cube->dir = 1;
 		set_idx(cube, idx_diff, idx_xy, angle_vals);
-		//		cube->posY--; //TODO: ponerlo para el minimapa
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
-		cube->posY -= angle_vals[SIN];
-		cube->posX += angle_vals[COS];
+		cube->nposY -= angle_vals[SIN_90];
+		cube->nposX += angle_vals[COS_90];
+		check_pos(cube);
+		calculate_rays(cube);
+		create_minimap(cube);
+	}
+	else if (keycode == 1) // S
+	{
+		cube->dir = 2;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
+		if (check_movement(cube, idx_diff, idx_xy))
+			return (0);
+		cube->nposY += angle_vals[SIN];
+		cube->nposX -= angle_vals[COS];
+		check_pos(cube);
+		calculate_rays(cube);
+		create_minimap(cube);
+	}
+	else if (keycode == 2) // D
+	{
+		cube->dir = 3;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
+		if (check_movement(cube, idx_diff, idx_xy))
+			return (0);
+		cube->nposY += angle_vals[SIN_90];
+		cube->nposX -= angle_vals[COS_90];
+		check_pos(cube);
+		calculate_rays(cube);
+		create_minimap(cube);
+	}
+	else if (keycode == 13) // W
+	{
+		cube->dir = 4;
+		set_idx(cube, idx_diff, idx_xy, angle_vals);
+		if (check_movement(cube, idx_diff, idx_xy))
+			return (0);
 		cube->nposY -= angle_vals[SIN];
 		cube->nposX += angle_vals[COS];
 		check_pos(cube);
 		calculate_rays(cube);
-		create_minimap(cube, -1);
-	}
-	else if (keycode == 1) // S
-	{
-		cube->dir = 2;
-		set_idx(cube, idx_diff, idx_xy, angle_vals);
-		//		cube->posY++;
-		if (check_movement(cube, idx_diff, idx_xy))
-			return (0);
-		cube->posY += angle_vals[SIN];
-		cube->posX -= angle_vals[COS];
-		cube->nposY += angle_vals[SIN];
-		cube->nposX -= angle_vals[COS];
-		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube, -1);
-		//		create_minimap(cube, 1);
-	}
-	else if (keycode == 1) // S
-	{
-		cube->dir = 2;
-		set_idx(cube, idx_diff, idx_xy, angle_vals);
-		//		cube->posY++;
-		if (check_movement(cube, idx_diff, idx_xy))
-			return (0);
-		cube->posY += angle_vals[SIN];
-		cube->posX -= angle_vals[COS];
-		cube->nposY += angle_vals[SIN];
-		cube->nposX -= angle_vals[COS];
-		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube, -1);
-		//		create_minimap(cube, 1);
-	}
-	else if (keycode == 124) // Flecha derecha
-	{
-		//		cube->posX++;
-		//		cube->nposX++;
-		if (cube->angle - 2.00 < 0.00)
-			cube->angle = 360.00 - cube->angle;
-		else
-			cube->angle -= 2.00;
-		calculate_rays(cube);
-		create_minimap(cube, -1);
-		//		create_minimap(cube, 2);
+		create_minimap(cube);
 	}
 	else if (keycode == 123) // Flecha izquierda
 	{
-		//		cube->posX--;
-		//		cube->nposX--;
-		if (cube->angle + 2.00 > 360.00)
+		if (dbl_eq(cube->angle, 358.00))
+			cube->angle = 0.00;
+		else if (cube->angle + 2.00 > 360.00)
 			cube->angle = 360.00 - cube->angle;
 		else
 			cube->angle += 2.00;
 		calculate_rays(cube);
-		create_minimap(cube, -1);
-		//		create_minimap(cube, 3);
+		create_minimap(cube);
 	}
-	//	read_map(cube);
-	printf("X: %f\tY: %f\tPos X: %f\tPos Y: %f\n", cube->nposX, cube->nposY,
-		   cube->posX, cube->posY);
+	else if (keycode == 124) // Flecha derecha
+	{
+		if (dbl_eq(cube->angle, 0.00))
+			cube->angle = 358.00;
+		else if (cube->angle - 2.00 < 0.00)
+			cube->angle = 360.00 - cube->angle;
+		else
+			cube->angle -= 2.00;
+		calculate_rays(cube);
+		create_minimap(cube);
+	}
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	return (0);
 }
