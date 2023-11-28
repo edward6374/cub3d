@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/24 13:45:03 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:18:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int check_params(t_cube *cube, char *file)
 	int i;
 
 	data = ft_file_to_dptr(file, 1);
+
 	if (!(cube->params.path = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
 		exit(EXIT_FAILURE);
-	// check_path_img();
 
 	i = 0;
 	if (data)
@@ -77,5 +77,6 @@ int check_params(t_cube *cube, char *file)
 	}
 	cube->params.path[4] = NULL;
 	ft_free_dptr(data);
+
 	return (0);
 }

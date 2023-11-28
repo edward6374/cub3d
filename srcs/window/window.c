@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/27 09:12:41 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:45:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,17 +117,17 @@ void	hook_mlx(t_cube *cube)
 	mlx_loop(cube->mlx.mlx);
 }
 
-void init_img(void *mlx, char **path, char *img[])
-{
-	int i = 0;
-	int len;
+// void init_img(void *mlx, char **path, char *img[])
+// {
+// 	int i = 0;
+// 	int len;
 
-	while (path[i])
-	{
-		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
-		i++;
-	}
-}
+// 	while (path[i])
+// 	{
+// 		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
+// 		i++;
+// 	}
+// }
 
 int	init_mlx(t_cube *cube)
 {
@@ -146,7 +146,7 @@ int	init_mlx(t_cube *cube)
 	if (!cube->mlx.addr)
 		return (4);
 
-	init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
+	// init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
 	hook_mlx(cube);
 	return (0);
 }
