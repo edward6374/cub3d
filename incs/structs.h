@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/29 11:29:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:06:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ enum
 	EA,
 };
 
+enum
+{
+	COLUM,
+	ROWS,
+	COLORS,
+	CHAR,
+};
+
 typedef struct s_values
 {
 	double			p_x;
@@ -81,6 +89,7 @@ typedef struct s_param
 {
 	char *img[4]; // TODO poner array de 4 para las 4 imagenes
 	char			**path;
+	int measures[4];
 	t_color			colors[2];
 } t_param;
 
