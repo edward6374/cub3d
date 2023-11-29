@@ -1,5 +1,5 @@
 /* XPM */
-static char *brow[] = {
+static char *green[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 4 1 ",
 "X c #170C12",

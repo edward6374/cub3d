@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 14:53:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/29 09:27:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ int	main(int argc, char *argv[])
 	}
 	i = 0;
 	// RGB
-	while (i < 2)
-	{
-		ft_printf("r: %d\n", cube.params.colors[i].r);
-		ft_printf("g: %d\n", cube.params.colors[i].g);
-		ft_printf("b: %d\n", cube.params.colors[i].b);
-		i++;
-	}
-	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
-		cube.nposX, cube.nposY);
-	printf(GREEN "Angle: %f\n" RESET, cube.angle);
+	// while (i < 2)
+	// {
+	// 	ft_printf("r: %d\n", cube.params.colors[i].r);
+	// 	ft_printf("g: %d\n", cube.params.colors[i].g);
+	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
+	// 	i++;
+	// }
+	// printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
+	// 	cube.nposX, cube.nposY);
+	// printf(GREEN "Angle: %f\n" RESET, cube.angle);
 
-	// init_text(&cube.params);
+	init_text(&cube.params);
 
 	//=========================================================================
 	// init_func(&cube);
