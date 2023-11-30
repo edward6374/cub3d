@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 13:52:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:43:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,8 @@ typedef struct s_img
 	char *name;
 	char *path;
 	int measures[4];
-	t_char chars;
+	t_char *lst;
 	char **img;
-
 } t_img;
 
 typedef struct s_param

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 11:30:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:49:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,17 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	printf("\n");
+
+	// LST
+
+	t_char *tmp;
+	tmp = cube.img->lst;
+	while (tmp != NULL)
+	{
+		printf(RED "\'%s\' " RESET, tmp->chars);
+		printf(GREEN "%s\n" RESET, tmp->hex_color);
+		tmp = tmp->next;
+	}
 
 	// // MAP
 	// while (cube.map[i])
