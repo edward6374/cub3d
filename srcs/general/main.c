@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 15:59:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:13:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ int	main(int argc, char *argv[])
 	while (tmp != NULL)
 	{
 		printf(RED "\'%s\' " RESET, tmp->chars);
-		printf(GREEN "%s\n" RESET, tmp->hex_color);
+		printf(GREEN "%s " RESET, tmp->hex_color);
+		printf(MAGENTA "r:%d g:%d b:%d\n" RESET, tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
 		tmp = tmp->next;
 	}
+
+	// IMG textura
+
+	ft_print_dptr(cube.img[0].img);
 
 	// // MAP
 	// while (cube.map[i])

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 11:34:53 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 15:52:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:38:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void init_colors(char **file, t_img *img)
 			new = (t_char *)malloc(sizeof(t_char));
 			new->chars = ft_substr(file[i], 1, ch);
 			new->hex_color = ft_substr(file[i], ch + 4, len);
+			hex_to_rgb(new->hex_color, &(new->rgb.r), &(new->rgb.g), &(new->rgb.b));
+
 			new->next = NULL;
 			add_lst(&(img->lst), new);
 		}

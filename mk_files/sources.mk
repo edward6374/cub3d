@@ -6,7 +6,7 @@
 #    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:18 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/30 13:55:03 by nmota-bu         ###   ########.fr        #
+#    Updated: 2023/11/30 16:24:06 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS_CALCS		+=	srcs/calcs/utils.c
 
 SRCS_TEXTURES = srcs/textures/init_img.c
 SRCS_TEXTURES += srcs/textures/init_colors.c
+SRCS_TEXTURES += srcs/textures/hex_to_rgb.c
 
 OBJS_GEN		=	$(patsubst $(SRCS_DIR_GEN)/%, $(OBJS_DIR_GEN)/%, $(SRCS_GEN:.c=.o))
 DEPS_GEN		=	$(patsubst $(SRCS_DIR_GEN)/%, $(DEPS_DIR_GEN)/%, $(SRCS_GEN:.c=.d))
