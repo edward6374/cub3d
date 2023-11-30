@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 15:38:54 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:06:21 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_rays
 typedef struct	s_wall
 {
 	int		dir[1280];
+	double	pos[1280];
 	double	dist[1280];
 }				t_wall;
 

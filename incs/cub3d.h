@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 19:16:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:18:04 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		dbl_btw(double angle, double min, double max);
 int		set_segments(t_rays *r, double small_val, double long_val);
 void	calculate_rays(t_cube *cube);
 
-/* ---			Utils.c			--- */
-void	print_pixel(t_cube *cube, int x, int y, t_color colors);
+/* ---			Print.c			--- */
+void	print_screen(t_cube *cube, double *arr);
 
 #endif

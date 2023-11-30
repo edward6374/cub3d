@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:18 by vduchi            #+#    #+#              #
-#    Updated: 2023/11/24 12:51:56 by vduchi           ###   ########.fr        #
+#    Updated: 2023/11/30 16:17:26 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_MAP		+=	srcs/map/ctrl.c
 SRCS_MAP		+=	srcs/map/check_rgb.c
 
 SRCS_CALCS		=	srcs/calcs/rays.c
+SRCS_CALCS		+=	srcs/calcs/print.c
 SRCS_CALCS		+=	srcs/calcs/utils.c
 
 OBJS_GEN		=	$(patsubst $(SRCS_DIR_GEN)/%, $(OBJS_DIR_GEN)/%, $(SRCS_GEN:.c=.o))

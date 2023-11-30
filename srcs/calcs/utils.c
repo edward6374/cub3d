@@ -6,19 +6,12 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:04:49 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 19:17:58 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:10:57 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-
-void	print_pixel(t_cube *cube, int x, int y, t_color colors)
-{
-	my_mlx_pixel_put(&cube->mlx, x, y, ((0 & 0xff) << 24) + \
-	   ((colors.r & 0xff) << 16) + ((colors.g & 0xff) << 8) + \
-	   ((colors.b & 0xff)));
-}
 
 int	dbl_eq(double a, double b)
 {

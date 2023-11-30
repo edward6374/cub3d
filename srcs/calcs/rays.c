@@ -6,69 +6,12 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 20:10:36 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/30 16:10:31 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-
-void	print_image(t_cube *cube, double height, int x, int y)
-{
-	int		min;
-	int		max;
-	int		idx;
-	double	piece;
-
-	min = (double)(cube->height / 2.00) - height;
-	max = (double)(cube->height / 2.00) + height;
-	piece = (double)(max - min) / 5.00;
-	idx = (((double)y / 5.00) * 64.00) / piece;
-	printf("Height: %f\tPiece: %f\tIdx: %d\tMin: %d\tMax: %d\n", height, piece, idx, min, max);
-//	printf("Dir: %d\tX: %d\tY: %d\n", cube->walls.dir[x], x, y);
-	if (cube->walls.dir[x] == NO)
-	{
-		if ((y % (int)fabs(piece)) % 2)
-			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC00); //verde
-		else
-			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC66);
-	}
-	else if (cube->walls.dir[x] == SO)
-		my_mlx_pixel_put(&cube->mlx, x, y, 0xCC99FF); //lilla
-	else if (cube->walls.dir[x] == WE)
-		my_mlx_pixel_put(&cube->mlx, x, y, 0xFF9933); //arancio
-	else if (cube->walls.dir[x] == EA)
-	{
-		my_mlx_pixel_put(&cube->mlx, x, y, 0xFF99CC); //rosa
-		printf("Before\n");
-	}
-}
-
-void	print_screen(t_cube *cube, double *arr)
-{
-	int		x;
-	int		y;
-	double	height;
-
-	x = -1;
-	while (++x < cube->width)
-	{
-		y = -1;
-//		printf("Value: %f\n", arr[x]);
-		height = ((64.00 / arr[x]) * cube->length_ray) / 2.00;
-//		printf("Height: %f\n", 64.00 / arr[x]);
-		while (++y < cube->height)
-		{
-			if ((double)y > (double)(cube->height / 2.00) - height
-				&& (double)y < (double)(cube->height / 2.00) + height)
-				print_image(cube, height, x, y);
-			else if ((double)y < (double)(cube->height / 2.00) - height)
-				print_pixel(cube, x, y, cube->params.colors[C]);
-			else
-				print_pixel(cube, x, y, cube->params.colors[F]);
-		}
-	}
-}
 
 double	calc_small(t_cube *cube, double pos, double angle, int mode)
 {
@@ -150,6 +93,7 @@ void	take_direction(t_cube *cube, t_rays *r, double angle, int idx)
 			cube->walls.dir[idx] = NO;
 		else
 			cube->walls.dir[idx] = SO;
+		cube->walls.pos[idx] = r->p_x;
 	}
 	else
 	{
@@ -157,6 +101,7 @@ void	take_direction(t_cube *cube, t_rays *r, double angle, int idx)
 			cube->walls.dir[idx] = WE;
 		else
 			cube->walls.dir[idx] = EA;
+		cube->walls.pos[idx] = r->p_y;
 	}
 }
 
@@ -217,11 +162,11 @@ void	calculate_rays(t_cube *cube)
 	double	cos_angle;
 	t_rays	r;
 
-	r.start_x = cube->nposX;
-	r.start_y = cube->nposY;
-	idx = cube->width - 1;
 	diff = 0.00;
 	cos_angle = 30.00;
+	idx = cube->width - 1;
+	r.start_x = cube->nposX;
+	r.start_y = cube->nposY;
 	if (cube->angle - 30.00 < 0.00)
 	{
 		angle = 360.00 - (30.00 - cube->angle);
@@ -244,13 +189,9 @@ void	calculate_rays(t_cube *cube)
 		idx--;
 	}
 	if (!dbl_eq(diff, 0.00))
-	{
-//		idx++;
-		angle = 0.00;
-	}
-	while ((dbl_eq(diff, 0.00) && !dbl_eq(cube->angle, 330.00)
-			&& angle < cube->angle + 30.00) || (dbl_eq(diff, 0.00)
-			&& dbl_eq(cube->angle, 330.00) && !dbl_eq(angle, 0.00))
+		angle -= 360.00;
+	while ((dbl_eq(diff, 0.00) && !dbl_eq(cube->angle, 330.00) && angle < cube->angle + 30.00)
+			|| (dbl_eq(diff, 0.00) && dbl_eq(cube->angle, 330.00) && !dbl_eq(angle, 0.00))
 			|| (!dbl_eq(diff, 0.00) && cube->angle < 30.00 && angle < 60.00 - diff)
 			|| (!dbl_eq(diff, 0.00) && cube->angle > 30.00 && angle < diff))
 	{
@@ -262,9 +203,11 @@ void	calculate_rays(t_cube *cube)
 		if (angle > 359.9999)
 			angle = 0.0;
 		idx--;
+//		printf("Idx: %d\n", idx);
 //		if (idx == -1)
 //			break ;
 	}
-	printf("Dist: %f\t%f\tIdx: %d\n", cube->walls.dist[0], cube->walls.dist[1], idx);
+//	printf("Diff: %f\tAngle: %f\tLimit: %f\n", diff, angle, 60.00 - diff);
+//	printf("Dist: %f\t%f\tIdx: %d\n", cube->walls.dist[0], cube->walls.dist[1], idx);
 	print_screen(cube, cube->walls.dist);
 }
