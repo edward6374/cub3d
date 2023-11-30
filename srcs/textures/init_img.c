@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 15:58:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:19:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,48 +85,6 @@ int hex_len(char *file)
 	return len - 1;
 }
 
-// void init_colors(char **file, int ch, int num_colors)
-// {
-// 	int i = 0;
-// 	int len = 0;
-
-// 	char **colors = malloc((num_colors + 1) * sizeof(char *));
-// 	char **caracter = malloc((num_colors + 1) * sizeof(char *));
-
-// 	while (file[i])
-// 	{
-// 		if (file[i][ch + 2] == 'c' && file[i][ch + 3] == ' ')
-// 		{
-// 			len = ft_strlen(file[i]) - (ch + 8);
-
-// 			colors[i] = ft_substr(file[i], ch + 4, len);
-// 			caracter[i] = ft_substr(file[i], 1, ch);
-
-// 			printf("len: %d ", len);
-// 			printf(RED "%s " RESET, caracter[i]);
-// 			printf(GREEN "%s\n" RESET, colors[i]);
-// 		}
-// 		i++;
-// 	}
-
-// 	// colors[i] = NULL;
-// 	for (int i = 0; colors[i]; i++)
-// 	{
-// 		printf(RED "%s\n" RESET, colors[i]);
-// 	}
-
-// 	// // Don't forget to free allocated memory when done
-// 	// for (int j = 0; j < i; j++)
-// 	// {
-// 	// 	free(colors[j]);
-// 	// 	free(caracter[j]);
-// 	// }
-
-// 	// Free the arrays themselves
-// 	// free(colors);
-// 	// free(caracter);
-// }
-
 // =========================================================================
 void init_img(t_img img[])
 {
@@ -136,7 +94,6 @@ void init_img(t_img img[])
 	file_content = load_img(img[0].path);
 	init_measures(file_content[3], img[0].measures); // file_content[3] es la linea donde esta las measures
 	init_colors(file_content, &img[0]);
-	// init_colors(file_content, img->measures[CHAR], img->measures[COLORS]);
 
 	// //=========================================================================
 
