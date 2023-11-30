@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 15:49:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:59:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int	main(int argc, char *argv[])
 		printf("%s\n", cube.img[i].path);
 		i++;
 	}
+
 	// MEASURES IMG
 	i = 0;
-	while (cube.img[0].measures[i])
+	while (i < 4)
 	{
 		printf("%d ", cube.img[0].measures[i]);
 		i++;
