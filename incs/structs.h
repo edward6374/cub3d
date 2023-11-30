@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/29 12:06:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 09:59:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,28 @@ typedef struct s_color
 	unsigned char	b;
 }					t_color;
 
+typedef struct s_char
+{
+	char *chars;
+	char *hex_color;
+	t_color rgb;
+	struct s_char *next;
+} t_char;
+
+typedef struct s_img
+{
+	char *name;
+	char *path;
+	int measures[4];
+	t_char chars;
+	char **img;
+
+} t_img;
+
 typedef struct s_param
 {
-	char *img[4]; // TODO poner array de 4 para las 4 imagenes
+	t_img img[4];
+	// char *img[4]; // TODO poner array de 4 para las 4 imagenes
 	char			**path;
 	int measures[4];
 	t_color			colors[2];

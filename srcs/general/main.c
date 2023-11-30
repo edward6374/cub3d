@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/29 09:27:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:45:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ int	main(int argc, char *argv[])
 	//=========================================================================
 	i = 0;
 	// PATH TEXTURES
-	while (cube.params.path[i])
-	{
-		printf("%s\n", cube.params.path[i]);
-		i++;
-	}
-	i = 0;
-	// MAP
-	while (cube.map[i])
-	{
-		printf(CYAN "%s\n" RESET, cube.map[i]);
-		i++;
-	}
-	i = 0;
+	// while (cube.params.path[i])
+	// {
+	// 	printf("%s\n", cube.params.path[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// // MAP
+	// while (cube.map[i])
+	// {
+	// 	printf(CYAN "%s\n" RESET, cube.map[i]);
+	// 	i++;
+	// }
+	// i = 0;
 	// RGB
 	// while (i < 2)
 	// {
