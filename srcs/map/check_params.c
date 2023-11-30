@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 15:18:25 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:50:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ char *ft_strdup_plus(char *s1)
 	return (ptr);
 }
 
-void init_texture(char **params, char **path)
+void init_texture(char **split, t_img *img)
 {
-	if (!ft_strncmp(params[0], "NO", 2))
-		path[NO] = ft_strdup_plus(params[1]);
-	else if (!ft_strncmp(params[0], "SO", 2))
-		path[SO] = ft_strdup_plus(params[1]);
-	else if (!ft_strncmp(params[0], "WE", 2))
-		path[WE] = ft_strdup_plus(params[1]);
-	else if (!ft_strncmp(params[0], "EA", 2))
-		path[EA] = ft_strdup_plus(params[1]);
+	if (!ft_strncmp(split[0], "NO", 2))
+		img[NO].path = ft_strdup_plus(split[1]);
+	else if (!ft_strncmp(split[0], "SO", 2))
+		img[SO].path = ft_strdup_plus(split[1]);
+	else if (!ft_strncmp(split[0], "WE", 2))
+		img[WE].path = ft_strdup_plus(split[1]);
+	else if (!ft_strncmp(split[0], "EA", 2))
+		img[EA].path = ft_strdup_plus(split[1]);
 }
 
 int check_params(t_cube *cube, char *file)
@@ -56,17 +56,15 @@ int check_params(t_cube *cube, char *file)
 	int i;
 
 	data = ft_file_to_dptr(file, 1);
-
-	if (!(cube->params.path = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
+	if (!data || init_map(cube, data))
 		exit(EXIT_FAILURE);
-
 	i = 0;
 	if (data)
 	{
 		while (data[i])
 		{
 			split = ft_split(data[i], ' ');
-			init_texture(split, cube->params.path);
+			init_texture(split, cube->img);
 			if (!ft_strncmp(split[0], "C", 1))
 				check_rgb(&cube->params.colors[C], split);
 			else if (!ft_strncmp(split[0], "F", 1))
@@ -75,8 +73,6 @@ int check_params(t_cube *cube, char *file)
 			i++;
 		}
 	}
-	cube->params.path[4] = NULL;
 	ft_free_dptr(data);
-
 	return (0);
 }

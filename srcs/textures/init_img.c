@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_text.c                                        :+:      :+:    :+:   */
+/*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/29 23:42:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:20:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,39 +45,31 @@ char *removeQuotes(const char *input)
 	}
 }
 
-char **load_img(char **path)
+char **load_img(char *path)
 {
 	char **file_content;
 
 	// TODO
-	printf(MAGENTA "%s\n" RESET, path[1]);
+	printf(MAGENTA "%s\n" RESET, path);
 
-	int fd = open(path[1], O_RDONLY);
+	int fd = open(path, O_RDONLY);
 	file_content = ft_file_to_dptr_m(fd);
 	close(fd);
 
 	return (file_content);
 }
 
-void init_params(char *num, t_param *params)
+void init_params(char *num, int measures[])
 {
 
 	char *result = removeQuotes(num);
-
-	// printf(RED "%s" RESET, num);
-	// printf(MAGENTA "%s\n" RESET, result);
 	char **split = ft_split(result, ' ');
 
 	free(result);
 
 	int i = -1;
 	while (split[++i])
-	{
-		// printf(ORANGE "%s\n" RESET, split[i]);
-		params->measures[i] = ft_atoi(split[i]);
-		// printf("s:%s d:%d\n", split[i], params[i]);
-	}
-
+		measures[i] = ft_atoi(split[i]);
 	ft_free_dptr(split);
 }
 
@@ -173,29 +165,19 @@ void init_colors(char **file, int ch, int num_colors)
 // 	// free(caracter);
 // }
 
-void init_text(t_param *params)
+// =========================================================================
+void init_img(t_img img[])
 {
 	char **file_content;
 
-	file_content = load_img(params->path);
+	file_content = load_img(img[0].path);
 
-	init_params(file_content[3], params);
-	init_colors(file_content, params->measures[CHAR], params->measures[COLORS]);
+	// TODO aqui while para las 4 texturas
+	init_params(file_content[3], img[0].measures);
+	// init_colors(file_content, params->measures[CHAR], params->measures[COLORS]);
 
-	//=========================================================================
-	// // TODO messusres
-	// for (size_t i = 0; params->measures[i]; i++)
-	// {
-	// 	printf(RED "d:%d\n", params->measures[i]);
-	// }
+	// //=========================================================================
 
-	//=========================================================================
-	// print file
-	// for (int i = 0; file_content[i] != NULL; i++)
-	// {
-	// 	printf("%s", file_content[i]);
-	// 	// free(file_content[i]); // Liberar la memoria de cada línea
-	// }
-	//=========================================================================
+	// //=========================================================================
 	free(file_content);
 }

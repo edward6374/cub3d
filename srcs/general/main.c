@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/29 17:45:09 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 11:16:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,30 @@ int	main(int argc, char *argv[])
 
 	ft_bzero(&cube, sizeof(t_cube));
 
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1])
-		|| ctrl_path(cube.params.path) || ctrl_player(&cube, cube.map)
-		|| ctrl_map(&cube))
+	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.img) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
+
+	init_img(cube.img);
+
 	// printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
-	i = 0;
 	// PATH TEXTURES
-	// while (cube.params.path[i])
-	// {
-	// 	printf("%s\n", cube.params.path[i]);
-	// 	i++;
-	// }
-	// i = 0;
+	i = 0;
+	while (cube.img[i].path)
+	{
+		printf("%s\n", cube.img[i].path);
+		i++;
+	}
+	// MEASURES IMG
+	i = 0;
+	while (cube.img[0].measures[i])
+	{
+		printf("%d ", cube.img[0].measures[i]);
+		i++;
+	}
+	printf("\n");
+
 	// // MAP
 	// while (cube.map[i])
 	// {
@@ -74,8 +83,6 @@ int	main(int argc, char *argv[])
 	// printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
 	// 	cube.nposX, cube.nposY);
 	// printf(GREEN "Angle: %f\n" RESET, cube.angle);
-
-	init_text(&cube.params);
 
 	//=========================================================================
 	// init_func(&cube);
