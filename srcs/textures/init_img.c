@@ -6,17 +6,15 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 11:20:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:02:57 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "cub3d.h"
 #include "libft.h"
 #include "colorsft.h"
 
 #include <fcntl.h>
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -48,10 +46,6 @@ char *removeQuotes(const char *input)
 char **load_img(char *path)
 {
 	char **file_content;
-
-	// TODO
-	printf(MAGENTA "%s\n" RESET, path);
-
 	int fd = open(path, O_RDONLY);
 	file_content = ft_file_to_dptr_m(fd);
 	close(fd);
@@ -59,7 +53,7 @@ char **load_img(char *path)
 	return (file_content);
 }
 
-void init_params(char *num, int measures[])
+void init_measures(char *num, int measures[])
 {
 
 	char *result = removeQuotes(num);
@@ -90,39 +84,7 @@ int hex_len(char *file)
 	}
 	return len - 1;
 }
-void init_colors(char **file, int ch, int num_colors)
-{
-	int i = 0;
-	int len = 0;
 
-	// Allocate a three-dimensional array
-
-	printf(MAGENTA "num_colors %d\n" RESET, num_colors);
-
-	while (file[i])
-	{
-		if (file[i][ch + 2] == 'c' && file[i][ch + 3] == ' ')
-		{
-			printf("%zu\n", ft_strlen(file[i]));
-			printf("%d\n", hex_len(file[i]));
-
-			printf(YELLOW "%s" RESET, file[i]);
-
-			len = ft_strlen(file[i]) - (ch + 7);
-
-			// Allocate memory for characters and colors
-			char *charte = ft_substr(file[i], 1, ch);
-			char *hex_color = ft_substr(file[i], ch + 4, len);
-
-			printf("len: %d ", len);
-			printf(RED "\'%s\' " RESET, charte);
-			printf(GREEN "%s\n" RESET, hex_color);
-			free(charte);
-			free(hex_color);
-		}
-		i++;
-	}
-}
 // void init_colors(char **file, int ch, int num_colors)
 // {
 // 	int i = 0;
@@ -170,11 +132,11 @@ void init_img(t_img img[])
 {
 	char **file_content;
 
-	file_content = load_img(img[0].path);
-
 	// TODO aqui while para las 4 texturas
-	init_params(file_content[3], img[0].measures);
-	// init_colors(file_content, params->measures[CHAR], params->measures[COLORS]);
+	file_content = load_img(img[0].path);
+	init_measures(file_content[3], img[0].measures); // file_content[3] es la linea donde esta las measures
+	init_colors(file_content, &img[0]);
+	// init_colors(file_content, img->measures[CHAR], img->measures[COLORS]);
 
 	// //=========================================================================
 
