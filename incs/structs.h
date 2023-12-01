@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 17:27:41 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:56:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,6 @@ typedef struct s_img
 
 typedef struct s_param
 {
-	// t_img img[4];
-	// char *img[4]; // TODO poner array de 4 para las 4 imagenes
-	// char			**path;
-	// int measures[4];
 	t_color			colors[2];
 } t_param;
 

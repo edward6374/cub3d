@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 18:14:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:55:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,6 @@ void init_measures(char *num, int measures[])
 	ft_free_dptr(split);
 }
 
-// int hex_len(char *file)
-// {
-// 	int i = 0;
-// 	int len = 0;
-// 	int flag = 0;
-// 	while (file[i])
-// 	{
-// 		if (file[i] == 'c')
-// 			flag = 1;
-// 		else if (file[i] == '"')
-// 			flag = 0;
-// 		if (flag)
-// 			len++;
-// 		i++;
-// 	}
-// 	return len - 1;
-// }
-
 int get_start(char **file)
 {
 	int i = 0;
@@ -96,23 +78,20 @@ int get_start(char **file)
 	return (i);
 }
 
-void get_img(char **file, t_img img)
+void get_img(char **file, t_img *img)
 {
 	int start = get_start(file);
 	int i = 0;
 
-	img.img = malloc(sizeof(char *) * img.measures[ROWS] + 1);
+	img->img = malloc(sizeof(char *) * img->measures[ROWS] + 1);
 	while (file[start])
 	{
-		img.img[i] = ft_strdup(file[start]);
-		// printf(CYAN "%s" RESET, file[start]);
-		printf(YELLOW "%s" RESET, img.img[i]);
+		img->img[i] = ft_strdup(file[start]);
+		// printf(YELLOW "%s" RESET, img->img[i]);
 		i++;
 		start++;
 	}
-	img.img[i] = NULL;
-	printf("start %d\n", start);
-	// printf(CYAN "%s\n" RESET, file[start]);
+	img->img[i] = NULL;
 }
 // =========================================================================
 void init_img(t_img img[])
@@ -123,7 +102,7 @@ void init_img(t_img img[])
 	file_content = load_img(img[0].path);
 	init_measures(file_content[3], img[0].measures); // file_content[3] es la linea donde esta las measures
 	init_colors(file_content, &img[0]);
-	get_img(file_content, img[0]);
+	get_img(file_content, &(img[0]));
 
 	// //=========================================================================
 

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 16:28:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:06:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ void	calculate_rays(t_cube *cube);
 void init_colors(char **file, t_img img[]);
 void init_img(t_img *img);
 void hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, unsigned char *blue);
+char *find_char(t_img img[], int x, int y);
+t_color *find_rgb(t_char *lst, char *chars, int n);
 
 #endif

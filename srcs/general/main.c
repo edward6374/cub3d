@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 18:13:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:14:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,20 @@ int	main(int argc, char *argv[])
 
 	init_img(cube.img);
 
-	// printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
-	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
+
+	// FIND CHAR ON TEXTURE
+	char *find = find_char(&cube.img[NO], 3, 33);
+
+	printf("find char:'%s'\n", find);
+	free(find);
+
+	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
+	// if (found != NULL)
+	// {
+	printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
+	// }
+
 	// PATH TEXTURES
 	i = 0;
 	while (cube.img[i].path)
@@ -67,7 +78,6 @@ int	main(int argc, char *argv[])
 	printf("\n");
 
 	// LST
-
 	t_char *tmp;
 	tmp = cube.img->lst;
 	while (tmp != NULL)
@@ -79,8 +89,7 @@ int	main(int argc, char *argv[])
 	}
 
 	// IMG textura
-
-	ft_print_dptr(cube.img[0].img);
+	// ft_print_dptr(cube.img[0].img, 0);
 
 	// // MAP
 	// while (cube.map[i])
