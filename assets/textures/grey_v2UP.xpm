@@ -1,5 +1,5 @@
 /* XPM */
-static char *brow[] = {
+static char *grey_v2UP[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 4 1 ",
 ". c #170C12",

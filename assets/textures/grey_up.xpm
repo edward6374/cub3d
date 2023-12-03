@@ -1,5 +1,5 @@
 /* XPM */
-static char *fotograma_000001[] = {
+static char *grey_up[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 5 1 ",
 "  c #2D2D2D",

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    directories.mk                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
+#    By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:10:09 by vduchi            #+#    #+#              #
-#    Updated: 2023/10/09 10:46:07 by vduchi           ###   ########.fr        #
+#    Updated: 2023/11/28 12:36:20 by nmota-bu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,3 +30,6 @@ DEPS_DIR_GEN	=	$(DEPS_DIR)/general
 SRCS_DIR_CALCS	=	$(SRCS_DIR)/calcs
 OBJS_DIR_CALCS	=	$(OBJS_DIR)/calcs
 DEPS_DIR_CALCS	=	$(DEPS_DIR)/calcs
+SRCS_DIR_TEXTURES	=	$(SRCS_DIR)/textures
+OBJS_DIR_TEXTURES	=	$(OBJS_DIR)/textures
+DEPS_DIR_TEXTURES	=	$(DEPS_DIR)/textures

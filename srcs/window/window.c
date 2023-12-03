@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 20:20:24 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/03 22:52:37 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
+void my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
-	char	*dst;
+	char *dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
-int	map_max_len(t_cube *cube, int mode)
+int map_max_len(t_cube *cube, int mode)
 {
-	int	i;
-	int	max;
+	int i;
+	int max;
 
 	max = -1;
 	if (!mode)
@@ -44,7 +44,7 @@ int	map_max_len(t_cube *cube, int mode)
 	}
 }
 
-void	print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
+void print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
 {
 	(void)cube;
 	(void)max_x;
@@ -53,25 +53,21 @@ void	print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
 	(void)offset;
 }
 
-void	which_colour(t_cube *cube, double *xy, int *idx, int *i)
+void which_colour(t_cube *cube, double *xy, int *idx, int *i)
 {
-	if (xy[X] < 0.00 || xy[Y] < 0.00 || idx[X] >= cube->rows
-		|| idx[Y] >= (int)ft_strlen(cube->map[idx[X]])
-		|| cube->map[idx[X]][idx[Y]] == '1'
-		|| cube->map[idx[X]][idx[Y]] == ' ')
+	if (xy[X] < 0.00 || xy[Y] < 0.00 || idx[X] >= cube->rows || idx[Y] >= (int)ft_strlen(cube->map[idx[X]]) || cube->map[idx[X]][idx[Y]] == '1' || cube->map[idx[X]][idx[Y]] == ' ')
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x242C5F);
-	else if (xy[X] >= cube->nposX - 8.00 && xy[X] <= cube->nposX + 8.00
-		&& xy[Y] >= cube->nposY - 8.00 && xy[Y] <= cube->nposY + 8.00)
+	else if (xy[X] >= cube->nposX - 8.00 && xy[X] <= cube->nposX + 8.00 && xy[Y] >= cube->nposY - 8.00 && xy[Y] <= cube->nposY + 8.00)
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x00FF00);
 	else
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x97A3F0);
 }
 
-void	create_minimap(t_cube *cube)
+void create_minimap(t_cube *cube)
 {
-	int		i[2];
-	int		idx[2];
-	double	xy[2];
+	int i[2];
+	int idx[2];
+	double xy[2];
 
 	xy[X] = cube->nposX - 320.00;
 	xy[Y] = cube->nposY - 192.00;
@@ -94,7 +90,7 @@ void	create_minimap(t_cube *cube)
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 }
 
-void	hook_mlx(t_cube *cube)
+void hook_mlx(t_cube *cube)
 {
 	calculate_rays(cube);
 	create_minimap(cube);
@@ -108,35 +104,35 @@ void	hook_mlx(t_cube *cube)
 	mlx_loop(cube->mlx.mlx);
 }
 
-void init_img(void *mlx, char **path, char *img[])
-{
-	int i = 0;
-	int len;
+// void init_img(void *mlx, char **path, char *img[])
+// {
+// 	int i = 0;
+// 	int len;
 
-	while (path[i])
-	{
-		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
-		i++;
-	}
-}
+// 	while (path[i])
+// 	{
+// 		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
+// 		i++;
+// 	}
+// }
 
-int	init_mlx(t_cube *cube)
+int init_mlx(t_cube *cube)
 {
 	cube->mlx.mlx = mlx_init();
 	if (!cube->mlx.mlx)
 		return (1);
 	cube->mlx.win = mlx_new_window(cube->mlx.mlx, cube->width, cube->height,
-		"cub3d");
+								   "cub3d");
 	if (!cube->mlx.win)
 		return (2);
 	cube->mlx.img = mlx_new_image(cube->mlx.mlx, cube->width, cube->height);
 	if (!cube->mlx.img)
 		return (3);
 	cube->mlx.addr = mlx_get_data_addr(cube->mlx.img, &cube->mlx.bits_per_pixel,
-		&cube->mlx.line_length, &cube->mlx.endian);
+									   &cube->mlx.line_length, &cube->mlx.endian);
 	if (!cube->mlx.addr)
 		return (4);
-//	init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
+	//	init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
 	hook_mlx(cube);
 	return (0);
 }

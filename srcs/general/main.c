@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 20:22:29 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/03 22:54:01 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,83 @@ int main(int argc, char *argv[])
 	int i;
 
 	ft_bzero(&cube, sizeof(t_cube));
-	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.params.path) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
+	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.img) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
 	//	printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
-	i = 0;
+
+	// FIND CHAR ON TEXTURE
+	char *find = find_char(&cube.img[NO], 3, 33);
+
+	printf("find char:'%s'\n", find);
+	free(find);
+
+	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
+	// if (found != NULL)
+	// {
+	printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
+	// }
+
 	// PATH TEXTURES
 	//	while (cube.params.path[i])
 	//	{
 	//		printf("%s\n", cube.params.path[i]);
 	//		i++;
 	//	}
-	//	i = 0;
+	i = 0;
 	// MAP
-	while (cube.map[i])
+	while (cube.img[i].path)
 	{
-		printf(CYAN "%s\n" RESET, cube.map[i]);
+		printf("%s\n", cube.img[i].path);
 		i++;
 	}
+
+	// MEASURES IMG
 	i = 0;
-	// RGB
-	while (i < 2)
+	while (i < 4)
 	{
-		ft_printf("r: %d\n", cube.params.colors[i].r);
-		ft_printf("g: %d\n", cube.params.colors[i].g);
-		ft_printf("b: %d\n", cube.params.colors[i].b);
+		printf("%d ", cube.img[0].measures[i]);
 		i++;
+	}
+	printf("\n");
+
+	// LST
+	t_char *tmp;
+	tmp = cube.img->lst;
+	while (tmp != NULL)
+	{
+		printf(RED "\'%s\' " RESET, tmp->chars);
+		printf(GREEN "%s " RESET, tmp->hex_color);
+		printf(MAGENTA "r:%d g:%d b:%d\n" RESET, tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
+		tmp = tmp->next;
 	}
 	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
 		   cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n" RESET, cube.angle);
+
+	// IMG textura
+	// ft_print_dptr(cube.img[0].img, 0);
+
+	// // MAP
+	// while (cube.map[i])
+	// {
+	// 	printf(CYAN "%s\n" RESET, cube.map[i]);
+	// 	i++;
+	// }
+	// i = 0;
+	// RGB
+	// while (i < 2)
+	// {
+	// 	ft_printf("r: %d\n", cube.params.colors[i].r);
+	// 	ft_printf("g: %d\n", cube.params.colors[i].g);
+	// 	ft_printf("b: %d\n", cube.params.colors[i].b);
+	// 	i++;
+	// }
+	// printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
+	// 	cube.nposX, cube.nposY);
+	// printf(GREEN "Angle: %f\n" RESET, cube.angle);
+
 	//=========================================================================
 	// init_func(&cube);
 	// ft_printf("Value: %d\n", init_mlx(&cube));

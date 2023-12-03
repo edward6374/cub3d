@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/03 20:22:56 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/03 22:52:25 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void check_img(char *file)
 	}
 }
 
-int ctrl_path(char **path)
+int ctrl_path(t_img img[])
 {
 	int i;
 	int fd;
@@ -35,22 +35,19 @@ int ctrl_path(char **path)
 
 	i = -1;
 	err = 0;
-	if (path)
+	while (img[++i].path)
 	{
-		while (path[++i])
+		fd = open(img[i].path, O_RDONLY);
+		if (fd >= 0)
 		{
-			fd = open(path[i], O_RDONLY);
-			if (fd >= 0)
-			{
-				check_img(path[i]);
-				close(fd);
-			}
-			else if (fd <= 0)
-			{
-				err = 1;
-				ft_message(DANGER, "Error\nWrong path: ");
-				ft_message(INFO, path[i]);
-			}
+			check_img(img[i].path);
+			close(fd);
+		}
+		else if (fd <= 0)
+		{
+			err = 1;
+			ft_message(DANGER, "Error\nWrong path: ");
+			ft_message(INFO, img[i].path);
 		}
 	}
 	return (err);

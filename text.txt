@@ -1,0 +1,23 @@
+int medidas[4] = {64, 64, 4, 1}
+char **colors = malloc( medidas[2] * sizeof(char *))
+
+mejor en lista,
+
+t_img img[4]
+
+t_img
+{
+char *name
+char *path
+int measures[4]
+char **imag
+t_char chars
+}
+
+t_char
+{
+	char *chars
+	char *hex_color
+	t_color rgb
+	next
+}
