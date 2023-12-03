@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 16:46:02 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/03 20:22:49 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int check_params(t_cube *cube, char *file)
 	data = ft_file_to_dptr(file, 1);
 	if (!(cube->params.path = ft_calloc(sizeof(char *), 5)) || !data || init_map(cube, data))
 		exit(EXIT_FAILURE);
-	// check_path_img();
 
 	i = 0;
 	if (data)

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 16:56:34 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/03 20:17:50 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	keep_pressed(int keycode, t_cube *cube)
 	int		idx_diff[4];
 	double	angle_vals[4];
 
+	cube->dir = keycode + 1;
 	if (keycode == 0) // A
 	{
-		cube->dir = 1;
 		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
@@ -106,7 +106,6 @@ int	keep_pressed(int keycode, t_cube *cube)
 	}
 	else if (keycode == 1) // S
 	{
-		cube->dir = 2;
 		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
@@ -118,7 +117,6 @@ int	keep_pressed(int keycode, t_cube *cube)
 	}
 	else if (keycode == 2) // D
 	{
-		cube->dir = 3;
 		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
@@ -130,7 +128,6 @@ int	keep_pressed(int keycode, t_cube *cube)
 	}
 	else if (keycode == 13) // W
 	{
-		cube->dir = 4;
 		set_idx(cube, idx_diff, idx_xy, angle_vals);
 		if (check_movement(cube, idx_diff, idx_xy))
 			return (0);
