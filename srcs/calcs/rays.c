@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:41:52 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/30 16:10:31 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:22:34 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ double	calc_small(t_cube *cube, double pos, double angle, int mode)
 	}
 }
 
+//mode 0 es el calculo de la X, 1 de la Y
 void check_segments(t_cube *cube, t_rays *r, double angle, int mode)
-// mode 0 es el calculo de la X, 1 de la Y
 {
 	if (((dbl_eq(angle, 0.00) || dbl_btw(angle, 0.00, 180.00)) && !mode)
 		|| ((dbl_eq(angle, 90.00) || dbl_btw(angle, 90.00, 270.00)) && mode))

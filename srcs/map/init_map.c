@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 20:55:52 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/04 10:12:09 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:31:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,28 @@ int len_row(char **data)
 
 int init_map(t_cube *cube, char **data)
 {
-	int i;
-	int map_index;
-	int j;
+	int	i;
+	int	j;
+	int	map_index;
 
+	i = -1;
+	map_index = 0;
 	cube->map = ft_calloc(len_row(data) + 1, sizeof(char *));
 	if (!cube->map)
 		return (EXIT_FAILURE);
-	i = 0;
-	map_index = 0;
-	while (data[i])
+	while (data[++i])
 	{
 		if (data[i][0] == ' ' || data[i][0] == '1')
 		{
-			if (!(cube->map[map_index] = ft_calloc(strlen(data[i]) + 1, 1)))
+			cube->map[map_index] = ft_calloc(ft_strlen(data[i]) + 1, 1);
+			if (!cube->map[map_index])
 				return (EXIT_FAILURE);
-			j = 0;
-			while (data[i][j] != '\0')
-			{
-				if (data[i][j] != '\n')
-					cube->map[map_index][j] = data[i][j];
-				j++;
-			}
+			j = -1;
+			while (data[i][++j] != '\n' && data[i][j] != '\0')
+				cube->map[map_index][j] = data[i][j];
 			cube->map[map_index][j] = '\0';
 			map_index++;
 		}
-		i++;
 	}
 	cube->map[map_index] = NULL;
 	return (0);
