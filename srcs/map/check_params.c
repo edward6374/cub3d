@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 22:52:21 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:14:34 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "error.h"
 #include "libft.h"
 #include <fcntl.h>
-
 #include "colorsft.h"
 
 char *ft_strdup_plus(char *s1)
@@ -51,11 +50,14 @@ void init_texture(char **split, t_img *img)
 
 int check_params(t_cube *cube, char *file)
 {
+	int i;
+	int	fd;
 	char **data;
 	char **split;
-	int i;
 
-	data = ft_file_to_dptr(file, 1);
+//	data = ft_file_to_dptr(file, 1);
+	fd = open(file, O_RDONLY);
+	data = ft_file_to_dptr_m(fd);
 	if (!data || init_map(cube, data))
 		exit(EXIT_FAILURE);
 	i = 0;

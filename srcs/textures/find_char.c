@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:46:53 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/01 12:10:18 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:10:47 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char *find_char(t_img img[], int x, int y)
 {
 	char *res;
 
-	res = malloc((img->measures[CHAR] + 1) * sizeof(char *));
+	res = malloc((img->measures[CHAR] + 1) * sizeof(char));
 	if (img->measures[CHAR] == 1)
 	{
 		res[0] = img->img[x][y + 1];

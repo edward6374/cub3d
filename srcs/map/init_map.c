@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 20:55:52 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 10:50:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:12:09 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int init_map(t_cube *cube, char **data)
 	int map_index;
 	int j;
 
-	if (!(cube->map = ft_calloc(len_row(data) + 1, sizeof(char *))))
+	cube->map = ft_calloc(len_row(data) + 1, sizeof(char *));
+	if (!cube->map)
 		return (EXIT_FAILURE);
 	i = 0;
 	map_index = 0;

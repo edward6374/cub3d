@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 22:54:01 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 10:11:16 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ int main(int argc, char *argv[])
 	//=========================================================================
 
 	// FIND CHAR ON TEXTURE
-	char *find = find_char(&cube.img[NO], 3, 33);
+//	char *find = find_char(&cube.img[NO], 3, 33);
+//
+//	printf("find char:'%s'\n", find);
+//	free(find);
 
-	printf("find char:'%s'\n", find);
-	free(find);
-
-	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
+//	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
 	// if (found != NULL)
 	// {
-	printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
+//	printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
 	// }
 
 	// PATH TEXTURES
@@ -115,8 +115,8 @@ int main(int argc, char *argv[])
 	// printf(GREEN "Angle: %f\n" RESET, cube.angle);
 
 	//=========================================================================
-	// init_func(&cube);
-	// ft_printf("Value: %d\n", init_mlx(&cube));
+	init_func(&cube);
+	ft_printf("Value: %d\n", init_mlx(&cube));
 	return (0);
 }
 
