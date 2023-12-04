@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 20:55:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:27:38 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "colorsft.h"
 #include <fcntl.h>
 
-char *removeQuotes(const char *input)
+char *remove_quotes(const char *input)
 {
 	// Verificar si el string tiene comillas al inicio y al final
 	if (input[0] == '"' && input[strlen(input) - 3] == '"')
@@ -52,7 +52,7 @@ char **load_img(char *path)
 void init_measures(char *num, int measures[])
 {
 
-	char *result = removeQuotes(num);
+	char *result = remove_quotes(num);
 	char **split = ft_split(result, ' ');
 
 	free(result);

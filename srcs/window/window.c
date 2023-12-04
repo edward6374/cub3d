@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 09:12:16 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:03:36 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ void print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
 
 void which_colour(t_cube *cube, double *xy, int *idx, int *i)
 {
-	if (xy[X] < 0.00 || xy[Y] < 0.00 || idx[X] >= cube->rows || idx[Y] >= (int)ft_strlen(cube->map[idx[X]]) || cube->map[idx[X]][idx[Y]] == '1' || cube->map[idx[X]][idx[Y]] == ' ')
+	if (xy[X] < 0.00 || xy[Y] < 0.00 || idx[X] >= cube->rows
+		|| idx[Y] >= (int)ft_strlen(cube->map[idx[X]])
+		|| cube->map[idx[X]][idx[Y]] == '1' || cube->map[idx[X]][idx[Y]] == ' ')
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x242C5F);
-	else if (xy[X] >= cube->nposX - 8.00 && xy[X] <= cube->nposX + 8.00 && xy[Y] >= cube->nposY - 8.00 && xy[Y] <= cube->nposY + 8.00)
+	else if (xy[X] >= cube->nposX - 8.00 && xy[X] <= cube->nposX + 8.00
+		&& xy[Y] >= cube->nposY - 8.00 && xy[Y] <= cube->nposY + 8.00)
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x00FF00);
 	else
 		my_mlx_pixel_put(&cube->mlx, i[X], i[Y], 0x97A3F0);
@@ -104,18 +107,6 @@ void hook_mlx(t_cube *cube)
 	mlx_loop(cube->mlx.mlx);
 }
 
-// void init_img(void *mlx, char **path, char *img[])
-// {
-// 	int i = 0;
-// 	int len;
-
-// 	while (path[i])
-// 	{
-// 		img[i] = mlx_xpm_file_to_image(mlx, path[i], &len, &len);
-// 		i++;
-// 	}
-// }
-
 int init_mlx(t_cube *cube)
 {
 	cube->mlx.mlx = mlx_init();
@@ -132,7 +123,6 @@ int init_mlx(t_cube *cube)
 									   &cube->mlx.line_length, &cube->mlx.endian);
 	if (!cube->mlx.addr)
 		return (4);
-	//	init_img(cube->mlx.mlx, cube->params.path, cube->params.img);
 	hook_mlx(cube);
 	return (0);
 }

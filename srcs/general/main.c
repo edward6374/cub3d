@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 10:21:26 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:10:06 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,20 @@ int main(int argc, char *argv[])
 	//	printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
+	
+	init_img(cube.img);
 
 	// FIND CHAR ON TEXTURE
-//	char *find = find_char(&cube.img[NO], 3, 33);
-//
-//	printf("find char:'%s'\n", find);
-//	free(find);
+	char *find = find_char(&cube.img[NO], 3, 33);
 
-//	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
-	// if (found != NULL)
-	// {
-//	printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
-	// }
+	printf("find char:'%s'\n", find);
+	free(find);
+
+	t_color *found = find_rgb(cube.img->lst, find, cube.img->measures[CHAR]);
+	if (found != NULL)
+	{
+		printf(YELLOW "r:%d g:%d b:%d\n" RESET, found->r, found->g, found->b);
+	}
 
 	// PATH TEXTURES
 	//	while (cube.params.path[i])
@@ -92,6 +94,7 @@ int main(int argc, char *argv[])
 		   cube.nposX, cube.nposY);
 	printf(GREEN "Angle: %f\n" RESET, cube.angle);
 
+	printf("First: %c\n", cube.img[0].img[3][20]);
 	// IMG textura
 	// ft_print_dptr(cube.img[0].img, 0);
 

@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 22:51:13 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:10:13 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void print_screen(t_cube *cube, double *arr);
 void init_colors(char **file, t_img img[]);
 void init_img(t_img *img);
 void hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, unsigned char *blue);
-char *find_char(t_img img[], int x, int y);
+char *find_char(t_img *img, int x, int y);
 t_color *find_rgb(t_char *lst, char *chars, int n);
 
 #endif

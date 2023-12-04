@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:09:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/01 12:34:34 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:38:17 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_pixel(t_cube *cube, int x, int y, t_color colors)
 
 int	check_x(t_cube *cube, int idx)
 {
+	int		ret;
 	double	min;
 	double	max;
 	double	diff;
@@ -43,7 +44,10 @@ int	check_x(t_cube *cube, int idx)
 	min = cube->walls.pos[idx] - diff;
 	max = min + 64.00;
 	piece = (max - min) / 5.00;
-	return ((int)((cube->walls.pos[idx] - min) / piece) % 2);
+	ret = (((int)(cube->walls.pos[idx] - min) % (int)piece) * 64) / piece;
+//	printf("Ret: %d\n", ret);
+	return (ret);
+//	return ((int)((cube->walls.pos[idx] - min) / piece) % 2);
 }
 
 void	print_image(t_cube *cube, double height, int x, int y)
@@ -52,43 +56,54 @@ void	print_image(t_cube *cube, double height, int x, int y)
 	double	min;
 	double	max;
 	double	piece;
+	char	*find;
+	t_color	*rgb;
 
 	min = ((double)cube->height / 2.00) - height;
 	max = ((double)cube->height / 2.00) + height;
 	piece = (max - min) / 5.00;
-	idx = (((double)y / 5.00) * 64.00) / piece; //TODO para las imagenes
-	if (cube->walls.dir[x] == NO)
-	{
-		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
-			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
-			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC00); //verde
-		else
-			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC66);
-	}
-	else if (cube->walls.dir[x] == SO)
-	{
-		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
-			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xCC99FF); //lilla
-		else
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xE2C4FF);
-	}
-	else if (cube->walls.dir[x] == WE)
-	{
-		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
-			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xFF9933); //arancio
-		else
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xFFB76E);
-	}
-	else if (cube->walls.dir[x] == EA)
-	{
-		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
-			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xFF99CC); //rosa
-		else
-			my_mlx_pixel_put(&cube->mlx, x, y, 0xFFB9DC);
-	}
+	idx = (((int)((double)y - min) % (int)piece) * 64) / piece;
+	if (dbl_btw(cube->angle, 20.00, 23.00))
+		printf("Y: %d\tX: %d\n", idx, check_x(cube, x));
+	find = find_char(&cube->img[0], idx, check_x(cube, x));
+//	printf("After\n");
+	rgb = find_rgb(cube->img->lst, find, cube->img->measures[CHAR]);
+//	printf("R: %d\tG: %d\tB: %d\n", rgb->r, rgb->g, rgb->b);
+	print_pixel(cube, x, y, *rgb);
+	free(find);
+	
+//	if (cube->walls.dir[x] == NO)
+//	{
+//		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
+//			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC00); //verde
+//		else
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0x00CC66);
+//	}
+//	else if (cube->walls.dir[x] == SO)
+//	{
+//		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
+//			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xCC99FF); //lilla
+//		else
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xE2C4FF);
+//	}
+//	else if (cube->walls.dir[x] == WE)
+//	{
+//		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
+//			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xFF9933); //arancio
+//		else
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xFFB76E);
+//	}
+//	else if (cube->walls.dir[x] == EA)
+//	{
+//		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
+//			|| (!check_x(cube, x) && (int)(((double)y - min) / piece) % 2))
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xFF99CC); //rosa
+//		else
+//			my_mlx_pixel_put(&cube->mlx, x, y, 0xFFB9DC);
+//	}
 }
 
 void	print_screen(t_cube *cube, double *arr)
