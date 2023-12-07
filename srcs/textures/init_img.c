@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/04 17:27:38 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/07 18:06:46 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,18 @@ void get_img(char **file, t_img *img)
 // =========================================================================
 void init_img(t_img img[])
 {
-	char **file_content;
+	int		i;
+	char	**file_content;
 
 	// TODO aqui while para las 4 texturas
-	file_content = load_img(img[0].path);
-	init_measures(file_content[3], img[0].measures); // file_content[3] es la linea donde esta las measures
-	init_colors(file_content, &img[0]);
-	get_img(file_content, &(img[0]));
-
-	// //=========================================================================
-
-	// //=========================================================================
-	free(file_content);
+	i = 0;
+	while (i < 4)
+	{
+		file_content = load_img(img[i].path);
+		init_measures(file_content[3], img[i].measures); // file_content[3] es la linea donde esta las measures
+		init_colors(file_content, &img[i]);
+		get_img(file_content, &(img[i]));
+		ft_free_dptr(file_content);
+		i++;
+	}
 }

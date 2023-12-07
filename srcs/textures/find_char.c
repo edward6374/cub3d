@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:46:53 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/04 17:15:41 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/07 18:48:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ t_color *find_rgb(t_char *lst, char *chars, int n)
 	tmp = lst;
 	while (tmp != NULL)
 	{
+//		printf("Char: -%s-\tTmp: -%s- ", chars, tmp->chars);
 		if (!ft_strncmp(tmp->chars, chars, n))
 		{
-//			printf(MAGENTA "\'%s\' " RESET, tmp->chars);
+//			printf(MAGENTA "\'%s\' \t" RESET, tmp->chars);
 			found = &tmp->rgb;
 			return (found);
 		}

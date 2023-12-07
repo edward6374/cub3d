@@ -6,24 +6,13 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:09:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 17:38:17 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/07 18:47:25 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "structs.h"
 #include <math.h>
-
-int	g_arr[] = {
-	0x00CC00, //verde
-	0x00CC66,
-	0xCC99FF, //lilla
-	0xE2C4FF,
-	0xFF9933, //arancio
-	0xFFB76E,
-	0xFF99CC, //rosa
-	0xFFB9DC,
-};
 
 void	print_pixel(t_cube *cube, int x, int y, t_color colors)
 {
@@ -32,7 +21,7 @@ void	print_pixel(t_cube *cube, int x, int y, t_color colors)
 	   ((colors.b & 0xff)));
 }
 
-int	check_x(t_cube *cube, int idx)
+int	check_x(t_cube *cube, int idx, int *retu)
 {
 	int		ret;
 	double	min;
@@ -40,12 +29,27 @@ int	check_x(t_cube *cube, int idx)
 	double	diff;
 	double	piece;
 
+	(void)retu;
 	diff = fmodf(cube->walls.pos[idx], 64.00);
 	min = cube->walls.pos[idx] - diff;
 	max = min + 64.00;
 	piece = (max - min) / 5.00;
-	ret = (((int)(cube->walls.pos[idx] - min) % (int)piece) * 64) / piece;
-//	printf("Ret: %d\n", ret);
+//	ret = (((int)(cube->walls.pos[idx] - min) % (int)piece) * 64) / piece; //peor
+//	ret = (int)((fmodf(cube->walls.pos[idx] - min, piece) * 64.00) / piece); //mejor
+//	printf("Before\n");
+	ret = (int)round(((fmodf(cube->walls.pos[idx] - min, piece) * 64.00) / piece));
+	if (ret == 64)
+		ret = 0;
+//	printf("After\n");
+//	if (dbl_btw(cube->angle, 20.00, 23.00) && idx > 550 && idx < 600)
+//		printf("Ret: %d\n", ret);
+//	if (*retu != idx)
+//	{
+//		*retu = idx;
+//		printf("X: %d\t\tDiff 1: %f\tDiff 2: %d\n", idx, (fmodf(cube->walls.pos[idx] - min, piece) * 64) / piece, (int)((fmodf(cube->walls.pos[idx] - min, piece) * 64) / piece));
+//		if (idx == 1279)
+//			printf("\n\n\n");
+//	}
 	return (ret);
 //	return ((int)((cube->walls.pos[idx] - min) / piece) % 2);
 }
@@ -59,15 +63,23 @@ void	print_image(t_cube *cube, double height, int x, int y)
 	char	*find;
 	t_color	*rgb;
 
+	static int ret;
 	min = ((double)cube->height / 2.00) - height;
 	max = ((double)cube->height / 2.00) + height;
 	piece = (max - min) / 5.00;
-	idx = (((int)((double)y - min) % (int)piece) * 64) / piece;
-	if (dbl_btw(cube->angle, 20.00, 23.00))
-		printf("Y: %d\tX: %d\n", idx, check_x(cube, x));
-	find = find_char(&cube->img[0], idx, check_x(cube, x));
-//	printf("After\n");
-	rgb = find_rgb(cube->img->lst, find, cube->img->measures[CHAR]);
+//	idx = (((int)((double)y - min) % (int)piece) * 64) / piece; //peor
+//	idx = (int)((fmodf((double)y - min, piece) * 64.00) / piece); //mejor
+	idx = (int)round(((fmodf((double)y - min, piece) * 64.00) / piece));
+	if (idx == 64)
+		idx = 0;
+//	if (dbl_btw(cube->angle, 20.00, 23.00) && x > 550 && x < 600)
+//		printf("Y: %d\tX: %d\n", idx, check_x(cube, x));
+//	find = find_char(&cube->img[0], idx, check_x(cube, x, &ret)); //para solo una imagen
+	find = find_char(&cube->img[cube->walls.dir[x]], idx, check_x(cube, x, &ret));
+//	if (x == 105)
+//		printf("Find: %s\n", find);
+	rgb = find_rgb(cube->img[cube->walls.dir[x]].lst, find, cube->img->measures[CHAR]);
+//	printf("Dir: %d\tX: %d\tY: %d\tP: %p\n", cube->walls.dir[x], x, y, find);
 //	printf("R: %d\tG: %d\tB: %d\n", rgb->r, rgb->g, rgb->b);
 	print_pixel(cube, x, y, *rgb);
 	free(find);
@@ -141,5 +153,6 @@ void	print_screen(t_cube *cube, double *arr)
 //				printf("7\n");
 			}
 		}
+//		printf("X: %d\n", x);
 	}
 }
