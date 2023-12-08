@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:09:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/07 18:47:25 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:19:31 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_pixel(t_cube *cube, int x, int y, t_color colors)
 	   ((colors.b & 0xff)));
 }
 
-int	check_x(t_cube *cube, int idx, int *retu)
+int	check_x(t_cube *cube, int idx)
 {
 	int		ret;
 	double	min;
@@ -29,7 +29,6 @@ int	check_x(t_cube *cube, int idx, int *retu)
 	double	diff;
 	double	piece;
 
-	(void)retu;
 	diff = fmodf(cube->walls.pos[idx], 64.00);
 	min = cube->walls.pos[idx] - diff;
 	max = min + 64.00;
@@ -63,7 +62,6 @@ void	print_image(t_cube *cube, double height, int x, int y)
 	char	*find;
 	t_color	*rgb;
 
-	static int ret;
 	min = ((double)cube->height / 2.00) - height;
 	max = ((double)cube->height / 2.00) + height;
 	piece = (max - min) / 5.00;
@@ -75,7 +73,7 @@ void	print_image(t_cube *cube, double height, int x, int y)
 //	if (dbl_btw(cube->angle, 20.00, 23.00) && x > 550 && x < 600)
 //		printf("Y: %d\tX: %d\n", idx, check_x(cube, x));
 //	find = find_char(&cube->img[0], idx, check_x(cube, x, &ret)); //para solo una imagen
-	find = find_char(&cube->img[cube->walls.dir[x]], idx, check_x(cube, x, &ret));
+	find = find_char(&cube->img[cube->walls.dir[x]], idx, check_x(cube, x));
 //	if (x == 105)
 //		printf("Find: %s\n", find);
 	rgb = find_rgb(cube->img[cube->walls.dir[x]].lst, find, cube->img->measures[CHAR]);
