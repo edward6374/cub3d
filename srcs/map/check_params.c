@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 10:14:34 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:59:14 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int check_params(t_cube *cube, char *file)
 	char **data;
 	char **split;
 
-//	data = ft_file_to_dptr(file, 1);
 	fd = open(file, O_RDONLY);
 	data = ft_file_to_dptr_m(fd);
 	if (!data || init_map(cube, data))

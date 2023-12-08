@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 17:03:36 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:59:54 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ int map_max_len(t_cube *cube, int mode)
 			i++;
 		return (i);
 	}
-}
-
-void print_minimap(t_cube *cube, int max_x, int max_y, int offset, int dir)
-{
-	(void)cube;
-	(void)max_x;
-	(void)max_y;
-	(void)dir;
-	(void)offset;
 }
 
 void which_colour(t_cube *cube, double *xy, int *idx, int *i)

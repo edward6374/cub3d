@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:46:53 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/07 18:48:03 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:59:05 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char *find_char(t_img *img, int x, int y)
 	char *res;
 
 	res = malloc((img->measures[CHAR] + 1) * sizeof(char));
-//	printf("Number: %d\tPointer: %p\n", img->measures[CHAR], img->img);
 	if (img->measures[CHAR] == 1)
 	{
 		res[0] = img->img[x][y + 1];
@@ -45,10 +44,8 @@ t_color *find_rgb(t_char *lst, char *chars, int n)
 	tmp = lst;
 	while (tmp != NULL)
 	{
-//		printf("Char: -%s-\tTmp: -%s- ", chars, tmp->chars);
 		if (!ft_strncmp(tmp->chars, chars, n))
 		{
-//			printf(MAGENTA "\'%s\' \t" RESET, tmp->chars);
 			found = &tmp->rgb;
 			return (found);
 		}
