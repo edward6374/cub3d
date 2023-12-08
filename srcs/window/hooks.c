@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/03 20:17:50 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 10:50:04 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	mouse_hook(int button, int x, int y, t_cube *cube)
 	(void)cube;
 	(void)button;
 	ft_printf("Mouse hook\n");
-	cube->mlx.status = 1;
+//	cube->mlx.status = 1;
 	return (0);
 }
 
@@ -56,6 +56,7 @@ void	check_pos(t_cube *cube)
 
 int	check_movement(t_cube *cube, int *idx_diff, int *idx_xy)
 {
+	printf("Angle: %f\tNO: %c\tSO: %c\tWE: %c\tEA: %c\n", cube->angle, cube->map[idx_diff[NO]][idx_xy[0]], cube->map[idx_diff[SO]][idx_xy[0]], cube->map[idx_xy[1]][idx_diff[WE]], cube->map[idx_xy[1]][idx_diff[EA]]);
 	if ((dbl_eq(cube->angle, 0.00) || dbl_btw(cube->angle, 0.00, 90.00)) && (cube->map[idx_diff[NO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[EA]] == '1'))
 		return (1);
 	else if ((dbl_eq(cube->angle, 90.00) || dbl_btw(cube->angle, 90.00, 180.00)) && (cube->map[idx_diff[NO]][idx_xy[0]] == '1' || cube->map[idx_xy[1]][idx_diff[WE]] == '1'))
@@ -92,6 +93,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 	int		idx_diff[4];
 	double	angle_vals[4];
 
+	printf("Keycode: %d\n", keycode);
+	cube->mlx.status = 1;
 	cube->dir = keycode + 1;
 	if (keycode == 0) // A
 	{
@@ -101,8 +104,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposY -= angle_vals[SIN_90];
 		cube->nposX += angle_vals[COS_90];
 		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	else if (keycode == 1) // S
 	{
@@ -112,8 +115,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposY += angle_vals[SIN];
 		cube->nposX -= angle_vals[COS];
 		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	else if (keycode == 2) // D
 	{
@@ -123,8 +126,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposY += angle_vals[SIN_90];
 		cube->nposX -= angle_vals[COS_90];
 		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	else if (keycode == 13) // W
 	{
@@ -134,8 +137,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 		cube->nposY -= angle_vals[SIN];
 		cube->nposX += angle_vals[COS];
 		check_pos(cube);
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	else if (keycode == 123) // Flecha izquierda
 	{
@@ -145,8 +148,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 			cube->angle = 360.00 - cube->angle;
 		else
 			cube->angle += 2.00;
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	else if (keycode == 124) // Flecha derecha
 	{
@@ -156,8 +159,8 @@ int	keep_pressed(int keycode, t_cube *cube)
 			cube->angle = 360.00 - cube->angle;
 		else
 			cube->angle -= 2.00;
-		calculate_rays(cube);
-		create_minimap(cube);
+//		calculate_rays(cube);
+//		create_minimap(cube);
 	}
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	return (0);
@@ -165,8 +168,7 @@ int	keep_pressed(int keycode, t_cube *cube)
 
 int	key_hook(int keycode, t_cube *cube)
 {
-	//	cube->mlx.status = 1;
-	printf("Keycode: %d\n", keycode);
+//	cube->mlx.status = 1;
 	if (keycode == 53)
 		exit_safe(cube, 0);
 	// else if (keycode == 126) // Flecha arriba
@@ -198,7 +200,9 @@ int	loop_hook(t_cube *cube)
 	if (cube->mlx.status == 1)
 	{
 		//		ft_printf("Loop hook\n");
-		//		calculate_rays(cube);
+		calculate_rays(cube);
+		create_minimap(cube);
+		mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 		cube->mlx.status = 0;
 	}
 	return (0);
