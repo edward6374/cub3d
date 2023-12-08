@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 17:10:13 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:10:33 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 
 /* ---			Hooks.c				--- */
 int loop_hook(t_cube *cube);
-int exit_safe(t_cube *cube, int index);
-int key_hook(int keycode, t_cube *cube);
-int keep_pressed(int keycode, t_cube *cube);
-int mouse_hook(int button, int x, int y, t_cube *cube);
-void second_key_hook(int keycode, t_cube *cube);
+int exit_safe(int index);
+int esc_hook(int key);
+int keep_pressed(int key, t_cube *cube);
+void second_key_hook(int key, t_cube *cube);
 
 /* ---			Window.c			--- */
 int init_mlx(t_cube *cube);
@@ -47,11 +46,11 @@ void read_map(t_cube *cube);
 /* ---			Rays.c			--- */
 int dbl_eq(double a, double b);
 int dbl_btw(double angle, double min, double max);
-int set_segments(t_rays *r, double small_val, double long_val);
+int set_segments(t_rays *r, float small_val, float long_val);
 void calculate_rays(t_cube *cube);
 
 /* ---			Print.c			--- */
-void print_screen(t_cube *cube, double *arr);
+void print_screen(t_cube *cube, float *arr);
 void init_colors(char **file, t_img img[]);
 void init_img(t_img *img);
 void hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, unsigned char *blue);

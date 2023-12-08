@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:04:49 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/08 10:56:40 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:10:48 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	dbl_btw(double angle, double min, double max)
     return (0);
 }
 
-int	set_segments(t_rays *r, double small_val, double long_val)
+int	set_segments(t_rays *r, float small_val, float long_val)
 {
 	r->small_seg = small_val;
 	r->long_seg = long_val;

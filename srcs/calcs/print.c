@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:09:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/08 10:58:37 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:04:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,25 @@ void	print_pixel(t_cube *cube, int x, int y, t_color colors)
 
 int	check_x(t_cube *cube, int idx)
 {
+//	int		ret;
+//	double	min;
+//	double	max;
+//	double	diff;
+//	double	piece;
+//
+//	diff = fmodf(cube->walls.pos[idx], 64.00);
+//	min = cube->walls.pos[idx] - diff;
+//	max = min + 64.00;
+//	piece = (max - min) / 5.00;
+//	ret = (int)round(((fmodf(cube->walls.pos[idx] - min, piece) * 64.00) / piece));
+//	if (ret == 64)
+//		ret = 0;
+//	return (ret);
 	int		ret;
-	double	min;
-	double	max;
-	double	diff;
-	double	piece;
+	float	min;
+	float	max;
+	float	diff;
+	float	piece;
 
 	diff = fmodf(cube->walls.pos[idx], 64.00);
 	min = cube->walls.pos[idx] - diff;
@@ -39,25 +53,47 @@ int	check_x(t_cube *cube, int idx)
 	return (ret);
 }
 
-void	print_image(t_cube *cube, double height, int x, int y)
+void	print_image(t_cube *cube, float height, int x, int y)
 {
+//	int		idx;
+//	double	min;
+//	double	max;
+//	double	piece;
+//	char	*find;
+//	t_color	*rgb;
+//
+//	min = ((double)cube->height / 2.00) - height;
+//	max = ((double)cube->height / 2.00) + height;
+//	piece = (max - min) / 5.00;
+//	idx = (int)round(((fmodf((double)y - min, piece) * 64.00) / piece));
+//	if (idx == 64)
+//		idx = 0;
+//	find = find_char(&cube->img[cube->walls.dir[x]], idx, check_x(cube, x));
+//	rgb = find_rgb(cube->img[cube->walls.dir[x]].lst, find, cube->img->measures[CHAR]);
+//	print_pixel(cube, x, y, *rgb);
+//	free(find);
 	int		idx;
-	double	min;
-	double	max;
-	double	piece;
+	float	min;
+	float	max;
+	float	piece;
 	char	*find;
 	t_color	*rgb;
 
-	min = ((double)cube->height / 2.00) - height;
-	max = ((double)cube->height / 2.00) + height;
+	min = ((float)cube->height / 2.00) - height;
+	max = ((float)cube->height / 2.00) + height;
 	piece = (max - min) / 5.00;
-	idx = (int)round(((fmodf((double)y - min, piece) * 64.00) / piece));
+	idx = (int)round(((fmodf((float)y - min, piece) * 64.00) / piece));
 	if (idx == 64)
 		idx = 0;
 	find = find_char(&cube->img[cube->walls.dir[x]], idx, check_x(cube, x));
 	rgb = find_rgb(cube->img[cube->walls.dir[x]].lst, find, cube->img->measures[CHAR]);
 	print_pixel(cube, x, y, *rgb);
 	free(find);
+
+
+
+
+
 //	if (cube->walls.dir[x] == NO)
 //	{
 //		if ((check_x(cube, x) && !((int)(((double)y - min) / piece) % 2))
@@ -92,11 +128,31 @@ void	print_image(t_cube *cube, double height, int x, int y)
 //	}
 }
 
-void	print_screen(t_cube *cube, double *arr)
+void	print_screen(t_cube *cube, float *arr)
 {
+//	int		x;
+//	int		y;
+//	double	height;
+//
+//	x = -1;
+//	while (++x < cube->width)
+//	{
+//		y = -1;
+//		height = ((64.00 / arr[x]) * cube->length_ray) / 2.00;
+//		while (++y < cube->height)
+//		{
+//			if ((double)y > (double)(cube->height / 2.00) - height
+//				&& (double)y < (double)(cube->height / 2.00) + height)
+//				print_image(cube, height, x, y);
+//			else if ((double)y < (double)(cube->height / 2.00) - height)
+//				print_pixel(cube, x, y, cube->params.colors[C]);
+//			else
+//				print_pixel(cube, x, y, cube->params.colors[F]);
+//		}
+//	}
 	int		x;
 	int		y;
-	double	height;
+	float	height;
 
 	x = -1;
 	while (++x < cube->width)
@@ -105,10 +161,10 @@ void	print_screen(t_cube *cube, double *arr)
 		height = ((64.00 / arr[x]) * cube->length_ray) / 2.00;
 		while (++y < cube->height)
 		{
-			if ((double)y > (double)(cube->height / 2.00) - height
-				&& (double)y < (double)(cube->height / 2.00) + height)
+			if ((float)y > (float)(cube->height / 2.00) - height
+				&& (float)y < (float)(cube->height / 2.00) + height)
 				print_image(cube, height, x, y);
-			else if ((double)y < (double)(cube->height / 2.00) - height)
+			else if ((float)y < (float)(cube->height / 2.00) - height)
 				print_pixel(cube, x, y, cube->params.colors[C]);
 			else
 				print_pixel(cube, x, y, cube->params.colors[F]);

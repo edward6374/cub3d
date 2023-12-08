@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 17:10:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:08:10 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void init_func(t_cube *cube)
 	int i;
 
 	i = 0;
-	cube->rad_const = M_PI / 180.0;
+	cube->rad_const = M_PI / 180.00;
 	cube->width = 1280;
 	cube->height = 720;
-	cube->length_ray = ((double)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
+	cube->length_ray = ((float)cube->width / 2.0) / tan((60.0 / 2.0) * cube->rad_const);
 	while (cube->map[i])
 		i++;
 	cube->rows = i;
@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.img) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
+	printf("Here\n");
 	//	printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================

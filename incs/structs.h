@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/04 10:09:51 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:05:04 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,32 @@ enum
 
 typedef struct s_values
 {
-	double p_x;
-	double p_y;
-	double dist;
-	double long_seg;
-	double small_seg;
+	float	p_x;
+	float	p_y;
+	float	dist;
+	float	long_seg;
+	float	small_seg;
 } t_values;
 
 typedef struct s_rays
 {
-	int incr;
-	int offset;
-	double start_x;
-	double start_y;
-	double p_x;
-	double p_y;
-	double dist_x;
-	double dist_y;
-	double long_seg;
-	double small_seg;
+	int		incr;
+	int		offset;
+	float	start_x;
+	float	start_y;
+	float	p_x;
+	float	p_y;
+	float	dist_x;
+	float	dist_y;
+	float	long_seg;
+	float	small_seg;
 } t_rays;
 
 typedef struct s_wall
 {
-	int dir[1280];
-	double pos[1280];
-	double dist[1280];
+	int		dir[1280];
+	float	pos[1280];
+	float	dist[1280];
 } t_wall;
 
 typedef struct s_color
@@ -143,11 +143,11 @@ typedef struct s_cube
 	int width;
 	int height;
 	char **map;
-	double nposX; // posicion del jugador en pixel
-	double nposY;
-	double angle;
-	double rad_const;
-	double length_ray;
+	float	nposX; // posicion del jugador en pixel
+	float	nposY;
+	float	angle;
+	float	rad_const;
+	float	length_ray;
 	t_mlx mlx;
 	t_wall walls;
 	t_img img[4];

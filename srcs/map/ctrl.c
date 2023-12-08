@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/04 10:06:32 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/08 12:09:10 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int ctrl_path(t_img img[])
 	return (err);
 }
 
-void ctrl_char(char ch, double *angle)
+void ctrl_char(char ch, float *angle)
 {
 	if (ch != 'N' && ch != 'S' && ch != 'E' && ch != 'W' && ch != '1' && ch != '0' && ch != ' ')
 	{
@@ -107,8 +107,8 @@ int ctrl_player(t_cube *cube, char **map)
 		ft_message(DANGER, "Error\nMissing N, S, E, W");
 		return (EXIT_FAILURE);
 	}
-	cube->nposX = (double)((cube->iX * 64) + 32);
-	cube->nposY = (double)((cube->iY * 64) + 32);
+	cube->nposX = (float)((cube->iX * 64) + 32);
+	cube->nposY = (float)((cube->iY * 64) + 32);
 	return (0);
 }
 
