@@ -6,20 +6,15 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/08 12:05:04 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/09 20:12:13 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-#define STRUCT_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-#include "../libft/incs/libft.h"
-#include "../mlx/mlx.h"
-
-// const static char *g_file[] = {
-// 	"Error\nMap file name required.",
-// 	"Error\nToo many arguments.",
-// 	"Error\nFile map does not have the extension .map."};
+# include "../libft/incs/libft.h"
+# include "../mlx/mlx.h"
 
 enum
 {
@@ -70,7 +65,7 @@ typedef struct s_values
 	float	dist;
 	float	long_seg;
 	float	small_seg;
-} t_values;
+}			t_values;
 
 typedef struct s_rays
 {
@@ -84,74 +79,90 @@ typedef struct s_rays
 	float	dist_y;
 	float	long_seg;
 	float	small_seg;
-} t_rays;
+}			t_rays;
 
 typedef struct s_wall
 {
 	int		dir[1280];
 	float	pos[1280];
 	float	dist[1280];
-} t_wall;
+}			t_wall;
 
 typedef struct s_color
 {
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-} t_color;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}					t_color;
 
 typedef struct s_char
 {
-	char *chars;
-	char *hex_color;
-	t_color rgb;
-	struct s_char *next;
-} t_char;
+	t_color			rgb;
+	char			*chars;
+	char			*hex_color;
+	struct s_char	*next;
+}					t_char;
 
 typedef struct s_img
 {
-	char *name;
-	char *path;
-	int measures[4];
-	t_char *lst;
-	char **img;
-} t_img;
+	int		measures[4];
+	char	*name;
+	char	*path;
+	char	**img;
+	t_char	*lst;
+}			t_img;
 
 typedef struct s_param
 {
-	t_color colors[2];
-} t_param;
+	t_color	colors[2];
+}			t_param;
 
 typedef struct s_mlx
 {
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-	int status;
-	void *mlx;
-	void *img;
-	void *win;
-	char *addr;
-} t_mlx;
+	int		endian;
+	int		status;
+	int		line_length;
+	int		bits_per_pixel;
+	void	*mlx;
+	void	*img;
+	void	*win;
+	char	*addr;
+}			t_mlx;
+
+typedef struct s_point
+{
+	int		x;
+	int		y;
+	int		len;
+	float	new_val;
+}			t_point;
+
+typedef struct s_angle
+{
+	int		idx;
+	float	diff;
+	float	angle;
+	float	cos_angle;
+}			t_angle;
 
 typedef struct s_cube
 {
-	int iX; // posicion del jugador en indice de array
-	int iY;
-	int dir;
-	int rows;
-	int width;
-	int height;
-	char **map;
-	float	nposX; // posicion del jugador en pixel
-	float	nposY;
+	int		i_x;
+	int		i_y;
+	int		dir;
+	int		rows;
+	int		width;
+	int		height;
+	char	**map;
+	float	npos_x;
+	float	npos_y;
 	float	angle;
 	float	rad_const;
 	float	length_ray;
-	t_mlx mlx;
-	t_wall walls;
-	t_img img[4];
-	t_param params;
-} t_cube;
+	t_mlx	mlx;
+	t_img	img[4];
+	t_wall	walls;
+	t_param	params;
+}			t_cube;
 
 #endif

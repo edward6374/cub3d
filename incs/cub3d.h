@@ -6,55 +6,82 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/08 12:10:33 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/09 20:10:03 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "structs.h"
+# include "structs.h"
 
-/* ---			Hooks.c				--- */
-int loop_hook(t_cube *cube);
-int exit_safe(int index);
-int esc_hook(int key);
-int keep_pressed(int key, t_cube *cube);
-void second_key_hook(int key, t_cube *cube);
+/*	=======================   CALCS   =================================*/
 
-/* ---			Window.c			--- */
-int init_mlx(t_cube *cube);
-void create_minimap(t_cube *cube);
-void my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+/* ---			print			--- */
+void	print_screen(t_cube *cube, float *arr);
+float	calc_small(t_cube *cube, float pos, float angle, int mode);
 
-/* ---			Check_file.c			--- */
-int check_params(t_cube *cube, char *str);
-void map_person_point(t_cube *cube, int dir);
-int check_file(int argc, char *file);
-int init_map(t_cube *cube, char **data);
-int ctrl_map(t_cube *cube);
-int check_path_img(void);
-void check_rgb(t_color *color, char **split);
+/* ---			rays			--- */
+void	calculate_rays(t_cube *cube);
+int		set_segments(t_rays *r, float small_val, float long_val);
+
+/* ---			utils			--- */
+float	loop_point(t_cube *cube, t_rays *r, int mod);
+void	take_direction(t_cube *cube, t_rays *r, t_angle *vals);
+void	segment_values(t_cube *cube, t_rays *r, float angle, int mode);
+
+/*	=======================   WINDOW   =================================*/
+
+/* ---			hooks			--- */
+int		esc_hook(int key);
+int		exit_safe(int index);
+int		loop_hook(t_cube *cube);
+int		keep_pressed(int key, t_cube *cube);
+
+/* ---			utils			--- */
+int		check_mov(t_cube *cube, int *i_out, int *i_xy, int key);
+void	update_pos(t_cube *cube, float *angle_vals, int sum, int idx);
+void	set_idx(t_cube *cube, int *i_out, int *i_xy, float *angle_vals);
+
+/* ---			window			--- */
+int		init_mlx(t_cube *cube);
+void	hook_mlx(t_cube *cube);
+void	create_minimap(t_cube *cube);
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+
+/*	=======================   MAP   =================================*/
+
+/* ---			check_file			--- */
+int		check_file(int argc, char *file);
+
+/* ---			check_params			--- */
+int		check_params(t_cube *cube, char *str);
+
+/* ---			check_rgb			--- */
+void	check_rgb(t_color *color, char **split);
 
 /* ---			ctrl			--- */
-int ctrl_path(t_img img[]);
-int ctrl_player(t_cube *cube, char **map);
+int		ctrl_map(t_cube *cube);
+int		ctrl_path(t_img img[]);
+int		ctrl_player(t_cube *cube, char **map);
 
-/* ---			Read_map.c			--- */
-void read_map(t_cube *cube);
+/* ---			init_map			--- */
+int		init_map(t_cube *cube, char **data);
 
-/* ---			Rays.c			--- */
-int dbl_eq(double a, double b);
-int dbl_btw(double angle, double min, double max);
-int set_segments(t_rays *r, float small_val, float long_val);
-void calculate_rays(t_cube *cube);
+/*	=======================   TEXTURES   =================================*/
 
-/* ---			Print.c			--- */
-void print_screen(t_cube *cube, float *arr);
-void init_colors(char **file, t_img img[]);
-void init_img(t_img *img);
-void hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, unsigned char *blue);
-char *find_char(t_img *img, int x, int y);
-t_color *find_rgb(t_char *lst, char *chars, int n);
+/* ---			find_char			--- */
+char	*find_char(t_img *img, int x, int y);
+t_color	*find_rgb(t_char *lst, char *chars, int n);
+
+/* ---			hex_to_rgb			--- */
+void	hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, \
+	unsigned char *blue);
+
+/* ---			init_colors			--- */
+void	init_colors(char **file, t_img img[]);
+
+/* ---			init_img			--- */
+void	init_img(t_img *img);
 
 #endif

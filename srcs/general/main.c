@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:01 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/08 12:08:10 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/09 17:10:32 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
 	ft_bzero(&cube, sizeof(t_cube));
 	if (check_file(argc, argv[1]) || check_params(&cube, argv[1]) || ctrl_path(cube.img) || ctrl_player(&cube, cube.map) || ctrl_map(&cube))
 		exit(EXIT_FAILURE);
-	printf("Here\n");
 	//	printf(MAGENTA "ctrl_map:%d\n", ctrl_map(&cube));
 	// ft_printf(YELLOW "ctr_player %d\n", player);
 	//=========================================================================
@@ -47,7 +46,9 @@ int main(int argc, char *argv[])
 	init_img(cube.img);
 
 	// FIND CHAR ON TEXTURE
-	char *find = find_char(&cube.img[NO], 3, 33);
+	char *find;
+
+	find = find_char(&cube.img[NO], 3, 33);
 
 	printf("find char:'%s'\n", find);
 	free(find);
@@ -82,20 +83,26 @@ int main(int argc, char *argv[])
 	printf("\n");
 
 	// LST
-	t_char *tmp;
-	tmp = cube.img->lst;
-	while (tmp != NULL)
-	{
-		printf(RED "\'%s\' " RESET, tmp->chars);
-		printf(GREEN "%s " RESET, tmp->hex_color);
-		printf(MAGENTA "r:%d g:%d b:%d\n" RESET, tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
-		tmp = tmp->next;
+	i = 0;
+	while (i < 4)
+	{	
+		t_char *tmp;
+		tmp = cube.img[i].lst;
+		printf("Name: %s\n", cube.img[i].path);
+		while (tmp != NULL)
+		{
+			printf(RED "\'%s\' " RESET, tmp->chars);
+			printf(GREEN "%s " RESET, tmp->hex_color);
+			printf(MAGENTA "r:%d g:%d b:%d\n" RESET, tmp->rgb.r, tmp->rgb.g, tmp->rgb.b);
+			tmp = tmp->next;
+		}
+		i++;
 	}
-	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
-		   cube.nposX, cube.nposY);
-	printf(GREEN "Angle: %f\n" RESET, cube.angle);
+//	printf(GREEN "X: %d\tY: %d\tPos X: %f\tPos Y: %f\n" RESET, cube.iX, cube.iY,
+//		   cube.nposX, cube.nposY);
+//	printf(GREEN "Angle: %f\n" RESET, cube.angle);
 
-	printf("First: %c\n", cube.img[0].img[3][20]);
+//	printf("First: %c\n", cube.img[0].img[3][20]);
 	// IMG textura
 	// ft_print_dptr(cube.img[0].img, 0);
 
@@ -120,7 +127,9 @@ int main(int argc, char *argv[])
 
 	//=========================================================================
 	init_func(&cube);
-	ft_printf("Value: %d\n", init_mlx(&cube));
+	if (init_mlx(&cube))
+		exit(EXIT_FAILURE);
+	hook_mlx(&cube);
 	return (0);
 }
 
