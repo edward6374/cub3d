@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:05:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/08 12:09:10 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/10 12:44:40 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int ctrl_player(t_cube *cube, char **map)
 					return (EXIT_FAILURE);
 				}
 				err = 1;
-				cube->iX = j;
-				cube->iY = i;
+				cube->i_x = j;
+				cube->i_y = i;
 			}
 			j++;
 		}
@@ -107,8 +107,8 @@ int ctrl_player(t_cube *cube, char **map)
 		ft_message(DANGER, "Error\nMissing N, S, E, W");
 		return (EXIT_FAILURE);
 	}
-	cube->nposX = (float)((cube->iX * 64) + 32);
-	cube->nposY = (float)((cube->iY * 64) + 32);
+	cube->npos_x = (float)((cube->i_x * 64) + 32);
+	cube->npos_y = (float)((cube->i_y * 64) + 32);
 	return (0);
 }
 

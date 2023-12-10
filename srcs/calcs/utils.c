@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:04:49 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/09 19:52:22 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/10 12:46:16 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	segment_values(t_cube *cube, t_rays *r, float angle, int mode)
 	}
 	else
 	{
-		((!mode) && (set_segments(r, calc_small(cube, cube->nposY, angle * \
+		((!mode) && (set_segments(r, calc_small(cube, cube->npos_y, angle * \
 			cube->rad_const, 0), 64.0 / tan(angle * cube->rad_const))));
-		((mode) && (set_segments(r, calc_small(cube, cube->nposX, angle * \
+		((mode) && (set_segments(r, calc_small(cube, cube->npos_x, angle * \
 			cube->rad_const, 1), 64.0 * tan(angle * cube->rad_const))));
 	}
 }
@@ -87,7 +87,7 @@ void	loop(t_cube *cube, t_rays *r, t_point *p, int mod)
 		r->offset += r->incr;
 		if (!mod)
 		{
-			p->x = (int)fabs(cube->nposY / 64.00) + r->offset;
+			p->x = (int)fabs(cube->npos_y / 64.00) + r->offset;
 			p->y = (int)fabs(p->new_val / 64.00);
 			if (p->x >= cube->rows)
 				break ;
@@ -96,7 +96,7 @@ void	loop(t_cube *cube, t_rays *r, t_point *p, int mod)
 		else
 		{
 			p->x = (int)fabs(p->new_val / 64.00);
-			p->y = (int)fabs(cube->nposX / 64.00) + r->offset;
+			p->y = (int)fabs(cube->npos_x / 64.00) + r->offset;
 			if (p->x >= cube->rows)
 				break ;
 			p->len = (int)ft_strlen(cube->map[p->x]);
@@ -110,14 +110,14 @@ float	loop_point(t_cube *cube, t_rays *r, int mod)
 
 	if (!mod)
 	{
-		p.x = (int)(fabs(cube->nposY / 64.00)) + r->offset;
+		p.x = (int)(fabs(cube->npos_y / 64.00)) + r->offset;
 		p.y = (int)(fabs(r->p_x / 64.00));
 		p.new_val = r->p_x;
 	}
 	else
 	{
 		p.x = (int)(fabs(r->p_y / 64.00));
-		p.y = (int)(fabs(cube->nposX / 64.00)) + r->offset;
+		p.y = (int)(fabs(cube->npos_x / 64.00)) + r->offset;
 		p.new_val = r->p_y;
 	}
 	if (p.x >= cube->rows)

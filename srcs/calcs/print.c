@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:09:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/09 19:56:47 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/10 12:45:44 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ float	calc_small(t_cube *cube, float pos, float angle, int mode)
 
 	tan_value = tan(angle);
 	just_angle = angle / cube->rad_const;
-	diff_x = ((cube->iY + 1) * 64.00) - pos;
-	diff_y = ((cube->iX + 1) * 64.00) - pos;
+	diff_x = ((cube->i_y + 1) * 64.00) - pos;
+	diff_y = ((cube->i_x + 1) * 64.00) - pos;
 	if (!mode)
 	{
 		if (just_angle == 0.00 || just_angle == 180.00
 			|| (just_angle > 0.00 && just_angle < 180.00))
-			return (fmod(cube->nposY, 64.00) / tan_value);
+			return (fmod(cube->npos_y, 64.00) / tan_value);
 		return (diff_x / tan_value);
 	}
 	else
 	{
 		if (just_angle == 90.00 || just_angle == 270.00
 			|| (just_angle > 90.00 && just_angle < 270.00))
-			return (fmod(cube->nposX, 64.00) * tan_value);
+			return (fmod(cube->npos_x, 64.00) * tan_value);
 		return (diff_y * tan_value);
 	}
 }
