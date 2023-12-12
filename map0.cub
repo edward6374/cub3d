@@ -1,9 +1,9 @@
-NO assets/textures/brow.xpm
+NO assets/textures/grey_up.xpm
 SO assets/textures/grey_up.xpm
-WE assets/textures/grey_v2UP.xpm
-EA assets/textures/green.xpm
+WE assets/textures/grey_up.xpm
+EA assets/textures/grey_up.xpm
 
-F 214,245,17
+F 96,96,96
 C 13,56,171
 
 111111111111111
