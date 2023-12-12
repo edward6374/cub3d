@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:39:37 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/12 12:09:42 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 16:21:23 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_color(t_color *color, char *split)
 	color->r = r;
 	color->g = g;
 	color->b = b;
-	free(rgb);
+	ft_free_dptr(rgb);
 }
 
 void	check_rgb(t_color *color, char **split)
