@@ -6,15 +6,15 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:06:06 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/09 20:12:13 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:24:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "../libft/incs/libft.h"
-# include "../mlx/mlx.h"
+# include "mlx.h"
+# include "libft.h"
 
 enum
 {

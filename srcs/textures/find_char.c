@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:46:53 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/08 10:59:05 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:21:14 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 // TODO
 // SELE PASA X(0-63) Y(0-63)
 
-char *find_char(t_img *img, int x, int y)
+char	*find_char(t_img *img, int x, int y)
 {
-	char *res;
+	char	*res;
 
 	res = malloc((img->measures[CHAR] + 1) * sizeof(char));
 	if (img->measures[CHAR] == 1)
@@ -36,12 +36,13 @@ char *find_char(t_img *img, int x, int y)
 	return (res);
 }
 
-t_color *find_rgb(t_char *lst, char *chars, int n)
+t_color	*find_rgb(t_char *lst, char *chars, int n)
 {
-	t_char *tmp;
-	t_color *found = NULL;
+	t_char	*tmp;
+	t_color	*found;
 
 	tmp = lst;
+	found = NULL;
 	while (tmp != NULL)
 	{
 		if (!ft_strncmp(tmp->chars, chars, n))

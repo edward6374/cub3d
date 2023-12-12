@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:39:37 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 16:46:06 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:09:42 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "cub3d.h"
 #include "error.h"
 
-void check_num(int r, int g, int b)
+void	check_num(int r, int g, int b)
 {
 	if ((r > 255 || r < 0) || (g > 255 || g < 0) || (b > 255 || b < 0))
 	{
@@ -23,25 +23,28 @@ void check_num(int r, int g, int b)
 	}
 }
 
-void is_num(char *str)
+void	is_num(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
 		if (str[i] != ',' && !ft_isdigit(str[i]))
 		{
 			ft_message(DANGER, "Error");
-			ft_printf(CYAN "The character: '%c' cannot be on RGB.\n" RESET, str[i]);
+			ft_printf(CYAN "The character: '%c' cannot be on RGB.\n" RESET, \
+				str[i]);
 			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
 }
 
-char *ft_split_join_plus(char **split)
+char	*ft_split_join_plus(char **split)
 {
-	int i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 1;
 	res = NULL;
@@ -57,12 +60,13 @@ char *ft_split_join_plus(char **split)
 	return (res);
 }
 
-void init_color(t_color *color, char *split)
+void	init_color(t_color *color, char *split)
 {
-	char **rgb;
-	int r;
-	int g;
-	int b;
+	int		r;
+	int		g;
+	int		b;
+	char	**rgb;
+
 	rgb = ft_split(split, ',');
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
@@ -74,14 +78,13 @@ void init_color(t_color *color, char *split)
 	free(rgb);
 }
 
-void check_rgb(t_color *color, char **split)
+void	check_rgb(t_color *color, char **split)
 {
-	int i;
+	int		i;
+	char	*res;
 
 	i = 0;
-	char *res;
 	res = NULL;
-
 	if (ft_len_dptr(split) > 2)
 	{
 		res = ft_split_join_plus(split);

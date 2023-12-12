@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/09 20:10:03 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:22:15 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 /*	=======================   MAP   =================================*/
 
 /* ---			check_file			--- */
+void	check_img(char *file);
 int		check_file(int argc, char *file);
+int		check_player_error(t_cube *cube, int *err, int i, int j);
 
 /* ---			check_params			--- */
 int		check_params(t_cube *cube, char *str);
@@ -75,6 +77,7 @@ char	*find_char(t_img *img, int x, int y);
 t_color	*find_rgb(t_char *lst, char *chars, int n);
 
 /* ---			hex_to_rgb			--- */
+char	*remove_quotes(const char *input);
 void	hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, \
 	unsigned char *blue);
 

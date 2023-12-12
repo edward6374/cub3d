@@ -6,17 +6,17 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 20:55:52 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/04 10:31:02 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:52:18 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
 
-int len_row(char **data)
+int	len_row(char **data)
 {
-	int i;
-	int row;
+	int	i;
+	int	row;
 
 	i = 0;
 	row = 0;
@@ -29,7 +29,7 @@ int len_row(char **data)
 	return (row);
 }
 
-int init_map(t_cube *cube, char **data)
+int	init_map(t_cube *cube, char **data)
 {
 	int	i;
 	int	j;

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 16:21:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/30 16:28:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:22:02 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,31 @@
 #include "cub3d.h"
 #include <stdio.h>
 
-long hexToDecimal(char *hex)
+char	*remove_quotes(const char *input)
 {
-	long decimal;
-	int i;
-	char digit;
-	int value;
+	size_t	len;
+	char	*result;
 
-	decimal = 0;
+	if (input[0] == '"' && input[strlen(input) - 3] == '"')
+	{
+		len = ft_strlen(input) - 2;
+		result = (char *)malloc(len + 1);
+		strncpy(result, input + 1, len);
+		result[len - 2] = '\0';
+		return (result);
+	}
+	return (strdup(input));
+}
+
+long	hex_to_decimal(char *hex)
+{
+	int		i;
+	int		value;
+	char	digit;
+	long	decimal;
+
 	i = 0;
+	decimal = 0;
 	while (i < 2)
 	{
 		digit = hex[i];
@@ -38,18 +54,16 @@ long hexToDecimal(char *hex)
 	return (decimal);
 }
 
-void hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, unsigned char *blue)
+void	hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green,
+	unsigned char *blue)
 {
-	// Skip the '#' character
 	if (*hexColor == '#')
 		hexColor++;
 	if (hexColor[0] == '0' && (hexColor[1] == 'x' || hexColor[1] == 'X'))
 		hexColor += 2;
-
-	// Convert hex to integer for red, green, and blue
-	*red = (int)hexToDecimal(hexColor);
+	*red = (int)hex_to_decimal(hexColor);
 	hexColor += 2;
-	*green = (int)hexToDecimal(hexColor);
+	*green = (int)hex_to_decimal(hexColor);
 	hexColor += 2;
-	*blue = (int)hexToDecimal(hexColor);
+	*blue = (int)hex_to_decimal(hexColor);
 }

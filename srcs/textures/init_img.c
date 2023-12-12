@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/07 18:06:46 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:21:51 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,96 +15,76 @@
 #include "colorsft.h"
 #include <fcntl.h>
 
-char *remove_quotes(const char *input)
+char	**load_img(char *path)
 {
-	// Verificar si el string tiene comillas al inicio y al final
-	if (input[0] == '"' && input[strlen(input) - 3] == '"')
-	{
-		// Calcular la longitud del nuevo string sin las comillas
-		size_t len = ft_strlen(input) - 2;
+	int		fd;
+	char	**file_content;
 
-		// Asignar memoria para el nuevo string sin comillas
-		char *result = (char *)malloc(len + 1);
-
-		// Copiar el contenido sin las comillas
-		strncpy(result, input + 1, len);
-		result[len - 2] = '\0'; // Agregar el carácter nulo al final
-
-		return result;
-	}
-	else
-	{
-		// Si no hay comillas al inicio y al final, devolver el string original
-		return strdup(input);
-	}
-}
-
-char **load_img(char *path)
-{
-	char **file_content;
-	int fd = open(path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	file_content = ft_file_to_dptr_m(fd);
 	close(fd);
-
 	return (file_content);
 }
 
-void init_measures(char *num, int measures[])
+void	init_measures(char *num, int measures[])
 {
+	int		i;
+	char	*result;
+	char	**split;
 
-	char *result = remove_quotes(num);
-	char **split = ft_split(result, ' ');
-
+	i = -1;
+	result = remove_quotes(num);
+	split = ft_split(result, ' ');
 	free(result);
-
-	int i = -1;
 	while (split[++i])
 		measures[i] = ft_atoi(split[i]);
 	ft_free_dptr(split);
 }
 
-int get_start(char **file)
+int	get_start(char **file)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (file[i])
 	{
 		if (!ft_strncmp(file[i], "/* pixels */\n", 13))
 		{
 			i++;
-			break;
+			break ;
 		}
 		i++;
 	}
 	return (i);
 }
 
-void get_img(char **file, t_img *img)
+void	get_img(char **file, t_img *img)
 {
-	int start = get_start(file);
-	int i = 0;
+	int	i;
+	int	start;
 
+	i = 0;
+	start = get_start(file);
 	img->img = malloc(sizeof(char *) * img->measures[ROWS] + 1);
 	while (file[start])
 	{
 		img->img[i] = ft_strdup(file[start]);
-		// printf(YELLOW "%s" RESET, img->img[i]);
 		i++;
 		start++;
 	}
 	img->img[i] = NULL;
 }
-// =========================================================================
-void init_img(t_img img[])
+
+void	init_img(t_img img[])
 {
 	int		i;
 	char	**file_content;
 
-	// TODO aqui while para las 4 texturas
 	i = 0;
 	while (i < 4)
 	{
 		file_content = load_img(img[i].path);
-		init_measures(file_content[3], img[i].measures); // file_content[3] es la linea donde esta las measures
+		init_measures(file_content[3], img[i].measures);
 		init_colors(file_content, &img[i]);
 		get_img(file_content, &(img[i]));
 		ft_free_dptr(file_content);
