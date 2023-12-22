@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   window_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/22 15:26:43 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:18:38 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <math.h>
 #include <colorsft.h>
 
@@ -67,7 +67,7 @@ void	hook_mlx(t_cube *cube)
 
 	i = 0;
 	calculate_rays(cube);
-//	create_minimap(cube);
+	create_minimap(cube);
 	cube->mlx.status = 0;
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	mlx_key_hook(cube->mlx.win, esc_hook, cube);

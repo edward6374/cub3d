@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   hooks_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:51:11 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/22 15:27:00 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:18:19 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
  * 124 : Flecha derecha
  */
 
-#include "cub3d.h"
-#include "structs.h"
+#include "cub3d_bonus.h"
 #include <math.h>
 
 int	exit_safe(int index, t_cube *cube)
@@ -103,7 +102,7 @@ int	loop_hook(t_cube *cube)
 	if (cube->mlx.status == 1)
 	{
 		calculate_rays(cube);
-//		create_minimap(cube);
+		create_minimap(cube);
 		mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0,
 			0);
 		cube->mlx.status = 0;
