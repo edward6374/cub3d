@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/22 15:18:38 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 17:34:09 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,14 @@ void	create_minimap(t_cube *cube)
 
 void	hook_mlx(t_cube *cube)
 {
-	int	i;
-
-	i = 0;
 	calculate_rays(cube);
 	create_minimap(cube);
 	cube->mlx.status = 0;
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0, 0);
 	mlx_key_hook(cube->mlx.win, esc_hook, cube);
-	mlx_hook(cube->mlx.win, 17, 0, exit_safe, cube);
+	mlx_hook(cube->mlx.win, 17, 1L << 0, (void *)exit, cube);
 	mlx_hook(cube->mlx.win, 2, 1L << 0, keep_pressed, cube);
 	mlx_loop_hook(cube->mlx.mlx, loop_hook, cube);
-	ft_printf(RED "Wait.......\n" RESET);
-	while (i < 200000000)
-		i++;
 	mlx_loop(cube->mlx.mlx);
 }
 

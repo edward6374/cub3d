@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:04:49 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/10 12:46:16 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 17:30:07 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ void	take_direction(t_cube *cube, t_rays *r, t_angle *vals)
 
 void	loop(t_cube *cube, t_rays *r, t_point *p, int mod)
 {
-	while (((!mod && p->x >= 0) || (mod && p->y >= 0))
-		&& p->x < cube->rows && p->y < p->len && cube->map[p->x][p->y] != '1')
+	while (((!mod && p->x >= 0) || (mod && p->y >= 0)) && p->x < cube->rows
+		&& p->y < p->len && cube->map[p->x][p->y] != '1'
+		&& cube->map[p->x][p->y] != ' ')
 	{
 		if (r->incr > 0)
 			p->new_val -= r->long_seg;
@@ -91,7 +92,6 @@ void	loop(t_cube *cube, t_rays *r, t_point *p, int mod)
 			p->y = (int)fabs(p->new_val / 64.00);
 			if (p->x >= cube->rows)
 				break ;
-			p->len = (int)ft_strlen(cube->map[p->x]);
 		}
 		else
 		{
@@ -99,8 +99,8 @@ void	loop(t_cube *cube, t_rays *r, t_point *p, int mod)
 			p->y = (int)fabs(cube->npos_x / 64.00) + r->offset;
 			if (p->x >= cube->rows)
 				break ;
-			p->len = (int)ft_strlen(cube->map[p->x]);
 		}
+		p->len = (int)ft_strlen(cube->map[p->x]);
 	}
 }
 

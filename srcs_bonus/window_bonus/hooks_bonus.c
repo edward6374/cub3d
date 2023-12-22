@@ -24,26 +24,6 @@
 #include "cub3d_bonus.h"
 #include <math.h>
 
-int	exit_safe(int index, t_cube *cube)
-{
-	if (!index)
-		ft_printf("Exit with ESC!\n");
-	else
-		ft_printf("Exit with the cross!\n");
-	ft_free_dptr(cube->map);
-	ft_free_dptr(cube->img[0].img);
-	ft_free_dptr(cube->img[1].img);
-	ft_free_dptr(cube->img[2].img);
-	ft_free_dptr(cube->img[3].img);
-	cube->map = NULL;
-	cube->img[0].img = NULL;
-	cube->img[1].img = NULL;
-	cube->img[2].img = NULL;
-	cube->img[3].img = NULL;
-	exit(0);
-	return (0);
-}
-
 void	arrows_pressed(int key, t_cube *cube)
 {
 	if (key == 123)
@@ -90,10 +70,10 @@ int	keep_pressed(int key, t_cube *cube)
 	return (0);
 }
 
-int	esc_hook(int key, t_cube *cube)
+int	esc_hook(int key)
 {
 	if (key == 53)
-		exit_safe(0, cube);
+		exit(0);
 	return (0);
 }
 

@@ -25,26 +25,6 @@
 #include "structs.h"
 #include <math.h>
 
-int	exit_safe(int index, t_cube *cube)
-{
-	if (!index)
-		ft_printf("Exit with ESC!\n");
-	else
-		ft_printf("Exit with the cross!\n");
-	ft_free_dptr(cube->map);
-	ft_free_dptr(cube->img[0].img);
-	ft_free_dptr(cube->img[1].img);
-	ft_free_dptr(cube->img[2].img);
-	ft_free_dptr(cube->img[3].img);
-	cube->map = NULL;
-	cube->img[0].img = NULL;
-	cube->img[1].img = NULL;
-	cube->img[2].img = NULL;
-	cube->img[3].img = NULL;
-	exit(0);
-	return (0);
-}
-
 void	arrows_pressed(int key, t_cube *cube)
 {
 	if (key == 123)
@@ -93,8 +73,9 @@ int	keep_pressed(int key, t_cube *cube)
 
 int	esc_hook(int key, t_cube *cube)
 {
+	(void)cube;
 	if (key == 53)
-		exit_safe(0, cube);
+		exit(0);
 	return (0);
 }
 
@@ -103,7 +84,6 @@ int	loop_hook(t_cube *cube)
 	if (cube->mlx.status == 1)
 	{
 		calculate_rays(cube);
-//		create_minimap(cube);
 		mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win, cube->mlx.img, 0,
 			0);
 		cube->mlx.status = 0;

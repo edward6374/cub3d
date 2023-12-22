@@ -34,7 +34,6 @@ void	segment_values(t_cube *cube, t_rays *r, float angle, int mode);
 
 /* ---			hooks			--- */
 int		esc_hook(int key, t_cube *cube);
-int		exit_safe(int index, t_cube *cube);
 int		loop_hook(t_cube *cube);
 int		keep_pressed(int key, t_cube *cube);
 
