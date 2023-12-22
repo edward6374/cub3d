@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:39:37 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/12 16:21:23 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 11:55:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_split_join_plus(char **split)
 {
 	int		i;
 	char	*res;
+	char	*tmp;
 
 	i = 1;
 	res = NULL;
@@ -54,7 +55,11 @@ char	*ft_split_join_plus(char **split)
 		if (res == NULL)
 			res = ft_strdup(split[i]);
 		else
-			res = ft_strjoin(res, split[i]);
+		{
+			tmp = ft_strjoin(res, split[i]);
+			free(res);
+			res = tmp;
+		}
 		i++;
 	}
 	return (res);

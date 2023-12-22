@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/09 20:14:27 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:04:50 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	hook_mlx(t_cube *cube)
 	mlx_hook(cube->mlx.win, 2, 1L << 0, keep_pressed, cube);
 	mlx_loop_hook(cube->mlx.mlx, loop_hook, cube);
 	mlx_loop(cube->mlx.mlx);
+	exit(50);
 }
 
 int	init_mlx(t_cube *cube)
