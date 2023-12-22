@@ -6,13 +6,13 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 12:13:07 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/22 11:49:51 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:50:53 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "colorsft.h"
 #include "cub3d.h"
 #include "libft.h"
-#include "colorsft.h"
 #include <fcntl.h>
 
 char	**load_img(char *path)
@@ -88,6 +88,7 @@ void	init_img(t_img img[])
 		init_colors(file_content, &img[i]);
 		get_img(file_content, &(img[i]));
 		ft_free_dptr(file_content);
+		file_content = NULL;
 		i++;
 	}
 }

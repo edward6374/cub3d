@@ -6,15 +6,15 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:20:22 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/22 11:50:52 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 13:21:38 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "colorsft.h"
 #include "cub3d.h"
 #include "error.h"
 #include "libft.h"
 #include <fcntl.h>
-#include "colorsft.h"
 
 char	*ft_strdup_plus(char *s1)
 {

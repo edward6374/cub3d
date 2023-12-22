@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:39:37 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/22 11:55:53 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:56:18 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	is_num(char *str)
 		if (str[i] != ',' && !ft_isdigit(str[i]))
 		{
 			ft_message(DANGER, "Error");
-			ft_printf(CYAN "The character: '%c' cannot be on RGB.\n" RESET, \
+			ft_printf(CYAN "The character: '%c' cannot be on RGB.\n" RESET,
 				str[i]);
 			exit(EXIT_FAILURE);
 		}
@@ -81,6 +81,7 @@ void	init_color(t_color *color, char *split)
 	color->g = g;
 	color->b = b;
 	ft_free_dptr(rgb);
+	rgb = NULL;
 }
 
 void	check_rgb(t_color *color, char **split)

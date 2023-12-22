@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 18:09:51 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/12 12:22:15 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:41:25 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	segment_values(t_cube *cube, t_rays *r, float angle, int mode);
 /*	=======================   WINDOW   =================================*/
 
 /* ---			hooks			--- */
-int		esc_hook(int key);
-int		exit_safe(int index);
+int		esc_hook(int key, t_cube *cube);
+int		exit_safe(int index, t_cube *cube);
 int		loop_hook(t_cube *cube);
 int		keep_pressed(int key, t_cube *cube);
 
@@ -78,8 +78,8 @@ t_color	*find_rgb(t_char *lst, char *chars, int n);
 
 /* ---			hex_to_rgb			--- */
 char	*remove_quotes(const char *input);
-void	hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green, \
-	unsigned char *blue);
+void	hex_to_rgb(char *hexColor, unsigned char *red, unsigned char *green,
+			unsigned char *blue);
 
 /* ---			init_colors			--- */
 void	init_colors(char **file, t_img img[]);

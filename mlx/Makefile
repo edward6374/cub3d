@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 18:09:29 by vduchi            #+#    #+#              #
-#    Updated: 2023/08/31 09:49:58 by vduchi           ###   ########.fr        #
+#    Updated: 2023/12/22 12:30:24 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ CFLAGS	+=	-O2 -w #-lglut -lGLU -lGL -lGLEW
 
 %.o		:	%.m
 	@echo "$(YELLOW)$<  \tcompiled!$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all		:	$(NOM)
 

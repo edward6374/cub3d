@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:39 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/22 12:04:50 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/22 13:04:14 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	hook_mlx(t_cube *cube)
 	mlx_hook(cube->mlx.win, 17, 0, exit_safe, cube);
 	mlx_hook(cube->mlx.win, 2, 1L << 0, keep_pressed, cube);
 	mlx_loop_hook(cube->mlx.mlx, loop_hook, cube);
+	write(1, "", 0);
 	mlx_loop(cube->mlx.mlx);
-	exit(50);
 }
 
 int	init_mlx(t_cube *cube)
@@ -79,16 +79,15 @@ int	init_mlx(t_cube *cube)
 	cube->mlx.mlx = mlx_init();
 	if (!cube->mlx.mlx)
 		return (1);
-	cube->mlx.win = mlx_new_window(cube->mlx.mlx, cube->width, cube->height, \
-		"cub3d");
+	cube->mlx.win = mlx_new_window(cube->mlx.mlx, cube->width, cube->height,
+			"cub3d");
 	if (!cube->mlx.win)
 		return (2);
 	cube->mlx.img = mlx_new_image(cube->mlx.mlx, cube->width, cube->height);
 	if (!cube->mlx.img)
 		return (3);
-	cube->mlx.addr = mlx_get_data_addr(cube->mlx.img, \
-		&cube->mlx.bits_per_pixel, \
-		&cube->mlx.line_length, &cube->mlx.endian);
+	cube->mlx.addr = mlx_get_data_addr(cube->mlx.img, &cube->mlx.bits_per_pixel,
+			&cube->mlx.line_length, &cube->mlx.endian);
 	if (!cube->mlx.addr)
 		return (4);
 	return (0);
